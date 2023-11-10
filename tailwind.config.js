@@ -18,6 +18,14 @@ export default {
                 bigShouldersDisplayBold: ['BigShouldersDisplay-Bold'],
                 bigShouldersDisplayBlack: ['BigShouldersDisplay-Black']
             },
+
+            colors: {
+                yellow:{
+                    light: '#FFE96B',
+                    DEFAULT: '#ffd700',
+                    dark: '#DEBD00'
+                },
+            },
         },
     },
 
