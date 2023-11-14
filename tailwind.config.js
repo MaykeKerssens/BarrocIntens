@@ -1,0 +1,33 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+    ],
+
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                roboto: ['Roboto', 'sans-serif'],
+                bigShouldersDisplay: ['BigShouldersDisplay'],
+                bigShouldersDisplayBold: ['BigShouldersDisplay-Bold'],
+                bigShouldersDisplayBlack: ['BigShouldersDisplay-Black']
+            },
+
+            colors: {
+                yellow:{
+                    light: '#FFE96B',
+                    DEFAULT: '#ffd700',
+                    dark: '#DEBD00'
+                },
+            },
+        },
+    },
+
+    plugins: [forms],
+};

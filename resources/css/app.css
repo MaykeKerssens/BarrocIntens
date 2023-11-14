@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@font-face {
+    font-family: 'Roboto';
+    src: url('http://barrocintens.test//fonts/Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'BigShouldersDisplay';
+    src: url('http://barrocintens.test//fonts/BigShouldersDisplay/BigShouldersDisplay-Regular.ttf');
+}
+@font-face {
+    font-family: 'BigShouldersDisplay-Bold';
+    src: url('http://barrocintens.test//fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf');
+}
+@font-face {
+    font-family: 'BigShouldersDisplay-Black';
+    src: url('http://barrocintens.test//fonts/BigShouldersDisplay/BigShouldersDisplay-Black.ttf');
+}
