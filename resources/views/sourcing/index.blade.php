@@ -1,17 +1,50 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-roboto text-xl text-gray-800 leading-tight">
-            {{ __('Product sourcing') }}
+    <x-slot name="pageHeaderText">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Product Overzicht') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 ">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Add a button to navigate to the create page -->
+    <a href="{{ route('sourcing.create') }}" class="btn btn-primary mb-2">Nieuw Product Toevoegen</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Beschrijving</th>
+                <th>Afbeelding</th>
+                <th>Prijs</th>
+                <th>Product Categorie</th>
+                <th>Acties</th> <!-- Add a new column for actions -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+                <tr>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>
+                        @if (!empty($product->image_path))
+                            <img style="width: 50px" src="{{ asset('storage/' . str_replace('public/', '', $product->image_path)) }}" alt="{{ $product->name }} afbeelding">
+                        @endif
+                    </td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->product_category_id }}</td>
+                    <td>
+                        <!-- Add buttons for edit and delete actions -->
+                        <a href="{{ route('sourcing.edit', $product->id) }}" class="btn btn-warning btn-sm">Bewerken</a>
+
+                        <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
+                        <form action="{{ route('sourcing.show', $product->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Verwijderen</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </x-app-layout>
+
