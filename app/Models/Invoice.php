@@ -11,4 +11,9 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $guarded = [];
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class);
+    }
 }

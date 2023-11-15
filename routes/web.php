@@ -30,5 +30,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('finance', InvoicesController::class);
+Route::resource('invoices', InvoicesController::class);
 
 require __DIR__.'/auth.php';

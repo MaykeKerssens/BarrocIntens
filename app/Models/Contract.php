@@ -11,4 +11,9 @@ class Contract extends Model
     protected $table = 'contracts';
 
     protected $guarded = [];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

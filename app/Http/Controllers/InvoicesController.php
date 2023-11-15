@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Contract;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
@@ -23,7 +25,8 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        //
+        $contracts = Contract::all();
+        return view('invoices.create', ['contracts' => $contracts]);
     }
 
     /**
@@ -31,7 +34,18 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required|date',
+            'contract_id' => 'required|exists:contracts,id',
+        ]);
+
+        Invoice::create([
+            'date' => $request->date,
+            'paid' => $request->has('paid') ? $request->paid : 0,
+            'contract_id' => $request->contract_id,
+        ]);
+
+        return redirect()->route('finance.index')->with('success', 'Factuur is succesvol aangemaakt.');
     }
 
     /**
