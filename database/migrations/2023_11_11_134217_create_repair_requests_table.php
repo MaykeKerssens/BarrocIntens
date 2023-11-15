@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('repair_request', function (Blueprint $table) {
+        Schema::create('repair_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')
-            ->references('id')
-            ->on('products');
+                ->references('id')
+                ->on('products');
             $table->foreignId('company_id')
-            ->references('id')
-            ->on('companies');
+                ->references('id')
+                ->on('companies');
             $table->text('note');
             $table->date('start_date');
             $table->timestamps();
