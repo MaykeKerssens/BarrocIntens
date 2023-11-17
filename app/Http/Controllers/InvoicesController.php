@@ -36,12 +36,14 @@ class InvoicesController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
+            'costs' => 'required|numeric',
             'contract_id' => 'required|exists:contracts,id',
         ]);
 
         Invoice::create([
             'date' => $request->date,
             'paid' => $request->has('paid') ? $request->paid : 0,
+            'costs' => $request->costs,
             'contract_id' => $request->contract_id,
         ]);
 
@@ -61,7 +63,8 @@ class InvoicesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $invoice = Invoice::find($id);
+        return view('invoices.edit')->with('invoice', $invoice);
     }
 
     /**
@@ -69,7 +72,16 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'paid' => 'required|boolean',
+        ]);
+    
+        $invoice = Invoice::findOrFail($id);
+        $invoice->update([
+            'paid' => $request->boolean('paid'),
+        ]);
+    
+        return redirect()->route('finance.index')->with('success', 'Factuur is succesvol bijgewerkt.');
     }
 
     /**

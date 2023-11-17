@@ -34,6 +34,11 @@
                                 <input type="checkbox" name="paid" id="paid" value="1" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
 
+                            <div class="col-span-6 sm:col-span-4">
+                                <label for="costs" class="block text-sm font-medium text-gray-700">Aansluitkosten</label>
+                                <input type="number"name="costs" id="costs" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                            </div>
+
                             <!-- Contract ID -->
                             <div class="col-span-6 sm:col-span-4">
                                 <label for="contract_id" class="block text-sm font-medium text-gray-700">Contract</label>

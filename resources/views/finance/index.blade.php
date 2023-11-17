@@ -14,10 +14,12 @@
             <tr class="bg-gray-200">
                 <th>Datum</th>
                 <th>Paid</th>
+                <th>Aansluitkosten</th>
                 <th>Contract</th>
+                <th>Aanpassen</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
             @foreach ($invoices as $invoice)
                 <tr class="hover:bg-gray-100">
                     <td>{{ $invoice->date }}</td>
@@ -28,7 +30,11 @@
                             <span class="text-red-500">Niet betaald</span>
                         @endif
                     </td>
+                    <td>{{ $invoice->costs }}</td>
                     <td>{{ $invoice->contract->company->name }}</td>
+                    <td>
+                        <a href="{{ route('invoices.edit', $invoice->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

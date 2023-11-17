@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('date');
             $table->boolean('paid');
+            $table->decimal('costs');
             $table->foreignId('contract_id')->references('id')->on('contracts');
             $table->timestamps();
         });
