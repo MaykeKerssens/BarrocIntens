@@ -19,7 +19,16 @@ class Companyseeder extends Seeder
             'street' => '123 Main Street',
             'city' => 'Breda',
             'bkr_checked_at' => now(),
-            'user_id' => 1,      
+            'user_id' => 1,
+        ]);
+
+        Company::create([
+            'name' => 'bedrijf2',
+            'phone' => '1234567890',
+            'street' => '123 Main Street',
+            'city' => 'Breda',
+            'bkr_checked_at' => now(),
+            'user_id' => 1,
         ]);
     }
 }

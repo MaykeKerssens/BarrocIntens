@@ -13,4 +13,9 @@ class MaintenanceAppointment extends Model
     {
         return $this->hasMany(AppointmentRequest::class);
     }
+
+    public function user()
+    {
+        return $this->belongsToy(User::class);
+    }
 }

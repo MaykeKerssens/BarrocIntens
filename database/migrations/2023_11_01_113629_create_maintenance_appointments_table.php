@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('maintenance_appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->references('id')->on('companies');
             $table->foreignId('user_id')
-            ->references('id')
-            ->on('users');
-            $table->text('remark');
-            $table->dateTime('date_added');
+                ->references('id')
+                ->on('users');
+            $table->text('note');
             $table->timestamps();
         });
     }
