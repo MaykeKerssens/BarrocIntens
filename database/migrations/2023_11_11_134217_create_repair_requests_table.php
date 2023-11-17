@@ -20,6 +20,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('companies');
             $table->text('note');
+            $table->string('status');
             $table->date('start_date');
             $table->timestamps();
         });
