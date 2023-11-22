@@ -1,19 +1,10 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Company extends Model
+class ProductCategory extends Model
 {
     use HasFactory;
-    protected $table = 'companies';
-
+    protected $table = 'product_categories';
     protected $guarded = [];
-
-    public function repairRequests()
-    {
-        return $this->hasMany(RepairRequest::class);
-    }
 }
