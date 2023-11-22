@@ -14,9 +14,11 @@ class InvoicesController extends Controller
      */
     public function index()
     {
+        $contracts = Contract::all();
         $invoices = Invoice::all();
         return view('finance.index',[
-            'invoices' => $invoices
+            'invoices' => $invoices,
+            'contracts' => $contracts
         ]);
     }
 
@@ -72,9 +74,6 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'paid' => 'required|boolean',
-        ]);
     
         $invoice = Invoice::findOrFail($id);
         $invoice->update([

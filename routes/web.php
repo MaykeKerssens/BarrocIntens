@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('finance', InvoicesController::class);
 Route::resource('invoices', InvoicesController::class);
+Route::resource('contracts', ContractsController::class);
 
 require __DIR__.'/auth.php';
