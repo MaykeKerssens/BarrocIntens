@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('repair_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')
-                ->references('id')
-                ->on('products');
             $table->foreignId('company_id')
                 ->references('id')
                 ->on('companies');
+            $table->foreignId('product_id')
+                ->references('id')
+                ->on('products');
+            $table->foreignId('status_id')
+                ->references('id')
+                ->on('statuses');
             $table->text('note');
-            $table->string('status');
             $table->timestamps();
         });
     }

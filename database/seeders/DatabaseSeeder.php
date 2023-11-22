@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             InvoiceSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
+            statusSeeder::class,
             RepairRequestSeeder::class,
             MaintenanceAppointmentSeeder::class,
             AppointmentRequestSeeder::class,

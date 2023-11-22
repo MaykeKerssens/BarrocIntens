@@ -14,7 +14,6 @@ class RepairRequest extends Model
     {
         return $this->hasMany(AppointmentRequest::class, 'request_id');
     }
-
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -22,5 +21,9 @@ class RepairRequest extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

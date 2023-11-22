@@ -29,7 +29,21 @@
                                 <td>{{ $request->company->name }}</td>
                                 <td>{{ $request->product->name }}</td>
                                 <td>{{ $request->note }}</td>
-                                <td>{{ $request->status }}</td>
+                                <!-- Determine what color the status should have -->
+
+                                <td
+                                    class="
+                                    @if ($request->status->color == 'blue')
+                                        text-blue-500
+                                    @elseif ($request->status->color == 'green')
+                                        text-green-500
+                                    @elseif ($request->status->color == 'yellow')
+                                        text-yellow-500
+                                    @elseif ($request->status->color == 'red')
+                                        text-red-500 @endif
+                                    ">
+                                    {{ $request->status->name }}
+                                </td>
                                 <td>
                                     <!-- Show all the people that have been assigned to resolve this request-->
                                     @php
@@ -37,7 +51,8 @@
                                     @endphp
 
                                     @foreach ($appointmentRequests as $appointmentRequest)
-                                        <p>{{ $appointmentRequest->maintenanceAppointment->user->name ? $appointmentRequest->maintenanceAppointment->user->name : '-' }}</p>
+                                        <p>{{ $appointmentRequest->maintenanceAppointment->user->name ? $appointmentRequest->maintenanceAppointment->user->name : '-' }}
+                                        </p>
                                     @endforeach
                                 </td>
                             </tr>
