@@ -13,8 +13,11 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
+
+
         $repairRequests = RepairRequest::all();
-        return view('maintenance.index', [
+
+        return view('maintenance.requests', [
             'requests' => $repairRequests,
         ]);
     }

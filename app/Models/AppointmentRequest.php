@@ -11,11 +11,11 @@ class AppointmentRequest extends Model
 
     public function repairRequest()
     {
-        return $this->belongsTo(RepairRequest::class);
+        return $this->belongsTo(RepairRequest::class, 'repair_id');
     }
 
     public function maintenanceAppointment()
     {
-        return $this->belongsTo(MaintenanceAppointment::class);
+        return $this->belongsTo(MaintenanceAppointment::class, 'appointment_id');
     }
 }

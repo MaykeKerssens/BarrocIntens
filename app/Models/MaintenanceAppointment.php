@@ -11,11 +11,11 @@ class MaintenanceAppointment extends Model
 
     public function appointmentRequest()
     {
-        return $this->hasMany(AppointmentRequest::class);
+        return $this->hasMany(AppointmentRequest::class, 'appointment_id');
     }
 
     public function user()
     {
-        return $this->belongsToy(User::class);
+        return $this->belongsTo(User::class);
     }
 }

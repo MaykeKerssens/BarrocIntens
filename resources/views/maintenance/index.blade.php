@@ -5,21 +5,10 @@
         </h2>
     </x-slot>
 
+    <!--Overview for all normal maintenance employees -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
-
-                @dd($requests)
-                <!-- Table with all maintenance requests -->
-                <table>
-                    <thead>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        <tr></tr>
-                    </tbody>
-                </table>
-
 
             </div>
         </div>

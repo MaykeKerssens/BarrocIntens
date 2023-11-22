@@ -11,4 +11,9 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $guarded = [];
+
+    public function repairRequests()
+    {
+        return $this->hasMany(RepairRequest::class);
+    }
 }
