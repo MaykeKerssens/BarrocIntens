@@ -14,5 +14,17 @@
         @endif
         <p><strong>Prijs:</strong> {{ $product->price }}</p>
         <p><strong>Product Categorie:</strong> {{ $product->product_category_id }}</p>
+
+        @if ($product->orders()->exists())
+            <p>Dit product kan niet worden verwijderd omdat het al is besteld.</p>
+        @else
+            <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit">Verwijder product</button>
+            </form>
+        @endif
     </div>
 </x-app-layout>
+

@@ -6,7 +6,6 @@
     </x-slot>
 
     <form method="POST" action="{{ route('sourcing.update', $product->id) }}" enctype="multipart/form-data">
-
         @csrf
         @method('PUT')
 
@@ -17,7 +16,10 @@
         <textarea name="description" required>{{ $product->description }}</textarea>
 
         <label for="image">Afbeelding:</label>
-        <input type="file" name="image">
+        <input type="file" name="image" id="imageInput" onchange="previewImage(event)">
+        @if($product->image_path)
+            <img src="{{ asset('storage/' . $product->image_path) }}" alt="Huidige afbeelding" style="max-width: 200px; margin-top: 5px;">
+        @endif
 
         <label for="price">Prijs:</label>
         <input type="number" name="price" value="{{ $product->price }}" required>
@@ -34,4 +36,16 @@
 
         <button type="submit">Opslaan</button>
     </form>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.querySelector('img');
+                preview.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </x-app-layout>
+

@@ -25,8 +25,10 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>
-                        @if (!empty($product->image_path))
-                            <img style="width: 50px" src="{{ asset('storage/' . str_replace('public/', '', $product->image_path)) }}" alt="{{ $product->name }} afbeelding">
+                        @if ($product->image_path)
+                            <img style="width: 100px" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }} afbeelding">
+                        @else
+                            <span>Geen afbeelding beschikbaar</span>
                         @endif
                     </td>
                     <td>{{ $product->price }}</td>
@@ -47,4 +49,3 @@
         </tbody>
     </table>
 </x-app-layout>
-
