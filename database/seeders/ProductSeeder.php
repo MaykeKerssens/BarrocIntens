@@ -41,19 +41,5 @@ class ProductSeeder extends Seeder
             'price' => 19.99,
             'product_category_id' => 1,
         ]);
-        Product::create([
-            'name' => 'Voorbeeldproduct',
-            'description' => 'Dit is een voorbeeldproduct.',
-            'image_path' => 'koffiezetapparaat5.jpg',
-            'price' => 19.99,
-            'product_category_id' => 1,
-        ]);
-        Product::create([
-            'name' => 'Voorbeeldproduct',
-            'description' => 'Dit is een voorbeeldproduct.',
-            'image_path' => 'koffiezetapparaat6.jpg',
-            'price' => 19.99,
-            'product_category_id' => 1,
-        ]);
     }
 }
