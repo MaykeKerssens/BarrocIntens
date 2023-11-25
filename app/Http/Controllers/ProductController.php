@@ -112,15 +112,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-    
-        // Check of het product gerelateerde bestellingen heeft
-        if ($product->orders()->exists()) {
-            return redirect()->back()->with('error', 'Dit product kan niet worden verwijderd omdat het al is besteld.');
+        // Afbeelding verwijderen als die bestaat
+        if (!empty($product->image_path) && Storage::exists($product->image_path)) {
+            Storage::delete($product->image_path);
         }
-    
-        // Als er geen gerelateerde bestellingen zijn, verwijder het product
         $product->delete();
-    
         return redirect()->route('sourcing.index')->with('message', 'Product is verwijderd');
     }
 }
