@@ -30,8 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('finance', InvoicesController::class);
-Route::resource('invoices', InvoicesController::class);
-Route::resource('contracts', ContractsController::class);
+ Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
+ Route::resource('invoices', InvoicesController::class)->except(['index']); 
+ Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
+ Route::resource('contracts', ContractsController::class); 
+
 
 require __DIR__.'/auth.php';

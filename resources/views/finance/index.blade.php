@@ -15,7 +15,7 @@
         <thead>
             <tr class="bg-gray-200">
                 <th>Datum</th>
-                <th>Paid</th>
+                <th>Betaaldstatus</th>
                 <th>Aansluitkosten</th>
                 <th>Contract</th>
                 <th>Aanpassen</th>

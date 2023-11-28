@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="container mx-auto py-6 sm:px-6 lg:px-8">
         <div class="mt-5 md:mt-0 md:col-span-2">
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="bg-red-500 text-white font-bold p-4">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -38,7 +38,7 @@
                                 <input type="checkbox" name="is_sign" id="is_sign" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md" {{ $contract->is_sign ? 'checked' : '' }}>
                             </div>
 
-                            <div class="mb-4">
+                            <div class="col-span-6 sm:col-span-4">
                                 <label for="billing_type" class="block text-sm font-medium text-gray-700">Factureringstype</label>
                                 <select name="billing_type" id="billing_type" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     <option value="maandelijks" {{ $contract->billing_type === 'maandelijks' ? 'selected' : '' }}>Maandelijks</option>

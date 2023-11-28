@@ -37,13 +37,13 @@ class ContractsController extends Controller
             'billing_type' => 'required|in:maandelijks,periodiek',
         ]);
 
-        $isSign = $request->has('is_sign') ? 1 : 0;
+        $isSigned = $request->has('is_sign') ? 1 : 0;
 
         Contract::create([
             'company_id' => $request->company_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'is_sign' => $isSign,
+            'is_sign' => $isSigned,
             'billing_type' => $request->billing_type,
         ]);
 

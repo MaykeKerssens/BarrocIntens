@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="container mx-auto py-6 sm:px-6 lg:px-8">
         <div class="mt-5 md:mt-0 md:col-span-2">
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="bg-red-500 text-white font-bold p-4">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
