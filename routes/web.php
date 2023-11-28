@@ -29,12 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('/sourcing/create', [ProductController::class, 'create'])->name('sourcing.create');
-    Route::get('/sourcing/{sourcing}/edit', [ProductController::class, 'edit'])->name('sourcing.edit');
-    Route::put('/sourcing/{sourcing}', [ProductController::class, 'update'])->name('sourcing.update');
-    Route::get('/sourcing/{sourcing}', [ProductController::class, 'show'])->name('sourcing.show');
-    Route::delete('/sourcing/{sourcing}', [ProductController::class, 'destroy'])->name('sourcing.destroy');
 });
+
 
 require __DIR__.'/auth.php';

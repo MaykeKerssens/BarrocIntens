@@ -4,7 +4,15 @@
             {{ __('Nieuw Product Toevoegen') }}
         </h2>
     </x-slot>
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form method="POST" action="{{ route('sourcing.store') }}" enctype="multipart/form-data" class="mt-5 md:mt-0 md:col-span-2">
         @csrf
 

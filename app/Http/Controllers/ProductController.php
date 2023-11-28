@@ -112,11 +112,25 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+
+
+        //Checl of product besteld is
+        // if ($product->orders()->exists()) {
+        //     return redirect()->back()->with('error', 'Dit product kan niet worden verwijderd omdat het is besteld.');
+        // }
+
         // Afbeelding verwijderen als die bestaat
         if (!empty($product->image_path) && Storage::exists($product->image_path)) {
             Storage::delete($product->image_path);
         }
+    
         $product->delete();
-        return redirect()->route('sourcing.index')->with('message', 'Product is verwijderd');
+        
+        // Redirect naar de showblade
+        $products = Product::all();
+        return view('sourcing.index', [
+            'products' => $products
+        ])->with('message', 'Product is verwijderd');
+        // return view('sourcing.index')->with('message', 'Product is verwijderd');
     }
 }
