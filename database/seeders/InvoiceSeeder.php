@@ -16,6 +16,7 @@ class InvoiceSeeder extends Seeder
             Invoice::create([
                 'date' => now(),
                 'paid' => true,
+                'costs' => 20,
                 'contract_id' => 1,  
             ]);
     }

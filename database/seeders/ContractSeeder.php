@@ -18,6 +18,15 @@ class ContractSeeder extends Seeder
                 'start_date' => '2023-01-01',
                 'end_date' => '2023-12-31',
                 'is_sign' => true,
+                'billing_type' => 'maandelijks',
+        ]);
+
+            Contract::create([
+                'company_id' => 2,
+                'start_date' => '2023-01-05',
+                'end_date' => '2023-12-30',
+                'is_sign' => true,
+                'billing_type' => 'periodiek',
         ]);
     }
 }

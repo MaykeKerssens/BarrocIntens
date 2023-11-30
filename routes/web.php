@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\ProfileController;
@@ -30,7 +31,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('finance', InvoicesController::class);
+ Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
+ Route::resource('invoices', InvoicesController::class)->except(['index']); 
+ Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
+ Route::resource('contracts', ContractsController::class); 
+
 
 Route::resource('maintenance', MaintenanceController::class);
 
