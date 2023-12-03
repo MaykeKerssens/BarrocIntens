@@ -16,15 +16,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased flex flex-col min-h-screen">
-    <div class="flex-grow bg-gray-100">
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100">
         <!-- Page Heading -->
         <header class="bg-white shadow">
             @include('layouts.navigation')
         </header>
 
         <!-- Page Content -->
-        <main class="flex-grow">
+        <main>
             @if (isset($pageHeaderText))
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $pageHeaderText }}
@@ -33,13 +33,9 @@
 
             {{ $slot }}
         </main>
+        <footer class="bg-white shadow">
+            @include('layouts.footer')
+        </footer>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-white shadow fixed bottom-0 w-full">
-        @include('layouts.footer')
-    </footer>
 </body>
-
-
 </html>

@@ -6,18 +6,18 @@
 
     <div>
         <h4><b>Contact</b></h4>
-        <p>+31(0)76-5733444</p>
-        <p>info@barrocintens.nl</p>
+        <p class="text-gray-500">+31(0)76-5733444</p>
+        <p class="text-gray-500">info@barrocintens.nl</p>
     </div>
     <div>
         <h4><b>Locatie</b></h4>
-        <p>Terheijdenseweg 350</p>
-        <p>4826 AA Breda</p>
+        <p class="text-gray-500">Terheijdenseweg 350</p>
+        <p class="text-gray-500">4826 AA Breda</p>
     </div>
     <div>
         <h4><b>Algemeen</b></h4>
-        <p>Privacy verklaring</p>
-        <p>Cookies</p>
+        <x-footer-link :href="route('privacy-verklaring')" :active="request()->routeIs('privacy-verklaring')">
+            {{ __('Privacy verklaring') }}
+        </x-footer-link>
     </div>
-
 </nav>
