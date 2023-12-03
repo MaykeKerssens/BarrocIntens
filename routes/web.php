@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\Maintenance\MaintenanceController;
+use App\Http\Controllers\NotesControllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
  Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
  Route::resource('contracts', ContractsController::class); 
 
+ Route::resource('sales', NotesControllers::class);
 
 Route::resource('maintenance', MaintenanceController::class);
 
