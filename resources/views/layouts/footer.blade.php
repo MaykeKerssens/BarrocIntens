@@ -9,10 +9,16 @@
         <p class="text-gray-500">+31(0)76-5733444</p>
         <p class="text-gray-500">info@barrocintens.nl</p>
     </div>
-    <div>
+    <div class="flex flex-col">
         <h4><b>Locatie</b></h4>
-        <p class="text-gray-500">Terheijdenseweg 350</p>
-        <p class="text-gray-500">4826 AA Breda</p>
+        <x-footer-link href="https://maps.app.goo.gl/FNuNL1VpBD4nbQmn6" :active="''">
+            {{ __('Terheijdenseweg 350') }}
+        </x-footer-link>
+
+        <x-footer-link href="https://maps.app.goo.gl/FNuNL1VpBD4nbQmn6" :active="''">
+            {{ __('4826 AA Breda') }}
+        </x-footer-link>
+
     </div>
     <div>
         <h4><b>Algemeen</b></h4>

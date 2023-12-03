@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class footer-link extends Component
+class footerLink extends Component
 {
     /**
      * Create a new component instance.
