@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,9 +36,9 @@ Route::middleware('auth')->group(function () {
 });
 
  Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
- Route::resource('invoices', InvoicesController::class)->except(['index']); 
+ Route::resource('invoices', InvoicesController::class)->except(['index']);
  Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
- Route::resource('contracts', ContractsController::class); 
+ Route::resource('contracts', ContractsController::class);
 
 
 Route::resource('maintenance', MaintenanceController::class);
