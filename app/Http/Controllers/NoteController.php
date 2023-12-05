@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class NotesControllers extends Controller
+class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class NotesControllers extends Controller
         $users = User::all();
         $notes = Note::all();
         return view('sales.index',[
-            'users' => $users,
+            'users' => $users,// gaat over alle klanten
             'notes' => $notes,
-            'user' => Auth::user(),
+            'user' => Auth::user(),// gaat over de sales medewerker die een notitie opslaat
         ]);
     }
 
