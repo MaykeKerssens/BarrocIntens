@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/privacy-verklaring', function () {
+    return view('privacy-verklaring');
+})->name('privacy-verklaring');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,9 +36,9 @@ Route::middleware('auth')->group(function () {
 });
 
  Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
- Route::resource('invoices', InvoicesController::class)->except(['index']); 
+ Route::resource('invoices', InvoicesController::class)->except(['index']);
  Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
- Route::resource('contracts', ContractsController::class); 
+ Route::resource('contracts', ContractsController::class);
 
 
 Route::resource('maintenance', MaintenanceController::class);

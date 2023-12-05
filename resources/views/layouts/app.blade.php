@@ -33,7 +33,9 @@
 
             {{ $slot }}
         </main>
+        <footer class="bg-white shadow">
+            @include('layouts.footer')
+        </footer>
     </div>
 </body>
-
 </html>
