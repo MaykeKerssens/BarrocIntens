@@ -12,25 +12,30 @@
                     <thead>
                         <tr class="bg-gray-200">
                             <th>Naam</th>
+                            <th>E-mail</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         @foreach ($users as $user)
                             <tr class="hover:bg-gray-100">
                                 <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">Notities</h2>
+                <div class="mb-4">
+                    <a href="{{ route('notes.create') }}" class="text-blue-500 hover:underline">Nieuwe notitie Toevoegen</a>
+                </div>
                 <table class="table-auto w-full border-collapse border border-gray-400 mb-8">
                     <thead>
                         <tr class="bg-gray-200">
                             <th>Beschrijving</th>
                             <th>Datum</th>
                             <th>Bedrijf</th>
-                            <th>Klant</th>
+                            <th>Medewerker</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">

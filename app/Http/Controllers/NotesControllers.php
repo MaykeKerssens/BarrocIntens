@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotesControllers extends Controller
 {
@@ -18,6 +20,7 @@ class NotesControllers extends Controller
         return view('sales.index',[
             'users' => $users,
             'notes' => $notes,
+            'user' => Auth::user(),
         ]);
     }
 
@@ -26,15 +29,32 @@ class NotesControllers extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        $users = User::all(); 
+        return view('notes.create', [
+            'users' => $users,
+            'companies' => $companies,
+        ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'note' => 'required',
+            'date' => 'required|date',
+            'company_id' => 'required|exists:companies,id',
+        ]);
+
+        Note::create([
+            'note' => $request->note,
+            'date' => $request->date,
+            'company_id' => $request->company_id,
+            'user_id' => Auth::id()
+        ]);
+        
+        return redirect()->route('notes.index')->with('success', 'Notitie is succesvol toegevoegd.');
     }
 
     /**

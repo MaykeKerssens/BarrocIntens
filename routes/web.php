@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
  Route::resource('contracts', ContractsController::class); 
 
  Route::resource('sales', NotesControllers::class);
+ Route::resource('notes', NotesControllers::class);
 
 Route::resource('maintenance', MaintenanceController::class);
 
