@@ -5,6 +5,21 @@
         </h2>
     </x-slot>
 
+    <x-primary-button>
+        Hello
+    </x-primary-button>
+
+    <x-primary-button>
+        Dit is een lange tekst
+    </x-primary-button>
+
+    <x-secondary-button>
+        Hello
+    </x-secondary-button>
+
+    <x-secondary-button>
+        Dit is een lange tekst
+    </x-secondary-button>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
