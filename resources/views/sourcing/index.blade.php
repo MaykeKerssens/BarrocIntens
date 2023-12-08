@@ -5,34 +5,6 @@
         </h2>
     </x-slot>
 
-    <style>
-        /* Inline CSS-stijlen voor de tabel */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .table th,
-        .table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-        }
-
-        .table img {
-            max-width: 100px;
-            max-height: 100px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 5px;
-        }
-    </style>
 
     <a href="{{ route('sourcing.create') }}" class="btn btn-primary mb-2">Nieuw Product Toevoegen</a>
 
@@ -61,7 +33,7 @@
                             @endif
                         </td>
                         <td>{{ $product->price }}</td>
-                        <td>{{ $product->product_category_id }}</td>
+                        <td>{{ $product->ProductCategory->name }}</td>
                         <td>
                             <!-- Add buttons for edit and delete actions -->
                             <a href="{{ route('sourcing.edit', $product->id) }}" class="btn btn-warning btn-sm">Bewerken</a>

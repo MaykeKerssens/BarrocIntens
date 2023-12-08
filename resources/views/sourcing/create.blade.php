@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="bg-red-500 text-white font-bold p-4">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
