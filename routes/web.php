@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ContractsController;
+use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +26,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('sourcing', ProductController::class);
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
+Route::resource('invoices', InvoicesController::class)->except(['index']); 
+Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
+Route::resource('contracts', ContractsController::class); 
+
+Route::resource('maintenance', MaintenanceController::class);
+
+Route::resource('sourcing', ProductController::class);
 
 require __DIR__.'/auth.php';

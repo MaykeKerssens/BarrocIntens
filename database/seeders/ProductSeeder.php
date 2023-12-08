@@ -21,21 +21,21 @@ class ProductSeeder extends Seeder
             'product_category_id' => 1,
         ]);
         Product::create([
-            'name' => 'Voorbeeldproduct',
+            'name' => 'Voorbeeldproduct 2',
             'description' => 'Dit is een voorbeeldproduct.',
             'image_path' => 'koffiezetapparaat2.jpg',
             'price' => 19.99,
             'product_category_id' => 1,
         ]);
         Product::create([
-            'name' => 'Voorbeeldproduct',
+            'name' => 'Voorbeeldproduct 3',
             'description' => 'Dit is een voorbeeldproduct.',
             'image_path' => 'koffiezetapparaat3.jpg',
             'price' => 19.99,
             'product_category_id' => 1,
         ]);
         Product::create([
-            'name' => 'Voorbeeldproduct',
+            'name' => 'Voorbeeldproduct 4',
             'description' => 'Dit is een voorbeeldproduct.',
             'image_path' => 'koffiezetapparaat4.jpg',
             'price' => 19.99,
