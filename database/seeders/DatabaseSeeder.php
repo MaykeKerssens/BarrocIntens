@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             RepairRequestSeeder::class,
             MaintenanceAppointmentSeeder::class,
             AppointmentRequestSeeder::class,
+            NoteSeeder::class,
         ]);
     }
 }

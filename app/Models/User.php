@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(MaintenanceAppointment::class);
     }
+
+    public function note()
+    {
+        return $this->hasMany(Note::class);
+    }
 }
