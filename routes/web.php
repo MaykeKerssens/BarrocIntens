@@ -44,8 +44,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('maintenance')->group(function () {
         Route::get('/dashboard', [MaintenanceController::class, 'index'])->name('maintenance.dashboard');
+        Route::get('/head-of-maintenance-dashboard', [MaintenanceController::class, 'request'])->name('headOfMaintenance.dashboard');
         // Add other maintenance routes as needed
-    });
+    });    
 
     Route::prefix('sales')->group(function () {
         Route::get('/dashboard', [SalesController::class, 'index'])->name('sales.dashboard');

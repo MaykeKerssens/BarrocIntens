@@ -30,19 +30,23 @@
                     </x-nav-link>
                 @elseif(auth()->user()->role_id == 2) {{-- Finance --}}
                     <x-nav-link :href="route('finance.dashboard')" :active="request()->routeIs('finance.dashboard')">
-                        {{ __('Finance Dashboard') }}
+                        {{ __('Financiën Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 3)
-                    <x-nav-link :href="route('maintenance.dashboard')" :active="request()->is('maintenance.dashboard')">
-                        {{ __('Maintenance Dashboard') }}
-                    </x-nav-link>
+                    <x-nav-link :href="route('maintenance.dashboard')" :active="request()->routeIs('maintenance.dashboard')">
+                        {{ __('Onderhoud Dashboard') }}
+                    </x-nav-link>             
                 @elseif (auth()->user()->role_id == 4)
                     <x-nav-link :href="route('sales.dashboard')" :active="request()->is('sales.dashboard')">
-                        {{ __('Sales Dashboard') }}
+                        {{ __('Verkoop Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 5)
                     <x-nav-link :href="route('sourcing.dashboard')" :active="request()->is('sourcing.dashboard')">
-                        {{ __('Sourcing Dashboard') }}
+                        {{ __('Inkoop Dashboard') }}
+                    </x-nav-link>
+                @elseif (auth()->user()->role_id == 6)
+                    <x-nav-link :href="route('headOfMaintenance.dashboard')" :active="request()->routeIs('headOfMaintenance.dashboard')">
+                        {{ __('Overziende Onderhoud Dashboard') }}
                     </x-nav-link>
                 {{-- Add similar checks for other roles --}}
                 @endif

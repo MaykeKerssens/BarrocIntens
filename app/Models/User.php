@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(MaintenanceAppointment::class);
     }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }
