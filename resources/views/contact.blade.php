@@ -16,6 +16,7 @@
                 </ul>
             </div>
             @endif
+
             <form action="" method="POST">
                 @csrf
                 <div class="shadow overflow-hidden">
@@ -24,12 +25,15 @@
                             {{-- Company name --}}
                             <div class="col-span-6">
                                 <label for="company_name" class="block font-medium text-gray-700">Bedrijfs naam:</label>
-                                <input type="text" name="company_name" id="company_name" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
+                                <input type="text" name="company_name" id="company_name" value="{{ isset($user->company) ? $user->company->name : old('company_name') }}" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
                             </div>
                             {{-- Email --}}
                             <div class="col-span-6">
                                 <label for="email" class="block font-medium text-gray-700">Email:</label>
-                                <input type="email" name="email" id="email" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
+                                <input type="email" name="email" id="email" value="{{ isset($user) ? $user->email : old('email') }}" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required
+                                 >
+
+
                             </div>
                             {{-- subject --}}
                             <div class="col-span-6">
