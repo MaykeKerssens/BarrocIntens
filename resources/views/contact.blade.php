@@ -17,7 +17,7 @@
             </div>
             @endif
 
-            <form action="" method="POST">
+            <form action="{{ route('contact-send') }}" method="POST">
                 @csrf
                 <div class="shadow overflow-hidden">
                     <div class="px-4 py-5 bg-white">
@@ -30,10 +30,7 @@
                             {{-- Email --}}
                             <div class="col-span-6">
                                 <label for="email" class="block font-medium text-gray-700">Email:</label>
-                                <input type="email" name="email" id="email" value="{{ isset($user) ? $user->email : old('email') }}" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required
-                                 >
-
-
+                                <input type="email" name="email" id="email" value="{{ isset($user) ? $user->email : old('email') }}" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
                             </div>
                             {{-- subject --}}
                             <div class="col-span-6">

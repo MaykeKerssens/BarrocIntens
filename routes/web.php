@@ -22,7 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/contact', [PageController::class, 'contactForm'])->name('contact');
+Route::post('/contact-send', [PageController::class, 'contactFormSend'])->name('contact-send');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

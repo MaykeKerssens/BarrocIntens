@@ -9,14 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Send the user to the Contact page
      */
-    public function contact()
+    public function contactForm()
     {
         $user = [];
         // Check if the user is logged in
         if (Auth::check()) {
-            // Retrieve the current user's data
             $user = Auth::user();
             return view('contact', [
                 'user' => $user,
@@ -25,6 +24,15 @@ class PageController extends Controller
         else{
             return view('contact');
         }
-
     }
+
+    /**
+     * Send the user to the Contact page
+     */
+    public function contactFormSend(Request $request)
+    {
+        dd('helloooo');
+    }
+
+
 }
