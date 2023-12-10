@@ -14,7 +14,7 @@ class Companyseeder extends Seeder
     public function run(): void
     {
         Company::create([
-            'name' => 'bedrijf1',
+            'name' => 'De Bijenkorf',
             'phone' => '1234567890',
             'street' => '123 Main Street',
             'city' => 'Breda',
@@ -23,12 +23,20 @@ class Companyseeder extends Seeder
         ]);
 
         Company::create([
-            'name' => 'bedrijf2',
+            'name' => 'Albert Heijn',
             'phone' => '1234567890',
             'street' => '123 Main Street',
             'city' => 'Breda',
             'bkr_checked_at' => now(),
-            'user_id' => 1,
+            'user_id' => 2,
+        ]);
+
+        Company::create([
+            'name' => 'IKEA',
+            'phone' => '1234567890',
+            'street' => '123 Main Street',
+            'city' => 'Breda',
+            'user_id' => 3,
         ]);
     }
 }

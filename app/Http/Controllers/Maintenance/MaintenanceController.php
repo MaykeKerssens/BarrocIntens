@@ -17,8 +17,7 @@ class MaintenanceController extends Controller
      */
     public function request()
     {
-        $repairRequests = RepairRequest::all();
-
+        $repairRequests = RepairRequest::paginate(10);
         return view('maintenance.requests', [
             'requests' => $repairRequests,
         ]);
