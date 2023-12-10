@@ -51,13 +51,6 @@
                 {{-- Add similar checks for other roles --}}
                 @endif
             @endif
-
-            {{-- Add your custom links based on user roles --}}
-            @if(auth()->user()->is_admin)
-                <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
-                    {{ __('Upload') }}
-                </x-nav-link>
-            @endif
         @endauth
 
         {{-- Display login link --}}
