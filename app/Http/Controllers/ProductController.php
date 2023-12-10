@@ -64,11 +64,10 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName);
-            $product->image_path = 'images/' . $imageName;
+            $imageName = time() . '-' . $request->name . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+            $product->image_path = 'storage/images/' . $imageName;
         }
-
         $product->save();
 
         return redirect()->route('sourcing.index')->with('message', 'Product is aangemaakt');
@@ -91,20 +90,25 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->product_category_id = $request->product_category_id;
 
-        if ($request->hasFile('image')) {
-            $oldImagePath = public_path($product->image_path);
+        $product->save();
 
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
+        // Update image file
+        if ($request->hasFile('image')) {
+
+            // Check if there's an old image saved to storage
+            if (isset($product->image_path)) {
+                // Delete the old image from the 'public' disk
+                Storage::disk('public')->delete(str_replace('storage/', '', $product->image_path));
             }
 
+            // Save new image to public/storage/images
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName);
-            $product->image_path = 'images/' . $imageName;
-        }
+            $imageName = time() . '-' . $request->name . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+            $product->image_path = 'storage/images/' . $imageName;
 
-        $product->save();
+            $product->save();
+        }
 
         return redirect()->route('sourcing.index')->with('message', 'Product is bewerkt');
     }

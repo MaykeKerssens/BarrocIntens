@@ -18,7 +18,7 @@
         <label for="image">Afbeelding:</label>
         <input type="file" name="image" id="imageInput" onchange="previewImage(event)">
         @if($product->image_path)
-            <img src="{{ asset('storage/' . $product->image_path) }}" alt="Huidige afbeelding" style="max-width: 200px; margin-top: 5px;">
+            <img src="{{ asset($product->image_path) }}" alt="{{ $product->name . 'picutre'}}" style="max-width: 200px; margin-top: 5px;">
         @endif
 
         <label for="price">Prijs:</label>
