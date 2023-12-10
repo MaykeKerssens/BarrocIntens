@@ -3,6 +3,8 @@
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\Maintenance\MaintenanceController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +22,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/privacy-verklaring', function () {
+    return view('privacy-verklaring');
+})->name('privacy-verklaring');
+
+Route::get('/contact', [PageController::class, 'contactForm'])->name('contact');
+Route::get('/contact-quotation/{id}', [PageController::class, 'contactFormForQuotation'])->name('contact-quotation');
+Route::post('/contact-send', [PageController::class, 'contactFormSend'])->name('contact-send');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,6 +46,9 @@ Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.inde
 Route::resource('invoices', InvoicesController::class)->except(['index']); 
 Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts.index');
 Route::resource('contracts', ContractsController::class); 
+
+Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
+Route::resource('notes', NoteController::class);
 
 Route::resource('maintenance', MaintenanceController::class);
 

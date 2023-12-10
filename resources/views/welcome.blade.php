@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="pageHeaderText">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Welkom op onze website!
         </h2>
@@ -14,5 +14,7 @@
                 </div>
             </div>
         </div>
+
+        <a href="{{ route( 'contact-quotation', 1) }}">test</a>
     </div>
 </x-app-layout>

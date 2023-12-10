@@ -6,61 +6,43 @@
     </x-slot>
 
     <!--Overview only for Head of maintenance employee -->
-    <div class="py-12">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+            <!-- Table with all maintenance requests -->
+            <x-table :columns="['Klant', 'Product', 'Beschrijving', 'Status', 'Toegewezen aan']">
+                <x-slot name="title">
+                    Maintenance Requests:
+                </x-slot>
+                <x-slot name="paginationLinks">
+                    <!-- Display pagination links -->
+                    {{ $requests->links() }}
+                </x-slot>
 
+                @foreach ($requests as $request)
+                    <tr>
+                        <x-table.td>{{ $request->company->name }}</x-table.td>
+                        <x-table.td>{{ $request->product->name }}</x-table.td>
+                        <x-table.td>{{ $request->note }}</x-table.td>
 
-                <!-- Table with all maintenance requests -->
-                <h3>Maintenance Requests:</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Bedrijf</th>
-                            <th>Product</th>
-                            <th>Bescrhijving</th>
-                            <th>Status</th>
-                            <th>Assigned to</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($requests as $request)
-                            <tr>
-                                <td>{{ $request->company->name }}</td>
-                                <td>{{ $request->product->name }}</td>
-                                <td>{{ $request->note }}</td>
-                                <!-- Determine what color the status should have -->
+                        <!-- Determine what color the status should have -->
+                        <x-table.td
+                            class="{{ $request->status->color == 'green' ? 'text-green-500' : ($request->status->color == 'yellow' ? 'text-yellow-500' : ($request->status->color == 'blue' ? 'text-blue-500' : 'text-red-500')) }}">
+                            {{ $request->status->name }}
+                        </x-table.td>
+                        <x-table.td>
+                            <!-- Show all the people that have been assigned to resolve this request-->
+                            @php
+                                $appointmentRequests = $requests->find($request->id)->appointmentRequests;
+                            @endphp
 
-                                <td
-                                    class="
-                                    @if ($request->status->color == 'blue')
-                                        text-blue-500
-                                    @elseif ($request->status->color == 'green')
-                                        text-green-500
-                                    @elseif ($request->status->color == 'yellow')
-                                        text-yellow-500
-                                    @elseif ($request->status->color == 'red')
-                                        text-red-500 @endif
-                                    ">
-                                    {{ $request->status->name }}
-                                </td>
-                                <td>
-                                    <!-- Show all the people that have been assigned to resolve this request-->
-                                    @php
-                                        $appointmentRequests = $requests->find($request->id)->appointmentRequests;
-                                    @endphp
-
-                                    @foreach ($appointmentRequests as $appointmentRequest)
-                                        <p>{{ $appointmentRequest->maintenanceAppointment->user->name ? $appointmentRequest->maintenanceAppointment->user->name : '-' }}
-                                        </p>
-                                    @endforeach
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-            </div>
+                            @foreach ($appointmentRequests as $appointmentRequest)
+                                <p>{{ $appointmentRequest->maintenanceAppointment->user->name ? $appointmentRequest->maintenanceAppointment->user->name : '-' }}
+                                </p>
+                            @endforeach
+                        </x-table.td>
+                    </tr>
+                @endforeach
+            </x-table>
         </div>
     </div>
 </x-app-layout>
