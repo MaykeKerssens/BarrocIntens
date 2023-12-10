@@ -46,7 +46,7 @@ class User extends Authenticatable
     public function company()
     {
         return $this->hasOne(Company::class);
-      
+    }
     public function maintenanceAppointments()
     {
         return $this->hasMany(MaintenanceAppointment::class);
@@ -56,7 +56,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class);
     }
-    
+
     public function role(){
         return $this->belongsTo(Role::class);
     }
