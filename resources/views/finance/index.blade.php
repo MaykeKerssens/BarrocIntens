@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Finance pagina') }}
+            {{ __('Finance') }}
         </h2>
     </x-slot>
 
