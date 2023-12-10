@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Note extends Model
 {
     use HasFactory;
-    protected $table = 'companies';
+    protected $table = 'notes';
 
     protected $guarded = [];
 
-    public function repairRequests()
+    public function company()
     {
-        return $this->hasMany(RepairRequest::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function user()
