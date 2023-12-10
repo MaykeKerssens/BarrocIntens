@@ -14,5 +14,7 @@
                 </div>
             </div>
         </div>
+
+        <a href="{{ route( 'contact-quotation', 1) }}">test</a>
     </div>
 </x-app-layout>

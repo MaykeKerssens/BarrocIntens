@@ -49,7 +49,7 @@
                             {{-- subject --}}
                             <div class="col-span-6">
                                 <label for="subject" class="block font-medium text-gray-700">Onderwerp:</label>
-                                <input type="text" name="subject" id="subject"
+                                <input type="text" name="subject" id="subject" value="{{ isset($subject) ? $subject : old('subject') }}"
                                     class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                     required>
                             </div>

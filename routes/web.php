@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/contact', [PageController::class, 'contactForm'])->name('contact');
+Route::get('/contact-quotation/{id}', [PageController::class, 'contactFormForQuotation'])->name('contact-quotation');
 Route::post('/contact-send', [PageController::class, 'contactFormSend'])->name('contact-send');
 
 Route::get('/dashboard', function () {

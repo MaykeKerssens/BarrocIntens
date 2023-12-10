@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactFormSubmitted;
 use App\Models\Email;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -25,6 +26,27 @@ class PageController extends Controller
         }
         else{
             return view('contact');
+        }
+    }
+
+    public function contactFormForQuotation(string $procuctId)
+    {
+        $user = [];
+        $product = Product::find($procuctId);
+        $subject = 'Offerte - ' . $product->name;
+
+        // Check if the user is logged in
+        if (Auth::check()) {
+            $user = Auth::user();
+            return view('contact', [
+                'user' => $user,
+                'subject' => $subject,
+            ]);
+        }
+        else{
+            return view('contact', [
+                'subject' => $subject,
+            ]);
         }
     }
 
