@@ -8,6 +8,7 @@ use App\Http\Controllers\SourcingController;
 use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,5 +66,7 @@ Route::middleware('auth')->group(function () {
         // Add other sourcing routes as needed
     });
 });
+
+Route::resource('sourcing', ProductController::class);
 
 require __DIR__.'/auth.php';
