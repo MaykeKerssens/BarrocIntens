@@ -27,7 +27,7 @@
                         <td>{{ $product->description }}</td>
                         <td>
                             @if ($product->image_path)
-                                <img style="max-width: 100px; max-height: 100px;" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }} afbeelding">
+                                <img style="max-width: 100px; max-height: 100px;" src="{{ asset($product->image_path) }}" alt="{{ $product->name }} afbeelding">
                             @else
                                 <span>Geen afbeelding beschikbaar</span>
                             @endif
@@ -43,7 +43,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Verwijderen</button>
-                            </form>                            
+                            </form>
                         </td>
                     </tr>
                 @endforeach
