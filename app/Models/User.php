@@ -52,8 +52,12 @@ class User extends Authenticatable
         return $this->hasMany(MaintenanceAppointment::class);
     }
 
-    public function note()
+    public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 }
