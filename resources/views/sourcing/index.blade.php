@@ -5,51 +5,47 @@
         </h2>
     </x-slot>
 
-<x-primary-button>
-    <a href="{{ route('sourcing.create') }}">Nieuw Product Toevoegen</a>
-</x-primary-button>
+<div class="py-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <x-primary-button class="mb-4">
+            <a href="{{ route('sourcing.create') }}">Product Toevoegen</a>
+        </x-primary-button>
+        <!-- Table with all products -->
+        <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
+            <x-slot name="title">
+                Producten overzicht:
+            </x-slot>
+            <x-slot name="paginationLinks">
+                <!-- Display pagination links -->
+                {{ $products->links() }}
+            </x-slot>
 
-
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
+            @foreach ($products as $product)
                 <tr>
-                    <th>Naam</th>
-                    <th>Beschrijving</th>
-                    <th>Afbeelding</th>
-                    <th>Prijs</th>
-                    <th>Product Categorie</th>
-                    <th>Acties</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->description }}</td>
-                        <td>
-                            @if ($product->image_path)
-                                <img style="max-width: 100px; max-height: 100px;" src="{{ asset($product->image_path) }}" alt="{{ $product->name }} afbeelding">
+                    <x-table.td>{{ $product->name }}</x-table.td>
+                    <x-table.td>{{ $product->description }}</x-table.td>
+                    <x-table.td>
+                        @if ($product->image_path)
+                                <img style="max-width: 80px; max-height: 80px;" src="{{ asset($product->image_path) }}" alt="{{ $product->name }} afbeelding">
                             @else
-                                <span>Geen afbeelding beschikbaar</span>
+                                <p>-</p>
                             @endif
-                        </td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->ProductCategory->name }}</td>
-                        <td>
-                            <!-- Add buttons for edit and delete actions -->
-                            <a href="{{ route('sourcing.edit', $product->id) }}" class="btn btn-warning btn-sm">Bewerken</a>
+                    </x-table.td>
+                    <x-table.td>{{ $product->price }}</x-table.td>
+                    <x-table.td>{{ $product->ProductCategory->name }}</x-table.td>
+                    <x-table.td>
+                        <!-- Add buttons for edit and delete actions -->
+                        <a href="{{ route('sourcing.edit', $product->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
 
-                            <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
-                            <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je dit item wilt verwijderen?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
+                        </form>
+                    </x-table.td>
+                </tr>
+            @endforeach
+        </x-table>
     </div>
+</div>
 </x-app-layout>

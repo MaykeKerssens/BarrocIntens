@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Maintenance - Head of Maintenance') }}
+            {{ __('Maintenance Requests') }}
         </h2>
     </x-slot>
 
@@ -11,8 +11,11 @@
             <!-- Table with all maintenance requests -->
             <x-table :columns="['Klant', 'Product', 'Beschrijving', 'Status', 'Toegewezen aan']">
                 <x-slot name="title">
-                    Maintenance Requests:
+                    Onderhoud Requests:
                 </x-slot>
+                {{-- <x-slot name="button">
+                    <a href="">-</a>
+                </x-slot> --}}
                 <x-slot name="paginationLinks">
                     <!-- Display pagination links -->
                     {{ $requests->links() }}

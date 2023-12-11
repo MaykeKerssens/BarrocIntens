@@ -15,12 +15,11 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $notes = Note::all();
+        $users = User::paginate(10);
+        $notes = Note::paginate(10);
         return view('sales.index',[
-            'users' => $users,// gaat over alle klanten
+            'users' => $users,
             'notes' => $notes,
-            'user' => Auth::user(),// gaat over de sales medewerker die een notitie opslaat
         ]);
     }
 
@@ -30,7 +29,7 @@ class NoteController extends Controller
     public function create()
     {
         $companies = Company::all();
-        $users = User::all(); 
+        $users = User::all();
         return view('notes.create', [
             'users' => $users,
             'companies' => $companies,
@@ -53,7 +52,7 @@ class NoteController extends Controller
             'company_id' => $request->company_id,
             'user_id' => Auth::id()
         ]);
-        
+
         return redirect()->route('notes.index')->with('success', 'Notitie is succesvol toegevoegd.');
     }
 
