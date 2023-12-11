@@ -29,7 +29,7 @@
         <input type="number" name="price" step="0.01" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
 
         <label for="product_category_id" class="block text-sm font-medium text-gray-700 mt-2">Product Categorie:</label>
-        <select name="product_category_id" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+        <select name="product_category_id" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
             <option value="">Selecteer een categorie</option>
             @foreach ($productCategories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>

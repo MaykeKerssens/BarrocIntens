@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InvoiceProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
@@ -52,8 +53,8 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'required|exists:product_categories,id',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
+            'product_category_id' => 'exists:product_categories,id',
         ]);
 
         $product = new Product;
@@ -68,6 +69,7 @@ class ProductController extends Controller
             $image->storeAs('images', $imageName, 'public');
             $product->image_path = 'storage/images/' . $imageName;
         }
+
         $product->save();
 
         return redirect()->route('sourcing.index')->with('message', 'Product is aangemaakt');
@@ -80,7 +82,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'required|exists:product_categories,id',
+            'product_category_id' => 'exists:product_categories,id',
         ]);
 
         $product = Product::findOrFail($id);
@@ -90,15 +92,13 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->product_category_id = $request->product_category_id;
 
-        $product->save();
-
-        // Update image file
         if ($request->hasFile('image')) {
-
             // Check if there's an old image saved to storage
             if (isset($product->image_path)) {
                 // Delete the old image from the 'public' disk
                 Storage::disk('public')->delete(str_replace('storage/', '', $product->image_path));
+
+                
             }
 
             // Save new image to public/storage/images
@@ -108,9 +108,9 @@ class ProductController extends Controller
             $product->image_path = 'storage/images/' . $imageName;
 
             $product->save();
-        }
 
-        return redirect()->route('sourcing.index')->with('message', 'Product is bewerkt');
+            return redirect()->route('sourcing.index')->with('message', 'Product is bewerkt');
+        }
     }
 
 
@@ -121,12 +121,16 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if (!empty($product->image_path) && Storage::exists('public/' . $product->image_path)) {
-            Storage::delete('public/' . $product->image_path);
+        // Check if there are associated invoice products
+        $associatedInvoices = InvoiceProduct::where('product_id', $product->id);
+
+
+
+        if ($associatedInvoices) {
+            return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
+        } else {
+            return view('sourcing.confirm-delete', ['product' => $product]);
+            $product->delete();
         }
-
-        $product->delete();
-
-        return redirect()->route('sourcing.index')->with('message', 'Product is verwijderd');
     }
 }
