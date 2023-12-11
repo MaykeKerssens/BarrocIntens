@@ -107,9 +107,9 @@ class ProductController extends Controller
             $product->image_path = 'storage/images/' . $imageName;
 
             $product->save();
-
-            return redirect()->route('sourcing.index')->with('message', 'Product is bewerkt');
         }
+
+        return redirect()->route('sourcing.index')->with('message', 'Product is succesvol bewerkt');
     }
 
 
@@ -120,14 +120,14 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        // Check if there are associated invoice products
-        $associatedInvoices = InvoiceProduct::where('product_id', $product->id)->exists();
-        $associatedRepairRequests = RepairRequest::where('product_id', $product->id)->exists();
-
-        if ($associatedInvoices || $associatedRepairRequests) {
+        // Check if product is allowed to be deleted
+        if ($product->InvoiceProducts->count() > 0) {
             return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
+        }
+        elseif ($product->RepairRequests->count() > 0) {
+            return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een reparatie aanvraag.');
         } else {
-            // Display confirmation view
+            // Delete product
             $product->delete();
             return redirect()->route('sourcing.index')->with('message', 'Product succesvol verwijderd.');
         }

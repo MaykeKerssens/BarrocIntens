@@ -19,8 +19,8 @@ class Product extends Model
     {
         return $this->hasMany(InvoiceProduct::class);
     }
-  
-    public function repairRequests()
+
+    public function RepairRequests()
     {
         return $this->hasMany(RepairRequest::class);
     }
