@@ -20,28 +20,28 @@
                 {{-- Display role-specific links --}}
                 @if (auth()->user()->role_id == 1)
                     {{-- Customer --}}
-                    <x-nav-link :href="route('customer.dashboard')" :active="request()->routeIs('customer.dashboard')">
+                    <x-nav-link :href="route('customer.index')" :active="request()->routeIs('customer.index')">
                         {{ __('Customer Dashboard') }}
                     </x-nav-link>
                 @elseif(auth()->user()->role_id == 2)
                     {{-- Finance --}}
-                    <x-nav-link :href="route('finance.dashboard')" :active="request()->routeIs('finance.dashboard')">
+                    <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
                         {{ __('Financiën Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 3)
-                    <x-nav-link :href="route('maintenance.dashboard')" :active="request()->routeIs('maintenance.dashboard')">
+                    <x-nav-link :href="route('maintenance.index')" :active="request()->routeIs('maintenance.index')">
                         {{ __('Onderhoud Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 4)
-                    <x-nav-link :href="route('sales.dashboard')" :active="request()->is('sales.dashboard')">
+                    <x-nav-link :href="route('sales.index')" :active="request()->is('sales.index')">
                         {{ __('Verkoop Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 5)
-                    <x-nav-link :href="route('sourcing.dashboard')" :active="request()->is('sourcing.dashboard')">
+                    <x-nav-link :href="route('sourcing.index')" :active="request()->is('sourcing.index')">
                         {{ __('Inkoop Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 6)
-                    <x-nav-link :href="route('headOfMaintenance.dashboard')" :active="request()->routeIs('headOfMaintenance.dashboard')">
+                    <x-nav-link :href="route('headOfMaintenance.index')" :active="request()->routeIs('headOfMaintenance.index')">
                         {{ __('Overziende Onderhoud Dashboard') }}
                     </x-nav-link>
                 @endif

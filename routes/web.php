@@ -45,24 +45,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('customer')->group(function () {
-        Route::get('/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
+        Route::get('/dashboard', [CustomerController::class, 'index'])->name('customer.index');
         // Add other customer routes as needed
     });
 
-    Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.dashboard');
+    Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
     Route::resource('invoices', InvoicesController::class)->except(['index']);
     //  Route::get('/finance', [ContractsController::class, 'index'])->name('contracts.dashboard');
     Route::resource('contracts', ContractsController::class)->except(['index']);
 
     Route::resource('maintenance', MaintenanceController::class)->except(['index']);
-    Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.dashboard');
-    Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.dashboard');
+    Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
+    Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.index');
 
-    Route::get('/sales', [NoteController::class, 'index'])->name('sales.dashboard');
+    Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
 
     Route::prefix('sourcing')->group(function () {
-        Route::get('/dashboard', [SourcingController::class, 'index'])->name('sourcing.dashboard');
+        Route::get('/dashboard', [SourcingController::class, 'index'])->name('sourcing.index');
         // Add other sourcing routes as needed
     });
 });
