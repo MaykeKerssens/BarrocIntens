@@ -45,7 +45,7 @@
                                     <option value="periodiek" {{ $contract->billing_type === 'periodiek' ? 'selected' : '' }}>Periodiek</option>
                                 </select>
                             </div>
-                        
+
 
                             <div class="col-span-6 sm:col-span-4">
                                 <label for="bkr_checked_at" class="block text-sm font-medium text-gray-700">BKR Check Datum</label>
@@ -54,9 +54,9 @@
                         </div>
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <x-primary-button>
                             Contract Bijwerken
-                        </button>
+                        </x-primary-button>
                     </div>
                 </div>
             </form>

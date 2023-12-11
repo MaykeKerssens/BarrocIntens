@@ -5,8 +5,10 @@
         </h2>
     </x-slot>
 
+<x-primary-button>
+    <a href="{{ route('sourcing.create') }}">Nieuw Product Toevoegen</a>
+</x-primary-button>
 
-    <a href="{{ route('sourcing.create') }}" class="btn btn-primary mb-2">Nieuw Product Toevoegen</a>
 
     <div class="table-responsive">
         <table class="table">
@@ -42,7 +44,7 @@
                             <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je dit item wilt verwijderen?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Verwijderen</button>
+                                <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
                             </form>
                         </td>
                     </tr>

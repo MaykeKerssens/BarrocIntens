@@ -27,7 +27,7 @@
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">Notities</h2>
                 <div class="mb-4">
-                    <a href="{{ route('notes.create') }}" class="text-blue-500 hover:underline">Nieuwe notitie Toevoegen</a>
+                     href="{{ route('notes.create') }}" class="text-blue-500 hover:underline">Nieuwe notitie Toevoegen</a>
                 </div>
                 <table class="table-auto w-full border-collapse border border-gray-400 mb-8">
                     <thead>

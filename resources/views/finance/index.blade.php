@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="mb-4">
-        <a href="{{ route('invoices.create') }}" class="text-blue-500 hover:underline">Nieuwe Factuur Toevoegen</a>
-    </div>
+    <x-primary-button class="mb-4">
+        <a href="{{ route('invoices.create') }}">Nieuwe Factuur Toevoegen</a>
+    </x-primary-button>
 
     <!-- Tabel voor Facturen -->
     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">Facturen</h2>
@@ -42,9 +42,9 @@
         </tbody>
     </table>
 
-    <div class="mb-4">
-        <a href="{{ route('contracts.create') }}" class="text-blue-500 hover:underline">Nieuwe contract Toevoegen</a>
-    </div>
+    <x-primary-button class="mb-4">
+        <a href="{{ route('contracts.create') }}">Nieuwe contract Toevoegen</a>
+    </x-primary-button>
 
     <!-- Tabel voor Contracts -->
     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">Contracten</h2>
