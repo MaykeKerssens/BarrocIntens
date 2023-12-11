@@ -39,11 +39,21 @@
                             <a href="{{ route('sourcing.edit', $product->id) }}" class="btn btn-warning btn-sm">Bewerken</a>
 
                             <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
-                            <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je dit item wilt verwijderen?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Verwijderen</button>
-                            </form>
+                            <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" id="deleteForm">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">Verwijderen</button>
+                          </form>
+                          
+                          <script>
+                              function confirmDelete(event) {
+                                  event.preventDefault(); // Prevents the form from submitting immediately
+                          
+                                  if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                      document.getElementById('deleteForm').submit(); // Submits the form if confirmed
+                                  }
+                              }
+                          </script>
                         </td>
                     </tr>
                 @endforeach

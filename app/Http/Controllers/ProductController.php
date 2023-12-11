@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InvoiceProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\RepairRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -97,8 +98,6 @@ class ProductController extends Controller
             if (isset($product->image_path)) {
                 // Delete the old image from the 'public' disk
                 Storage::disk('public')->delete(str_replace('storage/', '', $product->image_path));
-
-                
             }
 
             // Save new image to public/storage/images
@@ -122,15 +121,16 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         // Check if there are associated invoice products
-        $associatedInvoices = InvoiceProduct::where('product_id', $product->id);
+        $associatedInvoices = InvoiceProduct::where('product_id', $product->id)->exists();
+        $associatedRepairRequests = RepairRequest::where('product_id', $product->id)->exists();
 
-
-
-        if ($associatedInvoices) {
+        if ($associatedInvoices || $associatedRepairRequests) {
             return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
         } else {
-            return view('sourcing.confirm-delete', ['product' => $product]);
+            // Display confirmation view
             $product->delete();
+            return redirect()->route('sourcing.index')->with('message', 'Product succesvol verwijderd.');
         }
     }
+
 }
