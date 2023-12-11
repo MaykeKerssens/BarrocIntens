@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Maintenance') }}
-        </h2>
+        {{ __('Onderhoud overzicht') }}
     </x-slot>
 
     <!--Overview for all normal maintenance employees -->

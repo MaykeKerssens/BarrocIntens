@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Neem contact met ons op') }}
-        </h2>
+        {{ __('Neem contact met ons op') }}
     </x-slot>
 
     <div class="container mx-auto py-6 sm:px-6 lg:px-8">

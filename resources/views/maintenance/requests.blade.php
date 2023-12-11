@@ -1,17 +1,15 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Maintenance Requests') }}
-        </h2>
+        {{ __('Head of Maintenance overzicht') }}
     </x-slot>
 
     <!--Overview only for Head of maintenance employee -->
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <!-- Table with all maintenance requests -->
             <x-table :columns="['Klant', 'Product', 'Beschrijving', 'Status', 'Toegewezen aan']">
                 <x-slot name="title">
-                    Onderhoud Requests:
+                    Onderhoud verzoeken:
                 </x-slot>
                 {{-- <x-slot name="button">
                     <a href="">-</a>

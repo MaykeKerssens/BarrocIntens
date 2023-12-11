@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Welkom op onze website!
-        </h2>
+        Welkom op onze website!
     </x-slot>
 
     <div class="py-12">

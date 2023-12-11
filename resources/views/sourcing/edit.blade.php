@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Product Bewerken') }}
-        </h2>
+        {{ __('Product bewerken') }}
     </x-slot>
     @if ($errors->any())
         <div class="bg-red-500 text-white font-bold p-4">

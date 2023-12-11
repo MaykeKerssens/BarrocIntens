@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Sales pagina') }}
-        </h2>
+        {{ __('Sales overzicht') }}
     </x-slot>
     <div class="py-8">
         <div class="max-w-7xl mx-auto">
