@@ -55,7 +55,8 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'exists:product_categories,id',
+            // Fix when changing product category table!
+            // 'product_category_id' => 'nullable|exists:product_categories,id|required_if:product_category_id,null',
         ]);
 
         $product = new Product;
@@ -83,7 +84,8 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'exists:product_categories,id',
+            // Fix when changing product category table!
+            // 'product_category_id' => 'exists:product_categories,id',
         ]);
 
         $product = Product::findOrFail($id);
