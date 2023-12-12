@@ -1,12 +1,10 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Nieuwe Notitie Toevoegen') }}
-        </h2>
+        {{ __('Nieuwe notitie toevoegen') }}
     </x-slot>
 
-    <div class="container mx-auto py-6 sm:px-6 lg:px-8">
-        <div class="mt-5 md:mt-0 md:col-span-2">
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto">
             @if ($errors->any())
                 <div class="bg-red-500 text-white font-bold p-4">
                     <ul>
@@ -19,35 +17,39 @@
             <form action="{{ route('notes.store') }}" method="POST">
                 @csrf
 
-                <div class="shadow overflow-hidden sm:rounded-md">
-                    <div class="px-4 py-5 bg-white sm:p-6">
-                        <div class="grid grid-cols-6 gap-6">
-                            <!-- Notitie -->
-                            <div class="col-span-6 sm:col-span-4">
-                                <label for="note" class="block text-sm font-medium text-gray-700">Beschrijving</label>
-                                <textarea name="note" id="note" rows="3" class="form-input rounded-md shadow-sm mt-1 block w-full" required></textarea>
-                            </div>
+                <div class="shadow overflow-hidden">
+                    <div class="px-4 py-5 bg-white flex flex-col gap-6">
+                        <!-- Note -->
+                        <div>
+                            <label for="note" class="block text-sm font-medium text-gray-700">Beschrijving</label>
+                            <textarea name="note" id="note" rows="3"
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md w-full" required></textarea>
 
-                            <div class="col-span-6 sm:col-span-4">
-                                <label for="date" class="block text-sm font-medium text-gray-700">Datum</label>
-                                <input type="datetime-local" name="date" id="date" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
-                            </div>
-
-                            <!-- Bedrijf ID -->
-                            <div class="col-span-6 sm:col-span-4">
-                                <label for="company_id" class="block text-sm font-medium text-gray-700">Kies het bedrijf van de klant</label>
-                                <select name="company_id" id="company_id" class="form-select mt-1 block w-full">
-                                    @foreach($companies as $company)
-                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
-                    </div>
-                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Notitie Toevoegen
-                        </button>
+                        <!-- Date -->
+                        <div>
+                            <label for="date" class="block text-sm font-medium text-gray-700">Datum</label>
+                            <input type="datetime-local" name="date" id="date"
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
+                                required>
+                        </div>
+
+                        <!-- Comapny name -->
+                        <div>
+                            <label for="company_id" class="block text-sm font-medium text-gray-700">Kies het bedrijf van
+                                de klant</label>
+                            <select name="company_id" id="company_id"
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md w-full">
+                                @foreach ($companies as $company)
+                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <x-primary-button>
+                                Notitie Toevoegen
+                            </x-primary-button>
+                        </div>
                     </div>
                 </div>
             </form>

@@ -1,47 +1,45 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Product Overzicht') }}
-        </h2>
+        {{ __('Inkoop overzicht') }}
     </x-slot>
 
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+        
+      @if(session('message'))
+          <div class="bg-yellow text-gray-800 font-bold p-4">
+              <p>{{ session('message') }}</p>
+          </div>
+      @endif
+        <!-- Table with all products -->
+        <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
+            <x-slot name="title">
+                Producten overzicht:
+            </x-slot>
+            <x-slot name="button">
+                <a href="{{ route('sourcing.create') }}">Product Toevoegen</a>
+            </x-slot>
+            <x-slot name="paginationLinks">
+                <!-- Display pagination links -->
+                {{ $products->links() }}
+            </x-slot>
 
-    <a href="{{ route('sourcing.create') }}" class="btn btn-primary mb-2">Nieuw Product Toevoegen</a>
-
-    @if(session('message'))
-        <div class="bg-yellow text-gray-800 font-bold p-4">
-            <p>{{ session('message') }}</p>
-        </div>
-    @endif
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
+            @foreach ($products as $product)
                 <tr>
-                    <th>Naam</th>
-                    <th>Beschrijving</th>
-                    <th>Afbeelding</th>
-                    <th>Prijs</th>
-                    <th>Product Categorie</th>
-                    <th>Acties</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->description }}</td>
-                        <td>
-                            @if ($product->image_path)
-                                <img style="max-width: 100px; max-height: 100px;" src="{{ asset($product->image_path) }}" alt="{{ $product->name }} afbeelding">
+                    <x-table.td>{{ $product->name }}</x-table.td>
+                    <x-table.td>{{ $product->description }}</x-table.td>
+                    <x-table.td>
+                        @if ($product->image_path)
+                                <img style="max-width: 80px; max-height: 80px;" src="{{ asset($product->image_path) }}" alt="{{ $product->name }} afbeelding">
                             @else
-                                <span>Geen afbeelding beschikbaar</span>
+                                <p>-</p>
                             @endif
-                        </td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->ProductCategory->name }}</td>
-                        <td>
-                            <!-- Add buttons for edit and delete actions -->
-                            <a href="{{ route('sourcing.edit', $product->id) }}" class="btn btn-warning btn-sm">Bewerken</a>
+                    </x-table.td>
+                    <x-table.td>{{ $product->price }}</x-table.td>
+                    <x-table.td>{{ $product->ProductCategory->name }}</x-table.td>
+                    <x-table.td>
+                        <!-- Add buttons for edit and delete actions -->
+                        <a href="{{ route('sourcing.edit', $product->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
 
                             <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
                             <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" id="deleteForm{{ $product->id }}">
@@ -65,4 +63,5 @@
             </tbody>
         </table>
     </div>
+</div>
 </x-app-layout>

@@ -1,16 +1,12 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Maintenance') }}
-        </h2>
+        {{ __('Onderhoud overzicht') }}
     </x-slot>
 
     <!--Overview for all normal maintenance employees -->
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
 
-            </div>
         </div>
     </div>
 </x-app-layout>
