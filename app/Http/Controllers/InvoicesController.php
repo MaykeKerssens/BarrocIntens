@@ -14,8 +14,8 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        $contracts = Contract::all();
-        $invoices = Invoice::all();
+        $contracts = Contract::paginate(10);
+        $invoices = Invoice::paginate(10);
         return view('finance.index',[
             'invoices' => $invoices,
             'contracts' => $contracts
@@ -74,12 +74,12 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-    
+
         $invoice = Invoice::findOrFail($id);
         $invoice->update([
             'paid' => $request->boolean('paid'),
         ]);
-    
+
         return redirect()->route('finance.index')->with('success', 'Factuur is succesvol bijgewerkt.');
     }
 

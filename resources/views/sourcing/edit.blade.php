@@ -1,9 +1,16 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Product Bewerken') }}
-        </h2>
+        {{ __('Product bewerken') }}
     </x-slot>
+    @if ($errors->any())
+        <div class="bg-red-500 text-white font-bold p-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('sourcing.update', $product->id) }}" enctype="multipart/form-data">
         @csrf
@@ -25,7 +32,7 @@
         <input type="number" name="price" value="{{ $product->price }}" required>
 
         <label for="product_category_id">Product Categorie:</label>
-        <select name="product_category_id" required>
+        <select name="product_category_id">
             {{-- Dynamically populate options based on your categories --}}
             @foreach ($productCategories as $category)
                 <option value="{{ $category->id }}" {{ $product->product_category_id == $category->id ? 'selected' : '' }}>
@@ -34,7 +41,9 @@
             @endforeach
         </select>
 
-        <button type="submit">Opslaan</button>
+        <x-primary-button>
+            Product aanpassen
+        </x-primary-button>
     </form>
 
     <script>

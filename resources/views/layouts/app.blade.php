@@ -26,8 +26,10 @@
         <!-- Page Content -->
         <main>
             @if (isset($pageHeaderText))
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $pageHeaderText }}
+                <div class="max-w-7xl mx-auto py-4">
+                    <h2 class="font-semibold text-2xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 leading-tight ">
+                        {{ $pageHeaderText }}
+                    </h2>
                 </div>
             @endif
 
