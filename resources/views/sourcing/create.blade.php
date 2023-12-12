@@ -38,6 +38,7 @@
         <select name="product_category_id"
             class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
             required>
+
             <option value="">Selecteer een categorie</option>
             @foreach ($productCategories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>

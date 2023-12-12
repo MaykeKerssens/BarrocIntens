@@ -5,6 +5,12 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+        
+      @if(session('message'))
+          <div class="bg-yellow text-gray-800 font-bold p-4">
+              <p>{{ session('message') }}</p>
+          </div>
+      @endif
         <!-- Table with all products -->
         <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
             <x-slot name="title">
@@ -35,15 +41,27 @@
                         <!-- Add buttons for edit and delete actions -->
                         <a href="{{ route('sourcing.edit', $product->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
 
-                        <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
-                        </form>
-                    </x-table.td>
-                </tr>
-            @endforeach
-        </x-table>
+                            <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
+                            <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" id="deleteForm{{ $product->id }}">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">Verwijderen</button>
+                          </form>
+
+                          <script>
+                              function confirmDelete(event) {
+                                  event.preventDefault(); // Prevents the form from submitting immediately
+
+                                  if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                      document.getElementById('deleteForm{{ $product->id }}').submit(); // Submits the form if confirmed
+                                  }
+                              }
+                          </script>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 </x-app-layout>

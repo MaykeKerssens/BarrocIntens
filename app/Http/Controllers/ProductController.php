@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InvoiceProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\RepairRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +45,12 @@ class ProductController extends Controller
             'productCategories' => $productCategories,
         ]);
     }
+  
+     public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
+  
     /**
      * Store a newly created resource in storage.
      */
@@ -52,8 +60,9 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'required|exists:product_categories,id',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
+            // Fix when changing product category table!
+            // 'product_category_id' => 'nullable|exists:product_categories,id|required_if:product_category_id,null',
         ]);
 
         $product = new Product;
@@ -68,6 +77,7 @@ class ProductController extends Controller
             $image->storeAs('images', $imageName, 'public');
             $product->image_path = 'storage/images/' . $imageName;
         }
+
         $product->save();
 
         return redirect()->route('sourcing.index')->with('message', 'Product is aangemaakt');
@@ -80,7 +90,8 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'required|exists:product_categories,id',
+            // Fix when changing product category table!
+            // 'product_category_id' => 'exists:product_categories,id',
         ]);
 
         $product = Product::findOrFail($id);
@@ -90,11 +101,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->product_category_id = $request->product_category_id;
 
-        $product->save();
-
-        // Update image file
         if ($request->hasFile('image')) {
-
             // Check if there's an old image saved to storage
             if (isset($product->image_path)) {
                 // Delete the old image from the 'public' disk
@@ -110,7 +117,7 @@ class ProductController extends Controller
             $product->save();
         }
 
-        return redirect()->route('sourcing.index')->with('message', 'Product is bewerkt');
+        return redirect()->route('sourcing.index')->with('message', 'Product is succesvol bewerkt');
     }
 
 
@@ -121,12 +128,33 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if (!empty($product->image_path) && Storage::exists('public/' . $product->image_path)) {
-            Storage::delete('public/' . $product->image_path);
+        // Check if product is allowed to be deleted
+        if ($product->InvoiceProducts->count() > 0) {
+            return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
+        }
+        elseif ($product->RepairRequests->count() > 0) {
+            return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een reparatie aanvraag.');
+        } else {
+            // Delete product
+            $product->delete();
+            return redirect()->route('sourcing.index')->with('message', 'Product succesvol verwijderd.');
+        }
+    }
+  
+  public function welcome(Request $request)
+    {
+        $categories = ProductCategory::distinct()->get(['id', 'name']);
+        $query = Product::query();
+
+        if ($request->filled('category')) {
+            $query->where('product_category_id', $request->category);
         }
 
-        $product->delete();
+        $products = $query->get();
 
-        return redirect()->route('sourcing.index')->with('message', 'Product is verwijderd');
+        return view('welcome', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
 }

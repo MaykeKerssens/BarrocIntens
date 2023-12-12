@@ -15,11 +15,12 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
 
-    // public function InvoiceProducts(){
-    //     return $this->hasMany(InvoiceProducts::class);
-    // }
-  
-    public function repairRequests()
+    public function InvoiceProducts()
+    {
+        return $this->hasMany(InvoiceProduct::class);
+    }
+
+    public function RepairRequests()
     {
         return $this->hasMany(RepairRequest::class);
     }
