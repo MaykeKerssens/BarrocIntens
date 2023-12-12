@@ -57,7 +57,7 @@
         </x-nav-link>
 
         {{-- Display login link --}}
-        <x-nav-link>
+        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
             {{ __('Login') }}
         </x-nav-link>
     </div>
