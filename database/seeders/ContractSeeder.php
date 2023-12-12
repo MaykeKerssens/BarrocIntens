@@ -16,7 +16,7 @@ class ContractSeeder extends Seeder
         Contract::create([
                 'company_id' => 1,
                 'start_date' => '2023-01-01',
-                'end_date' => '2023-12-31',
+                'end_date' => '2024-03-14',
                 'is_sign' => true,
                 'billing_type' => 'maandelijks',
         ]);
@@ -24,7 +24,7 @@ class ContractSeeder extends Seeder
             Contract::create([
                 'company_id' => 2,
                 'start_date' => '2023-01-05',
-                'end_date' => '2023-12-30',
+                'end_date' => '2024-07-31',
                 'is_sign' => true,
                 'billing_type' => 'periodiek',
         ]);
