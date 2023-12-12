@@ -1,7 +1,7 @@
 <?php
 namespace Database\Seeders;
+
 use App\Models\ProductCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductCategorySeeder extends Seeder
@@ -11,8 +11,18 @@ class ProductCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        ProductCategory::create([
-            'name' => 'Test',
-        ]);
+        $categories = [
+            'Halfautomaat',
+            'Volautomaat',
+            'Filterautomaat',
+            'Molen',
+            'Afrikaans'
+        ];
+
+        foreach ($categories as $category) {
+            ProductCategory::create([
+                'name' => $category,
+            ]);
+        }
     }
 }
