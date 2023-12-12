@@ -8,15 +8,16 @@ use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
+    public function index()
+    {
+        return view('maintenance.index'); // Update the view path as needed
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function request()
     {
-
-
-        $repairRequests = RepairRequest::all();
-
+        $repairRequests = RepairRequest::paginate(10);
         return view('maintenance.requests', [
             'requests' => $repairRequests,
         ]);

@@ -1,17 +1,68 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-roboto text-xl text-gray-800 leading-tight">
-            {{ __('Product sourcing') }}
+    <x-slot name="pageHeaderText">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Product Overzicht') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 ">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+
+    <a href="{{ route('sourcing.create') }}" class="btn btn-primary mb-2">Nieuw Product Toevoegen</a>
+
+    @if(session('message'))
+        <div class="bg-yellow text-gray-800 font-bold p-4">
+            <p>{{ session('message') }}</p>
         </div>
+    @endif
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Beschrijving</th>
+                    <th>Afbeelding</th>
+                    <th>Prijs</th>
+                    <th>Product Categorie</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>
+                            @if ($product->image_path)
+                                <img style="max-width: 100px; max-height: 100px;" src="{{ asset($product->image_path) }}" alt="{{ $product->name }} afbeelding">
+                            @else
+                                <span>Geen afbeelding beschikbaar</span>
+                            @endif
+                        </td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->ProductCategory->name }}</td>
+                        <td>
+                            <!-- Add buttons for edit and delete actions -->
+                            <a href="{{ route('sourcing.edit', $product->id) }}" class="btn btn-warning btn-sm">Bewerken</a>
+
+                            <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
+                            <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST" class="inline" id="deleteForm{{ $product->id }}">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">Verwijderen</button>
+                          </form>
+
+                          <script>
+                              function confirmDelete(event) {
+                                  event.preventDefault(); // Prevents the form from submitting immediately
+
+                                  if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                      document.getElementById('deleteForm{{ $product->id }}').submit(); // Submits the form if confirmed
+                                  }
+                              }
+                          </script>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </x-app-layout>
