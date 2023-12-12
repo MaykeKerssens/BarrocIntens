@@ -14,21 +14,21 @@ class NoteSeeder extends Seeder
     public function run(): void
     {
         Note::create([
-            'note' => 'Initial meeting regarding coffee machine requirements.',
+            'note' => 'Eerste gesprek over de vereisten voor de koffiemachine.',
             'date' => now()->subDays(5),
             'company_id' => 1,
             'user_id' => 1,
         ]);
 
         Note::create([
-            'note' => 'Received updated price quotes for the coffee machines.',
+            'note' => 'Geactualiseerde prijsoffertes ontvangen voor de koffiemachines.',
             'date' => now()->subDays(2),
             'company_id' => 1,
             'user_id' => 1,
         ]);
 
         Note::create([
-            'note' => 'Scheduled demonstration of the latest coffee machines.',
+            'note' => 'Geplande demonstratie van de nieuwste koffiemachines.',
             'date' => now(),
             'company_id' => 1,
             'user_id' => 1,
