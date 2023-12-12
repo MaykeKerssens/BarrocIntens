@@ -5,7 +5,7 @@
 
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
             <!-- Tabel for Invoices -->
             <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Acties']">
                 <x-slot name="title">

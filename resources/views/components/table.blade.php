@@ -8,7 +8,7 @@
     </x-primary-button>
 @endif
 
-<table class="bg-gray-100 shadow-sm border-gray-900 border-2 table-fixed border-collapse min-w-full max-w-7xl mx-auto">
+<table class="shadow-sm border-gray-900 border-2 table-fixed border-collapse min-w-full max-w-7xl mx-auto">
     <thead class="p-10">
         <tr class="border-gray-400 min-w-full">
             @foreach ($columns as $column)

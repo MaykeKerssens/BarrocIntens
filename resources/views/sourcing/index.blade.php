@@ -1,19 +1,17 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Product overzicht') }}
-        </h2>
+        {{ __('Inkoop overzicht') }}
     </x-slot>
 
-<div class="py-8">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <x-primary-button class="mb-4">
-            <a href="{{ route('sourcing.create') }}">Product Toevoegen</a>
-        </x-primary-button>
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
         <!-- Table with all products -->
         <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
             <x-slot name="title">
                 Producten overzicht:
+            </x-slot>
+            <x-slot name="button">
+                <a href="{{ route('sourcing.create') }}">Product Toevoegen</a>
             </x-slot>
             <x-slot name="paginationLinks">
                 <!-- Display pagination links -->
