@@ -14,7 +14,9 @@
                 <p class="text-lg font-bold mt-2">Price: ${{ $product->price }}</p>
                 
                 <!-- Offerte Button -->
-                <a class="bg-blue-500 text-white py-2 px-4 rounded-full mt-4 inline-block">Offerte aanvragen</a>
+                <x-primary-button>
+                    <a href="{{ route('contact-quotation', $product->id) }}">Offerte aanvragen</a>
+                </x-primary-button>
             </div>
         </div>
     </div>
