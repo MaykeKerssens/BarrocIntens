@@ -8,7 +8,6 @@ use App\Http\Controllers\SourcingController;
 use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
