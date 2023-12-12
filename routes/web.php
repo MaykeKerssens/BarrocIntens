@@ -10,6 +10,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +24,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [ProductController::class, 'welcome'])->name('welcome');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::resource('sourcing', ProductController::class);
+//     Route::prefix('sourcing')->group(function () {
+//         Route::get('/dashboard', [SourcingController::class, 'index'])->name('sourcing.index');
+//         // Add other sourcing routes as needed
+//     });
 
 Route::get('/privacy-verklaring', function () {
     return view('privacy-verklaring');
@@ -61,12 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
 
-    Route::prefix('sourcing')->group(function () {
-        Route::get('/dashboard', [SourcingController::class, 'index'])->name('sourcing.index');
-        // Add other sourcing routes as needed
-    });
+
 });
 
-Route::resource('sourcing', ProductController::class);
 
 require __DIR__.'/auth.php';

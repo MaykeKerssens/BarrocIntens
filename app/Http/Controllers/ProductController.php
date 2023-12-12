@@ -45,6 +45,12 @@ class ProductController extends Controller
             'productCategories' => $productCategories,
         ]);
     }
+  
+     public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
+  
     /**
      * Store a newly created resource in storage.
      */
@@ -134,5 +140,21 @@ class ProductController extends Controller
             return redirect()->route('sourcing.index')->with('message', 'Product succesvol verwijderd.');
         }
     }
+  
+  public function welcome(Request $request)
+    {
+        $categories = ProductCategory::distinct()->get(['id', 'name']);
+        $query = Product::query();
 
+        if ($request->filled('category')) {
+            $query->where('product_category_id', $request->category);
+        }
+
+        $products = $query->get();
+
+        return view('welcome', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
+    }
 }
