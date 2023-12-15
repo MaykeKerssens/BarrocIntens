@@ -3,10 +3,17 @@
         {{ __('Finance') }}
     </x-slot>
 
-
     <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
-            <!-- Tabel for Invoices -->
+        <div class="max-w-7xl mx-auto bg-white shadow overflow-hidden">
+
+            @if (session('message'))
+            <div class="bg-yellow text-gray-800 font-bold p-4">
+                <p>{{ session('message') }}</p>
+            </div>
+        @endif
+        <div class="px-4 py-5">
+
+            <!-- Table for Invoices -->
             <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Acties']">
                 <x-slot name="title">
                     Facturen:
@@ -31,15 +38,11 @@
                         <x-table.td>{{ $invoice->costs }}</x-table.td>
                         <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
                         <x-table.td>
-                            <a href="{{ route('invoices.edit', $invoice->id) }}"
-                                class="text-blue-500 hover:underline">Bewerken</a>
+                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
                         </x-table.td>
                     </tr>
                 @endforeach
             </x-table>
-
-
-
 
             <!-- Table for Contracts -->
             <x-table :columns="['Bedrijf', 'Startdatum', 'Einddatum', 'Ondertekend', 'Factureringstype', 'BKR check', 'Acties']">
@@ -75,17 +78,30 @@
                             @endif
                         </x-table.td>
                         <x-table.td>
-                            <a href="{{ route('contracts.edit', $contract->id) }}"
-                                class="text-blue-500 hover:underline">Bewerken</a>
-                            <form action="{{ route('contracts.destroy', $contract->id) }}" method="POST">
+                            <a href="{{ route('contracts.edit', $contract->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
+                            <form action="{{ route('contracts.destroy', $contract->id) }}" method="POST" class="inline"
+                                id="deleteForm{{ $contract->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
+                                <button type="submit"  class="text-red-500 hover:underline"
+                                    onclick="confirmDelete(event)">Verwijderen</button>
                             </form>
                         </x-table.td>
+
                     </tr>
                 @endforeach
             </x-table>
         </div>
+        </div>
     </div>
+
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault(); // Prevents the form from submitting immediately
+
+            if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                document.getElementById('deleteForm{{ $contract->id }}').submit(); // Submits the form if confirmed
+            }
+        }
+    </script>
 </x-app-layout>

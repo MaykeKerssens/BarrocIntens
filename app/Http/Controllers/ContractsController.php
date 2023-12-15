@@ -66,7 +66,6 @@ class ContractsController extends Controller
         $contract = Contract::findOrFail($id);
         $companies = Company::all();
         return view('contracts.edit')->with(['contract' => $contract, 'companies' => $companies]);
-
     }
 
     /**
@@ -80,9 +79,9 @@ class ContractsController extends Controller
             'bkr_checked_at' => 'nullable|date',
             'billing_type' => 'required|in:maandelijks,periodiek',
         ]);
-    
+
         $contract = Contract::findOrFail($id);
-    
+
         $contract->update([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
@@ -97,17 +96,24 @@ class ContractsController extends Controller
                 'bkr_checked_at' => $request->input('bkr_checked_at'),
             ]);
         }
-    
+
         return redirect()->route('finance.index')->with('success', 'Contract is succesvol bijgewerkt.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contract $contract)
+    public function destroy($id)
     {
-        $contract->invoices()->delete();
-        $contract->delete();
-        return redirect()->route('finance.index')->with('succes', 'Contract is verwijderd');
+        $contract = Contract::findOrFail($id);
+
+        if ($contract->invoices->count() > 0) {
+            return redirect()->route('finance.index')->with('message', 'Dit contract kan niet verwijderd worden omdat het gekoppeld is aan een of meerdere facturen.');
+        } 
+        else {
+            // Delete contract
+            $contract->delete();
+            return redirect()->route('finance.index')->with('succes', 'Contract succesvol verwijderd');
+        }
     }
 }
