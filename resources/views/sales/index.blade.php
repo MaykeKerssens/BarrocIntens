@@ -17,7 +17,7 @@
                 </x-slot>
                 @foreach ($users as $user)
                     <tr class="hover:bg-gray-200">
-                        <x-table.td>{{ $user->company->name }}</x-table.td>
+                        <x-table.td>{{ $user->company ? $user->company->name : '-' }}</x-table.td>
                         <x-table.td>{{ $user->name }}</x-table.td>
                         <x-table.td>{{ $user->email }}</x-table.td>
                         <x-table.td>-</x-table.td>
@@ -37,7 +37,7 @@
                 </x-slot>
                 <x-slot name="paginationLinks">
                     <!-- Display pagination links -->
-                    {{ $users->links() }}
+                    {{ $notes->links() }}
                 </x-slot>
                 @foreach ($notes as $note)
                     <tr class="hover:bg-gray-200">
