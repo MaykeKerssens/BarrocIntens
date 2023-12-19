@@ -69,7 +69,7 @@ Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
-    Route::get('/head-of-maintenance-dashboard', [MaintenanceController::class, 'headOfMaintenanceDashboard'])->name('headOfMaintenance.dashboard');
+    Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
     // Add other routes for HeadOfMaintenance
 });
 
