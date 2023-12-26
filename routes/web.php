@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
     Route::resource('users', UserController::class)->except(['index']);
+    Route::get('/search', [NoteController::class, 'search'])->name('search');
 
 });
 
