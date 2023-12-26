@@ -23,6 +23,20 @@ class NoteController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $users = User::paginate(10);
+        $search = $request->search;
+        $notes = Note::where(function ($query) use ($search) {
+            $query->orWhere('note', 'like', "%$search%");
+        })
+        ->orWhereHas('company', function ($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(10);
+
+        return view('sales.index', ['notes' => $notes, 'users' => $users,  'search' => $search]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -53,7 +67,7 @@ class NoteController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        return redirect()->route('notes.index')->with('success', 'Notitie is succesvol toegevoegd.');
+        return redirect()->route('sales.index')->with('success', 'Notitie is succesvol toegevoegd.');
     }
 
     /**
