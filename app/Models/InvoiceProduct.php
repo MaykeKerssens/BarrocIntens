@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceProduct extends Model
 {
     use HasFactory;
+    protected $table = 'invoice_products';
     protected $guarded = [];
 
     public function product()

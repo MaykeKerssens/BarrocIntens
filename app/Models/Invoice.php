@@ -21,5 +21,10 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceProduct::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'invoice_products');
+    }
     
 }

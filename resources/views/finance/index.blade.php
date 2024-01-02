@@ -7,7 +7,7 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
             <!-- Tabel for Invoices -->
-            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Acties']">
+            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Producten', 'Acties']">
                 <x-slot name="title">
                     Facturen:
                 </x-slot>
@@ -30,6 +30,9 @@
                         </x-table.td>
                         <x-table.td>{{ $invoice->costs }}</x-table.td>
                         <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
+                        <x-table.td>
+                            {{ implode(', ', $invoice->products->pluck('name')->toArray()) }}
+                        </x-table.td>
                         <x-table.td>
                             <a href="{{ route('invoices.edit', $invoice->id) }}"
                                 class="text-blue-500 hover:underline">Bewerken</a>
