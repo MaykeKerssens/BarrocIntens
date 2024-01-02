@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             MaintenanceAppointmentSeeder::class,
             AppointmentRequestSeeder::class,
             NoteSeeder::class,
+            InvoiceProductSeeder::class,
         ]);
     }
 }

@@ -53,6 +53,18 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div>
+                            <label for="product_ids" class="block text-sm font-medium text-gray-700">Selecteer Producten</label>
+                            <select name="product_ids[]" id="product_ids"
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
+                                required multiple>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
                         <div>
                             <x-primary-button>
                                 Factuur Toevoegen
