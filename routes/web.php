@@ -65,6 +65,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
 
+    Route::get('/change-password-email', function () {
+        return view('mails.change-password');
+    })->name('change-password-email');
+    
+    Route::get('/contact-us-email', function () {
+        return view('mails.contact-us');
+    })->name('contact-us-email');
+    
 
 });
 
