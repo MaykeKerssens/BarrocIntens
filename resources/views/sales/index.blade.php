@@ -17,7 +17,7 @@
                 </x-slot>
                 @foreach ($users as $user)
                     <tr class="hover:bg-gray-200">
-                        <x-table.td>{{ $user->company->name }}</x-table.td>
+                        <x-table.td>{{ isset($user->company->name) ? $user->company->name : '-' }}</x-table.td>
                         <x-table.td>{{ $user->name }}</x-table.td>
                         <x-table.td>{{ $user->email }}</x-table.td>
                         <x-table.td>-</x-table.td>
@@ -28,7 +28,7 @@
 
 
 
-            <x-table :columns="['Bedrijf', 'Beschrijving', 'Datum', 'BIT Medewerker']">
+            <x-table :columns="['Bedrijf', 'Beschrijving', 'Datum', 'BIT Medewerker', 'Acties']">
                 <x-slot name="title">
                     Notities:
                 </x-slot>
@@ -45,9 +45,26 @@
                         <x-table.td>{{ $note->note }}</x-table.td>
                         <x-table.td>{{ $note->date }}</x-table.td>
                         <x-table.td>{{ $note->user->name }}</x-table.td>
+                        <td>
+                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" class="inline"
+                                id="deleteForm{{ $note->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"  class="text-red-500 hover:underline"
+                                    onclick="confirmDelete(event)">Verwijderen</button>
+                        </td>
                     </tr>
                 @endforeach
             </x-table>
         </div>
     </div>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault(); // Prevents the form from submitting immediately
+
+            if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                document.getElementById('deleteForm{{ $note->id }}').submit(); // Submits the form if confirmed
+            }
+        }
+    </script>
 </x-app-layout>

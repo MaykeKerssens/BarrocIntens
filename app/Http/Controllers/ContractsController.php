@@ -106,7 +106,7 @@ class ContractsController extends Controller
     public function destroy($id)
     {
         $contract = Contract::findOrFail($id);
-
+        
         if ($contract->invoices->count() > 0) {
             return redirect()->route('finance.index')->with('message', 'Dit contract kan niet verwijderd worden omdat het gekoppeld is aan een of meerdere facturen.');
         } 
