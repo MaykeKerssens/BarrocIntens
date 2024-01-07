@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <!-- Logo in het midden -->
+    <div class="mb-8 flex items-center justify-center">
+        <img src="{{ asset('images/Logo4_groot.png') }}" alt="Machine Bit Light Logo" class="w-30 h-auto">
+    </div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
