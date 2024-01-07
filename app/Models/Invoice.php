@@ -12,6 +12,10 @@ class Invoice extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'date' => 'datetime: d/m/Y H:i',
+    ];
+
     public function contract()
     {
         return $this->belongsTo(Contract::class);
@@ -21,5 +25,5 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceProduct::class);
     }
-    
+
 }

@@ -19,7 +19,7 @@
 
                 <div class="shadow overflow-hidden">
                     <div class="px-4 py-5 bg-white flex flex-col gap-6">
-                        <!-- Datum -->
+                        <!-- Date -->
                         <div>
                             <label for="date" class="block text-sm font-medium text-gray-700">Datum</label>
                             <input type="datetime-local" name="date" id="date"
@@ -27,13 +27,14 @@
                                 required>
                         </div>
 
-                        <!-- Betaald -->
+                        <!-- IsPaid -->
                         <div>
                             <label for="paid" class="block text-sm font-medium text-gray-700">Betaald</label>
                             <input type="checkbox" name="paid" id="paid" value="1"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md">
                         </div>
 
+                        <!-- Sign-up costs -->
                         <div>
                             <label for="costs" class="block text-sm font-medium text-gray-700">Aansluitkosten</label>
                             <input type="number"name="costs" id="costs"
@@ -41,7 +42,7 @@
                                 required>
                         </div>
 
-                        <!-- Contract comapany name -->
+                        <!-- Contract -->
                         <div>
                             <label for="contract_id" class="block text-sm font-medium text-gray-700">Contract</label>
                             <select name="contract_id" id="contract_id"
@@ -49,7 +50,7 @@
                                 required>
                                 <option value="">Selecteer een contract</option>
                                 @foreach ($contracts as $contract)
-                                    <option value="{{ $contract->id }}">{{ $contract->company->name }}</option>
+                                    <option value="{{ $contract->id }}">{{ $contract->company->id . ' - ' . $contract->company->name . ' - ' . $contract->company->created_at->format('d/m/Y H:i') }}</option>
                                 @endforeach
                             </select>
                         </div>

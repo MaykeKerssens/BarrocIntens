@@ -47,7 +47,7 @@ class ContractsController extends Controller
             'billing_type' => $request->billing_type,
         ]);
 
-        return redirect()->route('finance.index')->with('success', 'contract is succesvol aangemaakt.');
+        return redirect()->route('finance.index')->with('message', 'contract is succesvol aangemaakt.');
     }
 
     /**
@@ -80,9 +80,9 @@ class ContractsController extends Controller
             'bkr_checked_at' => 'nullable|date',
             'billing_type' => 'required|in:maandelijks,periodiek',
         ]);
-    
+
         $contract = Contract::findOrFail($id);
-    
+
         $contract->update([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
@@ -97,8 +97,8 @@ class ContractsController extends Controller
                 'bkr_checked_at' => $request->input('bkr_checked_at'),
             ]);
         }
-    
-        return redirect()->route('finance.index')->with('success', 'Contract is succesvol bijgewerkt.');
+
+        return redirect()->route('finance.index')->with('message', 'Contract is succesvol bijgewerkt.');
     }
 
     /**
@@ -108,6 +108,6 @@ class ContractsController extends Controller
     {
         $contract->invoices()->delete();
         $contract->delete();
-        return redirect()->route('finance.index')->with('succes', 'Contract is verwijderd');
+        return redirect()->route('finance.index')->with('message', 'Contract is verwijderd');
     }
 }
