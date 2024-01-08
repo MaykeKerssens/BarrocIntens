@@ -3,27 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
-use App\Models\Note;
 use App\Models\Offer;
-use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class NoteController extends Controller
+class OfferController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $offers = Offer::with('products')->paginate(10);
-        $users = User::paginate(10);
-        $notes = Note::paginate(10);
-        return view('sales.index',[
-            'users' => $users,
-            'notes' => $notes,
-            'offers' => $offers,
-        ]);
+        //
     }
 
     /**
@@ -32,31 +23,32 @@ class NoteController extends Controller
     public function create()
     {
         $companies = Company::all();
-        $users = User::all();
-        return view('notes.create', [
-            'users' => $users,
-            'companies' => $companies,
-        ]);
+        $products = Product::all(); // Haal alle beschikbare producten op
+        return view('offers.create', ['companies' => $companies, 'products' => $products]);
     }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
-            'note' => 'required',
             'date' => 'required|date',
+            'costs' => 'required|numeric',
             'company_id' => 'required|exists:companies,id',
+            'product_ids' => 'required|array',
+            'product_ids.*' => 'exists:products,id',
         ]);
 
-        Note::create([
-            'note' => $request->note,
+        $offer = Offer::create([
             'date' => $request->date,
+            'costs' => $request->costs,
             'company_id' => $request->company_id,
-            'user_id' => Auth::id()
         ]);
 
-        return redirect()->route('notes.index')->with('message', 'Notitie is succesvol toegevoegd.');
+        $offer->products()->attach($request->input('product_ids', []));
+
+        return redirect()->route('sales.index');
     }
 
     /**
@@ -72,7 +64,8 @@ class NoteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $offer = Offer::find($id);
+        return view('offers.edit')->with('offer', $offer);
     }
 
     /**
@@ -80,8 +73,14 @@ class NoteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $offer = Offer::findOrFail($id);
+        $offer->update([
+            'accept' => $request->has('accept') && $request->input('accept') === '1',
+        ]);
+
+        return redirect()->route('sales.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

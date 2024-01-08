@@ -7,6 +7,7 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SourcingController;
 use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
@@ -64,6 +65,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
+    Route::resource('offers', OfferController::class)->except(['index']);
 
 
 });

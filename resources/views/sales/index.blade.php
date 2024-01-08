@@ -55,6 +55,44 @@
                     </tr>
                 @endforeach
             </x-table>
+
+            <x-table :columns="['Datum', 'Geaccepteerd', 'Aansluitkosten', 'Bedrijf', 'Producten', 'Acties']">
+                <x-slot name="title">
+                    Offertes:
+                </x-slot>
+                <x-slot name="button">
+                    <a href="{{ route('offers.create') }}">Offerte Toevoegen</a>
+                </x-slot>
+                <x-slot name="paginationLinks">
+                    <!-- Display pagination links -->
+                    {{ $offers->links() }}
+                </x-slot>
+                @foreach ($offers as $offer)
+                <tr class="hover:bg-gray-200">
+                    <x-table.td>{{ $offer->date }}</x-table.td>
+                    <x-table.td>
+                        @if ($offer->accept !== null)
+                        @if ($offer->accept)
+                            <span class="text-green-500">Ja</span>
+                        @else
+                            <span class="text-red-500">Nee</span>
+                        @endif
+                    @else
+                        Afwachting
+                    @endif
+                    </x-table.td>
+                    <x-table.td>{{ $offer->costs }}</x-table.td>
+                    <x-table.td>{{ $offer->company->name }}</x-table.td>
+                    <x-table.td>
+                        {{ implode(', ', $offer->products->pluck('name')->toArray()) }}
+                    </x-table.td>
+                    <x-table.td>
+                        <a href="{{ route('offers.edit', $offer->id) }}"
+                            class="text-blue-500 hover:underline">Bewerken</a>
+                    </x-table.td>
+                </tr>
+                @endforeach
+            </x-table>
         </div>
     </div>
 </x-app-layout>

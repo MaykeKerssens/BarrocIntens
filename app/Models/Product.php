@@ -20,6 +20,11 @@ class Product extends Model
         return $this->hasMany(InvoiceProduct::class);
     }
 
+    public function OfferProducts()
+    {
+        return $this->hasMany(OfferProduct::class);
+    }
+
     public function RepairRequests()
     {
         return $this->hasMany(RepairRequest::class);
