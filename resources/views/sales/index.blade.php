@@ -89,6 +89,18 @@
                     <x-table.td>
                         <a href="{{ route('offers.edit', $offer->id) }}"
                             class="text-blue-500 hover:underline">Bewerken</a>
+                            <form action="{{ route('offers.destroy', $offer->id) }}" method="POST" id="deleteForm{{ $offer->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="confirmDelete('{{ $offer->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                            </form>
+                            <script>
+                                function confirmDelete(offerId) {
+                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                        document.getElementById('deleteForm' + offerId).submit(); // Submits the form if confirmed
+                                    }
+                                }
+                            </script>
                     </x-table.td>
                 </tr>
                 @endforeach
