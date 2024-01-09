@@ -14,8 +14,8 @@ class AppointmentRequest extends Model
         return $this->belongsTo(RepairRequest::class, 'repair_id');
     }
 
-    public function maintenanceAppointment()
+    public function appointment()
     {
-        return $this->belongsTo(MaintenanceAppointment::class, 'appointment_id');
+        return $this->belongsTo(Appointment::class, 'appointment_id');
     }
 }

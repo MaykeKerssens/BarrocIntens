@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             statusSeeder::class,
             RepairRequestSeeder::class,
-            MaintenanceAppointmentSeeder::class,
+            AppointmentSeeder::class,
             AppointmentRequestSeeder::class,
             NoteSeeder::class,
         ]);

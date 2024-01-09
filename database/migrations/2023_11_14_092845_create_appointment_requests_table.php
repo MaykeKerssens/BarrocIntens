@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('appointment_id')
                 ->references('id')
-                ->on('maintenance_appointments');
+                ->on('appointments');
             $table->foreignId('request_id')
                 ->references('id')
                 ->on('repair_requests');
