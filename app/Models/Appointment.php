@@ -9,9 +9,15 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    public function appointmentRequest()
+    protected $casts = [
+        'start' => 'datetime:d-m-Y',
+        'end' => 'datetime:d-m-Y',
+    ];
+
+    public function repairRequests()
     {
-        return $this->hasMany(AppointmentRequest::class, 'appointment_id');
+        return $this->belongsToMany(RepairRequest::class, 'appointment_repair_requests', 'appointment_id', 'repair_request_id')
+            ->withTimestamps();
     }
 
     public function user()

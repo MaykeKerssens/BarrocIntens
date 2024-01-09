@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointment_requests', function (Blueprint $table) {
+        Schema::create('appointment_repair_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('appointment_id')
                 ->references('id')
                 ->on('appointments');
-            $table->foreignId('request_id')
+            $table->foreignId('repair_request_id')
                 ->references('id')
                 ->on('repair_requests');
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('appointment_requests');
+        Schema::dropIfExists('appointment_repair_requests');
     }
 };

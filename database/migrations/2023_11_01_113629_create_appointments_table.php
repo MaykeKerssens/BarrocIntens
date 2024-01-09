@@ -17,7 +17,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users');
             $table->string('title');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
             $table->timestamps();
