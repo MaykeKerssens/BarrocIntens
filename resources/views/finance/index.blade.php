@@ -22,7 +22,7 @@
                     <tr class="hover:bg-gray-200">
                         <x-table.td>{{ $invoice->date }}</x-table.td>
                         <x-table.td>
-                            @if ($invoice->paid)
+                            @if ($invoice->is_paid)
                                 <span class="text-green-500">Betaald</span>
                             @else
                                 <span class="text-red-500">Niet betaald</span>
@@ -60,7 +60,7 @@
                         <x-table.td>{{ $contract->start_date }}</x-table.td>
                         <x-table.td>{{ $contract->end_date }}</x-table.td>
                         <x-table.td>
-                            @if ($contract->is_sign)
+                            @if ($contract->is_signed)
                                 Ja
                             @else
                                 Nee

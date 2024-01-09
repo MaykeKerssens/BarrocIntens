@@ -38,7 +38,7 @@
                             <label for="is_sign" class="block text-sm font-medium text-gray-700">Ondertekend</label>
                             <input type="checkbox" name="is_sign" id="is_sign"
                             class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md"
-                                {{ $contract->is_sign ? 'checked' : '' }}>
+                                {{ $contract->is_signed ? 'checked' : '' }}>
                         </div>
 
                         <div>
