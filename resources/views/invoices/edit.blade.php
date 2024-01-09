@@ -21,10 +21,22 @@
 
                 <div class="shadow overflow-hidden">
                     <div class="px-4 py-5 bg-white flex flex-col gap-6">
-                            <!-- Betaald -->
+                            <!-- Contract name -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Contract</label>
+                                <p>{{ $invoice->contract->company->id . ' - ' . $invoice->contract->company->name . ' - ' . $invoice->contract->company->created_at->format('d/m/Y H:i') }}</p>
+                            </div>
+
+                            <!-- Date -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Datum</label>
+                                <p>{{ $invoice->date->format('d/m/Y H:i') }}</p>
+                            </div>
+
+                            <!-- Paid -->
                             <div>
                                 <label for="paid" class="block text-sm font-medium text-gray-700">Betaald</label>
-                                <input type="checkbox" name="paid" id="paid" value="1" {{ $invoice->paid ? 'checked' : '' }} class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                <input type="checkbox" name="paid" id="paid" value="1" {{ $invoice->paid ? 'checked' : '' }} class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
                             <div>
                                 <x-primary-button>
