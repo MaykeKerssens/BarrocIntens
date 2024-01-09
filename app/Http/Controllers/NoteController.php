@@ -66,8 +66,8 @@ class NoteController extends Controller
             'company_id' => $request->company_id,
             'user_id' => Auth::id()
         ]);
-
-        return redirect()->route('sales.index')->with('success', 'Notitie is succesvol toegevoegd.');
+      
+        return redirect()->route('sales.index')->with('message', 'Notitie is succesvol toegevoegd.');
     }
 
     /**
