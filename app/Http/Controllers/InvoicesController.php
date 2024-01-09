@@ -44,7 +44,7 @@ class InvoicesController extends Controller
 
         Invoice::create([
             'date' => $request->date,
-            'paid' => $request->has('paid') ? $request->paid : 0,
+            'is_paid' => $request->has('is_paid') ? $request->is_paid : 0,
             'costs' => $request->costs,
             'contract_id' => $request->contract_id,
         ]);
@@ -77,7 +77,7 @@ class InvoicesController extends Controller
 
         $invoice = Invoice::findOrFail($id);
         $invoice->update([
-            'paid' => $request->boolean('paid'),
+            'is_paid' => $request->boolean('is_paid'),
         ]);
 
         return redirect()->route('finance.index')->with('success', 'Factuur is succesvol bijgewerkt.');

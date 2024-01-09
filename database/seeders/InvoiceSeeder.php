@@ -15,20 +15,20 @@ class InvoiceSeeder extends Seeder
     {
             Invoice::create([
                 'date' => now(),
-                'paid' => true,
+                'is_paid' => true,
                 'costs' => 20,
-                'contract_id' => 1,  
+                'contract_id' => 1,
             ]);
             Invoice::create([
                 'date' => now()->subDays(5),
-                'paid' => false,
+                'is_paid' => false,
                 'costs' => 35,
                 'contract_id' => 2,
             ]);
-    
+
             Invoice::create([
                 'date' => now()->subDays(10),
-                'paid' => true,
+                'is_paid' => true,
                 'costs' => 50,
                 'contract_id' => 1,
             ]);
