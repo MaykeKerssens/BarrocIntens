@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -48,7 +49,10 @@ class UserController extends Controller
         $user->role_id = $defaultRoleId;
         $user->save();
 
-        return redirect()->route('sales.index');
+        Mail::to($request->email)
+        ->send(new \App\Mail\UserRegistered($request->email));
+
+        return redirect()->route('sales.index')->with('message', 'Gebruiker succesvol toegevoegd!');
     }
 
     /**
