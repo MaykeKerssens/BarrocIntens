@@ -4,8 +4,13 @@
     </x-slot>
 
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+    <div class="max-w-7xl mx-auto my-8 bg-white shadow overflow-hidden">
+        @if (session('message'))
+            <div class="bg-yellow text-gray-800 font-bold p-4">
+                <p>{{ session('message') }}</p>
+            </div>
+        @endif
+        <div class="px-4 py-5">
             <!-- Tabel for Invoices -->
             <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Acties']">
                 <x-slot name="title">

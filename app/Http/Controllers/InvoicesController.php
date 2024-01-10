@@ -49,7 +49,7 @@ class InvoicesController extends Controller
             'contract_id' => $request->contract_id,
         ]);
 
-        return redirect()->route('finance.index')->with('success', 'Factuur is succesvol aangemaakt.');
+        return redirect()->route('finance.index')->with('message', 'Factuur is succesvol aangemaakt.');
     }
 
     /**
@@ -80,7 +80,7 @@ class InvoicesController extends Controller
             'is_paid' => $request->boolean('is_paid'),
         ]);
 
-        return redirect()->route('finance.index')->with('success', 'Factuur is succesvol bijgewerkt.');
+        return redirect()->route('finance.index')->with('message', 'Factuur is succesvol bijgewerkt.');
     }
 
     /**
