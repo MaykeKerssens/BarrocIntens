@@ -14,6 +14,9 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- FullCalender scripts-->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src="{{ asset('js/calendar.js') }}" defer></script>
 </head>
 
 <body class="font-sans antialiased">

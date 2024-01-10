@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password'),
-                'role_id' => 1,
+                'role_id' => $faker->numberBetween(1, 6),
             ]);
         }
     }

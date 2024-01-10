@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('status_id')
                 ->references('id')
                 ->on('statuses');
-            $table->text('note');
+            $table->text('description');
             $table->timestamps();
         });
     }

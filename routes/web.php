@@ -27,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ProductController::class, 'welcome'])->name('welcome');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::resource('sourcing', ProductController::class);
-//     Route::prefix('sourcing')->group(function () {
-//         Route::get('/dashboard', [SourcingController::class, 'index'])->name('sourcing.index');
-//         // Add other sourcing routes as needed
-//     });
 
 Route::get('/privacy-verklaring', function () {
     return view('privacy-verklaring');
@@ -44,31 +40,40 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+Route::middleware(['auth', 'verified', 'role:1'])->group(function () {
     Route::prefix('customer')->group(function () {
         Route::get('/dashboard', [CustomerController::class, 'index'])->name('customer.index');
         // Add other customer routes as needed
     });
+});
 
+Route::middleware(['auth', 'verified', 'role:2'])->group(function () {
     Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
     Route::resource('invoices', InvoicesController::class)->except(['index']);
-    //  Route::get('/finance', [ContractsController::class, 'index'])->name('contracts.dashboard');
     Route::resource('contracts', ContractsController::class)->except(['index']);
+});
 
+Route::middleware(['auth', 'verified', 'role:3'])->group(function () {
     Route::resource('maintenance', MaintenanceController::class)->except(['index']);
     Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
     Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.index');
+});
 
+Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
     Route::resource('users', UserController::class)->except(['index']);
     Route::get('/search', [NoteController::class, 'search'])->name('search');
-
 });
 
+Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
+    Route::get('/sourcing', [SourcingController::class, 'index'])->name('sourcing.index');
+    // Add other sourcing routes as needed
+});
+
+Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
+    Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
+    // Add other routes for HeadOfMaintenance
+});
 
 require __DIR__.'/auth.php';
