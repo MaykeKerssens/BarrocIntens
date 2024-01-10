@@ -10,17 +10,18 @@ class Product extends Model
     use HasFactory;
 
     protected $guarded = [];
-    public function ProductCategory()
+    public function productCategory()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
 
-    public function InvoiceProducts()
+    public function invoices()
     {
-        return $this->hasMany(InvoiceProduct::class);
+        return $this->belongsToMany(Invoice::class, 'invoice_products', 'product_id', 'invoice_id')
+            ->withTimestamps();
     }
 
-    public function RepairRequests()
+    public function repairRequests()
     {
         return $this->hasMany(RepairRequest::class);
     }

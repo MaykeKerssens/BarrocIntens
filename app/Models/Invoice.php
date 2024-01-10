@@ -12,14 +12,19 @@ class Invoice extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'date' => 'datetime: d/m/Y H:i',
+    ];
+
     public function contract()
     {
         return $this->belongsTo(Contract::class);
     }
 
-    public function InvoiceProducts()
+    public function products()
     {
-        return $this->hasMany(InvoiceProduct::class);
+        return $this->belongsToMany(Product::class, 'invoice_products', 'invoice_id', 'product_id')
+            ->withTimestamps();
     }
-    
+
 }
