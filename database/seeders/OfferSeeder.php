@@ -13,24 +13,31 @@ class OfferSeeder extends Seeder
      */
     public function run(): void
     {
-        Offer::create([
+        $offer1 = Offer::create([
             'date' => now(),
             'accept' => true,
             'costs' => 20,
             'company_id' => 1,  
         ]);
-        Offer::create([
+
+        $offer1->products()->attach([1, 2]);
+
+        $offer2 = Offer::create([
             'date' => now()->subDays(5),
             'accept' => true,
             'costs' => 35,
             'company_id' => 2,
         ]);
 
-        Offer::create([
+        $offer2->products()->attach([3]);
+
+        $offer3 = Offer::create([
             'date' => now()->subDays(10),
             'accept' => false,
             'costs' => 50,
             'company_id' => 3,
         ]);
+
+        $offer3->products()->attach([1]);
     }
 }

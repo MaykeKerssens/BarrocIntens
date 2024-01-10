@@ -24,6 +24,7 @@ class Offer extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'offer_products');
+        return $this->belongsToMany(Product::class, 'offer_products', 'offer_id', 'product_id')
+            ->withTimestamps();
     }
 }

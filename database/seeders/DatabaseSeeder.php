@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             AppointmentRequestSeeder::class,
             NoteSeeder::class,
             OfferSeeder::class,
-            OfferProductSeeder::class,
         ]);
     }
 }
