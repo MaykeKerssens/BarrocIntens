@@ -29,8 +29,8 @@
 
                         <!-- IsPaid -->
                         <div>
-                            <label for="paid" class="block text-sm font-medium text-gray-700">Betaald</label>
-                            <input type="checkbox" name="paid" id="paid" value="1"
+                            <label for="is_paid" class="block text-sm font-medium text-gray-700">Betaald</label>
+                            <input type="checkbox" name="is_paid" id="is_paid" value="1"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md">
                         </div>
 

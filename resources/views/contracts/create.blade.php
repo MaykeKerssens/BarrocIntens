@@ -62,9 +62,9 @@
 
                             <!-- Is signed-->
                             <div>
-                                <label for="is_sign"
+                                <label for="is_signed"
                                     class="block text-sm font-medium text-gray-700">Ondertekend</label>
-                                <input type="checkbox" name="is_sign" id="is_sign"
+                                <input type="checkbox" name="is_signed" id="is_signed"
                                     class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md">
                             </div>
                         </div>

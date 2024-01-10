@@ -35,8 +35,8 @@
 
                             <!-- Paid -->
                             <div>
-                                <label for="paid" class="block text-sm font-medium text-gray-700">Betaald</label>
-                                <input type="checkbox" name="paid" id="paid" value="1" {{ $invoice->paid ? 'checked' : '' }} class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                <label for="is_paid" class="block text-sm font-medium text-gray-700">Betaald</label>
+                                <input type="checkbox" name="is_paid" id="is_paid" value="1" {{ $invoice->is_paid ? 'checked' : '' }} class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
                             <div>
                                 <x-primary-button>
