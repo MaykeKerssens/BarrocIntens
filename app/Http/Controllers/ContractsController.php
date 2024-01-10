@@ -106,7 +106,11 @@ class ContractsController extends Controller
      */
     public function destroy(Contract $contract)
     {
-        $contract->invoices()->delete();
+        $contract->invoices->each(function ($invoice) {
+            $invoice->products()->detach();
+            $invoice->delete();
+        });
+      
         $contract->delete();
         return redirect()->route('finance.index')->with('succes', 'Contract is verwijderd');
     }
