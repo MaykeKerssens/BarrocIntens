@@ -53,7 +53,7 @@ class NoteController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        return redirect()->route('notes.index')->with('success', 'Notitie is succesvol toegevoegd.');
+        return redirect()->route('notes.index')->with('message', 'Notitie is succesvol toegevoegd.');
     }
 
     /**
