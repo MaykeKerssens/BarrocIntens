@@ -15,9 +15,9 @@
                 <x-slot name="title">
                     Klanten:
                 </x-slot>
-                {{-- <x-slot name="button">
-                        <a href="">-</a>
-                    </x-slot> --}}
+                <x-slot name="button">
+                    <a href="{{ route('users.create') }}">Klant aanmaken</a>
+                </x-slot>
                 <x-slot name="paginationLinks">
                     <!-- Display pagination links -->
                     {{ $users->links() }}
@@ -33,7 +33,19 @@
                 @endforeach
             </x-table>
 
-
+            <div class="col-md-6">
+                <div class="form-group">
+                    <form method="get" action="/search">
+                        <div class="flex items-center">
+                            <input class="border border-gray-300 rounded-md p-2 mr-2" name="search" placeholder="Search..."
+                                value="{{ isset($search) ? $search : '' }}">
+                            <x-primary-button>
+                                Zoek
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>            
 
             <x-table :columns="['Bedrijf', 'Beschrijving', 'Datum', 'BIT Medewerker', 'Acties']">
                 <x-slot name="title">
