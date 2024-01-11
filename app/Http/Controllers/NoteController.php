@@ -86,16 +86,7 @@ class NoteController extends Controller
     {
         $note = Note::findOrFail($id);
     
-        // Check if product is allowed to be deleted
-        if ($note->company->count() > 0) {
-            return redirect()->route('notes.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
-        }
-        elseif ($note->user->count() > 0) {
-            return redirect()->route('notes.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een reparatie aanvraag.');
-        } else {
-            // Delete product
-            $note->delete();
-            return redirect()->route('notes.index')->with('message', 'Product succesvol verwijderd.');
-        }
+        $note->delete();
+        return redirect()->route('sales.index')->with('message', 'Notitie succesvol verwijderd.');
     }
 }    

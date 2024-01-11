@@ -53,25 +53,22 @@
                         <x-table.td>{{ $note->date }}</x-table.td>
                         <x-table.td>{{ $note->user->name }}</x-table.td>
                         <td>
-                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" class="inline"
-                                id="deleteForm{{ $note->id }}">
+                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteForm{{ $note->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"  class="text-red-500 hover:underline"
-                                    onclick="confirmDelete(event)">Verwijderen</button>
+                                <button type="button" onclick="confirmDelete('{{ $note->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                            </form>
+                            <script>
+                                function confirmDelete(noteId) {
+                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                        document.getElementById('deleteForm' + noteId).submit();
+                                    }
+                                }
+                            </script>
                         </td>
                     </tr>
                 @endforeach
             </x-table>
         </div>
     </div>
-    <script>
-        function confirmDelete(event) {
-            event.preventDefault(); // Prevents the form from submitting immediately
-
-            if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
-                document.getElementById('deleteForm{{ $note->id }}').submit(); // Submits the form if confirmed
-            }
-        }
-    </script>
 </x-app-layout>
