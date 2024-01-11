@@ -9,7 +9,9 @@ use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
 
-
+    Route::get('/workorder/create', [WorkOrderController::class, 'create'])->name('workOrder.create');
+    Route::post('/workOrders', [WorkOrderController::class, 'store'])->name('workOrders.store');
 });
 
 
