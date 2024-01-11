@@ -10,8 +10,9 @@ class MaintenanceController extends Controller
 {
     public function index()
     {
-        return view('maintenance.index'); // Update the view path as needed
+        return view('maintenance.index');
     }
+
     /**
      * Display a listing of the resource.
      */
