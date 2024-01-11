@@ -56,7 +56,7 @@
                 @endforeach
             </x-table>
 
-            <x-table :columns="['Datum', 'Geaccepteerd', 'Aansluitkosten', 'Bedrijf', 'Producten', 'Acties']">
+            <x-table :columns="['Datum', 'Geaccepteerd', 'Aansluitkosten', 'Bedrijf', 'Email', 'Producten', 'Acties']">
                 <x-slot name="title">
                     Offertes:
                 </x-slot>
@@ -83,6 +83,7 @@
                     </x-table.td>
                     <x-table.td>{{ $offer->costs }}</x-table.td>
                     <x-table.td>{{ $offer->company->name }}</x-table.td>
+                    <x-table.td>{{ $offer->company->user->email }}</x-table.td>
                     <x-table.td>
                         {{ implode(', ', $offer->products->pluck('name')->toArray()) }}
                     </x-table.td>
@@ -108,3 +109,4 @@
         </div>
     </div>
 </x-app-layout>
+

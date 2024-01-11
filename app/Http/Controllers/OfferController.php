@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Offer;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OfferController extends Controller
 {
@@ -47,6 +48,23 @@ class OfferController extends Controller
         ]);
 
         $offer->products()->attach($request->input('product_ids', []));
+
+        $mailData = [
+            'offerDate' => $offer->date,
+            'offerCosts' => $offer->costs,
+            'companyName' => $offer->company->name,
+            'userEmail' => $offer->company->user->email,
+            'productNames' => $offer->products->pluck('name')->toArray(),
+        ];
+
+        Mail::to($offer->company->user->email)
+        ->send(new \App\Mail\OfferteCreate(
+            $mailData['offerDate'],
+            $mailData['offerCosts'],
+            $mailData['companyName'],
+            $mailData['userEmail'],
+            $mailData['productNames']
+        ));
 
         return redirect()->route('sales.index');
     }
