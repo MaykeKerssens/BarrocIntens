@@ -65,15 +65,15 @@
                         <x-table.td>{{ $note->date }}</x-table.td>
                         <x-table.td>{{ $note->user->name }}</x-table.td>
                         <td>
-                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteForm{{ $note->id }}">
+                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteFormnote{{ $note->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" onclick="confirmDelete('{{ $note->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                                <button type="button" onclick="confirmDeleteNote('{{ $note->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
                             </form>
                             <script>
-                                function confirmDelete(noteId) {
-                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
-                                        document.getElementById('deleteForm' + noteId).submit();
+                                function confirmDeleteNote(noteId) {
+                                    if (confirm('Weet je zeker dat je deze notitie wilt verwijderen?')) {
+                                        document.getElementById('deleteFormnote' + noteId).submit();
                                     }
                                 }
                             </script>
@@ -116,15 +116,15 @@
                     <x-table.td>
                         <a href="{{ route('offers.edit', $offer->id) }}"
                             class="text-blue-500 hover:underline">Bewerken</a>
-                            <form action="{{ route('offers.destroy', $offer->id) }}" method="POST" id="deleteForm{{ $offer->id }}">
+                            <form action="{{ route('offers.destroy', $offer->id) }}" method="POST" id="deleteFormoffer{{ $offer->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" onclick="confirmDelete('{{ $offer->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                                <button type="button" onclick="confirmDeleteOffer('{{ $offer->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
                             </form>
                             <script>
-                                function confirmDelete(offerId) {
-                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
-                                        document.getElementById('deleteForm' + offerId).submit(); // Submits the form if confirmed
+                                function confirmDeleteOffer(offerId) {
+                                    if (confirm('Weet je zeker dat je deze offerte wilt verwijderen?')) {
+                                        document.getElementById('deleteFormoffer' + offerId).submit();
                                     }
                                 }
                             </script>

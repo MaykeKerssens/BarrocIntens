@@ -24,7 +24,7 @@
                             <!-- Contract name -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Contract</label>
-                                <p>{{ $invoice->contract->company->id . ' - ' . $invoice->contract->company->name . ' - ' . $invoice->contract->company->created_at->format('d/m/Y H:i') }}</p>
+                                <p>{{ $invoice->contract->id . ' - ' . $invoice->contract->company->name . ' - ' . $invoice->contract->created_at->format('d/m/Y H:i') }}</p>
                             </div>
 
                             <!-- Date -->

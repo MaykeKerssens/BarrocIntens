@@ -70,8 +70,9 @@ class InvoicesController extends Controller
      */
     public function edit(string $id)
     {
+        $contracts = Contract::all();
         $invoice = Invoice::find($id);
-        return view('invoices.edit')->with('invoice', $invoice);
+        return view('invoices.edit')->with('invoice', $invoice, 'contracts', $contracts);
     }
 
     /**

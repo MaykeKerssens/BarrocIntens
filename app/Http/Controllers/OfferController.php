@@ -66,7 +66,7 @@ class OfferController extends Controller
             $mailData['productNames']
         ));
 
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')->with('message', 'Offerte is succesvol aangemaakt.');
     }
 
     /**
@@ -96,7 +96,7 @@ class OfferController extends Controller
             'accept' => $request->has('accept') && $request->input('accept') === '1',
         ]);
 
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')->with('message', 'Offerte is succesvol bijgewerkt.');
     }
 
 
@@ -105,8 +105,11 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        $offer->offerProducts()->delete();
+        $offer->each(function ($offer) {
+            $offer->products()->detach();
+        });
+
         $offer->delete();
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')->with('message', 'Offerte is succesvol verwijderd.');
     }
 }

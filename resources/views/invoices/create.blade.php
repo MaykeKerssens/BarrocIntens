@@ -50,7 +50,7 @@
                                 required>
                                 <option value="">Selecteer een contract</option>
                                 @foreach ($contracts as $contract)
-                                    <option value="{{ $contract->id }}">{{ $contract->company->id . ' - ' . $contract->company->name . ' - ' . $contract->company->created_at->format('d/m/Y H:i') }}</option>
+                                <option value="{{ $contract->id }}">{{ $contract->id . ' - ' . $contract->company->name . ' - ' . $contract->created_at->format('d/m/Y H:i') }}</option>
                                 @endforeach
                             </select>
                         </div>
