@@ -12,7 +12,7 @@
         @endif
         <div class="px-4 py-5">
             <!-- Tabel for Invoices -->
-            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Acties']">
+            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Producten', 'Acties']">
                 <x-slot name="title">
                     Facturen:
                 </x-slot>
@@ -36,7 +36,11 @@
                         <x-table.td>{{ $invoice->costs }}</x-table.td>
                         <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
                         <x-table.td>
-                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
+                            {{ implode(', ', $invoice->products->pluck('name')->toArray()) }}
+                        </x-table.td>
+                        <x-table.td>
+                            <a href="{{ route('invoices.edit', $invoice->id) }}"
+                                class="text-blue-500 hover:underline">Bewerken</a>
                         </x-table.td>
                     </tr>
                 @endforeach

@@ -103,17 +103,14 @@ class ContractsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Contract $contract)
     {
-        $contract = Contract::findOrFail($id);
-        
-        if ($contract->invoices->count() > 0) {
-            return redirect()->route('finance.index')->with('message', 'Dit contract kan niet verwijderd worden omdat het gekoppeld is aan een of meerdere facturen.');
-        } 
-        else {
-            // Delete contract
-            $contract->delete();
-            return redirect()->route('finance.index')->with('message', 'Contract succesvol verwijderd');
-        }
+        $contract->invoices->each(function ($invoice) {
+            $invoice->products()->detach();
+            $invoice->delete();
+        });
+      
+        $contract->delete();
+        return redirect()->route('finance.index')->with('message', 'Contract is verwijderd');
     }
 }
