@@ -10,6 +10,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'welcome'])->name('welcome');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-Route::resource('sourcing', ProductController::class);
 
 Route::get('/privacy-verklaring', function () {
     return view('privacy-verklaring');
@@ -61,10 +61,13 @@ Route::middleware(['auth', 'verified', 'role:3'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/sales', [NoteController::class, 'index'])->name('sales.index');
     Route::resource('notes', NoteController::class);
+    Route::resource('users', UserController::class)->except(['index']);
+    Route::get('/search', [NoteController::class, 'search'])->name('search');
 });
 
 Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
     Route::get('/sourcing', [SourcingController::class, 'index'])->name('sourcing.index');
+    Route::resource('sourcing', ProductController::class);
     // Add other sourcing routes as needed
 });
 

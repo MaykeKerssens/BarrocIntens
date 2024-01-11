@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             Companyseeder::class,
             ContractSeeder::class,
-            InvoiceSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
             statusSeeder::class,
@@ -26,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AppointmentSeeder::class,
             AppointmentRepairRequestsSeeder::class,
             NoteSeeder::class,
+            InvoiceSeeder::class,
         ]);
     }
 }

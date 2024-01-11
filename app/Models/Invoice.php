@@ -26,5 +26,4 @@ class Invoice extends Model
         return $this->belongsToMany(Product::class, 'invoice_products', 'invoice_id', 'product_id')
             ->withTimestamps();
     }
-
 }

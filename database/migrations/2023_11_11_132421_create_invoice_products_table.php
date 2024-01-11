@@ -19,8 +19,6 @@ return new class extends Migration
             $table->foreignId('product_id')
                 ->references('id')
                 ->on('products');
-            $table->integer('amount');
-            $table->decimal('price');
             $table->timestamps();
         });
     }
