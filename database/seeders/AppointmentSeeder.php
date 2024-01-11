@@ -13,9 +13,9 @@ class AppointmentSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('nl_NL');
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $appointment = new \App\Models\Appointment();
-            $appointment->user_id = $faker->numberBetween(1,1);
+            $appointment->user_id = $faker->numberBetween(3,4);
             $appointment->title = $faker->word;
             $appointment->note = $faker->sentence;
             $appointment->start = $faker->dateTimeThisMonth;

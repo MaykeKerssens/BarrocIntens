@@ -1,4 +1,8 @@
-const maintenanceAppointmentsUrl = "http://barrocintens.test/api/maintenance-appointments";
+const userId = 3;
+// console.log(userId);
+const maintenanceAppointmentsUrl = `http://barrocintens.test/api/maintenance-appointments/${userId}`;
+
+console.log(maintenanceAppointmentsUrl);
 
 var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -13,51 +17,42 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     },
 
     events: fetchEvents
-
-    // Hardcoded adding events -------------------------------------------------------------------------------------------------------------
-    // events: [
-    //     { // this object will be "parsed" into an Event Object
-    //         title: 'IKEA',
-    //         start: '2024-01-07T09:30',
-    //         end: '2023-01-08',
-    //         description: ' ashfkjdf jasdfhasjdfhsjkf afsdjkdlhdaflajk',
-    //         color: '#ffd700',
-    //     },
-    // ],
-
 });
 
 calendar.render();
 
-  // Fetch appointments for calendar
-  function fetchEvents(info, successCallback, failureCallback) {
-    fetch(maintenanceAppointmentsUrl)
-      .then(response => response.json())
-      .then(data => {
-        // Transform data for FullCalendar
-        const events = data.map(appointment => {
-          const { id, start, end, title, note } = appointment;
+// Fetch appointments for calendar
+function fetchEvents(info, successCallback, failureCallback) {
+fetch(maintenanceAppointmentsUrl)
+    .then(response => response.json())
+    .then(data => {
+    // Transform data for FullCalendar
+    const events = data.map(appointment => {
+        const { id, title, description, start, end, company, city, street } = appointment;
 
-          // Adjust date format according to FullCalendar requirements
-          const formattedStartDate = new Date(start);
+        // Adjust date format according to FullCalendar requirements
+        const formattedStartDate = new Date(start);
+        const formattedEndDate = new Date(end);
 
-          const formattedEndDate = new Date(end);
+        return {
+        id: id,
+        title: title,
+        description: description,
+        start: formattedStartDate,
+        end: formattedEndDate,
+        // extendedProps: {
+        //     company: company,
+        //     city: city,
+        //     street: street
+        // },
+        color: '#ffd700',
+        };
+    });
 
-        //   console.log(data);
-          return {
-            id: id,
-            title: title,
-            start: formattedStartDate,
-            end: formattedEndDate,
-            description: note,
-            color: '#ffd700',
-          };
-        });
-
-        successCallback(events);
-      })
-      .catch(appointment => {
-        console.error('Error fetching data for appointments:', appointment);
-        failureCallback(appointment);
-      });
-  }
+    successCallback(events);
+    })
+    .catch(appointment => {
+    console.error('Error fetching data for appointments:', appointment);
+    failureCallback(appointment);
+    });
+}

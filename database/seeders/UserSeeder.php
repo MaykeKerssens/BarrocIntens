@@ -18,12 +18,6 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => $faker->name,
-            'email' => 'admin@barrocIntens.com',
-            'password' => Hash::make('password'),
-            'role_id' => 1,
-        ]);
-        User::create([
-            'name' => $faker->name,
             'email' => 'Customer@barrocIntens.com',
             'password' => Hash::make('password'),
             'role_id' => 1,
@@ -34,12 +28,25 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'role_id' => 2,
         ]);
+
         User::create([
             'name' => $faker->name,
             'email' => 'Maintenance@barrocIntens.com',
             'password' => Hash::make('password'),
             'role_id' => 3,
         ]);
+
+        // Create Maintenance employees
+        for ($i = 0; $i < 10; $i++) {
+            $name = $faker->firstName;
+            User::create([
+                'name' => $name . ' ' . $faker->lastName,
+                'email' => $name . '.Maintenance@barrocIntens.com',
+                'password' => Hash::make('password'),
+                'role_id' => 3,
+            ]);
+        }
+
         User::create([
             'name' => $faker->name,
             'email' => 'Sales@barrocIntens.com',
@@ -63,7 +70,7 @@ class UserSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password'),
-                'role_id' => $faker->numberBetween(1, 6),
+                'role_id' => 1,
             ]);
         }
     }
