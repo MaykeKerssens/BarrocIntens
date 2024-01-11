@@ -15,9 +15,9 @@
                 <x-slot name="title">
                     Klanten:
                 </x-slot>
-                {{-- <x-slot name="button">
-                        <a href="">-</a>
-                    </x-slot> --}}
+                <x-slot name="button">
+                    <a href="{{ route('users.create') }}">Klant aanmaken</a>
+                </x-slot>
                 <x-slot name="paginationLinks">
                     <!-- Display pagination links -->
                     {{ $users->links() }}
@@ -33,9 +33,21 @@
                 @endforeach
             </x-table>
 
+            <div class="col-md-6">
+                <div class="form-group">
+                    <form method="get" action="/search">
+                        <div class="flex items-center">
+                            <input class="border border-gray-300 rounded-md p-2 mr-2" name="search" placeholder="Search..."
+                                value="{{ isset($search) ? $search : '' }}">
+                            <x-primary-button>
+                                Zoek
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>            
 
-
-            <x-table :columns="['Bedrijf', 'Beschrijving', 'Datum', 'BIT Medewerker']">
+            <x-table :columns="['Bedrijf', 'Beschrijving', 'Datum', 'BIT Medewerker', 'Acties']">
                 <x-slot name="title">
                     Notities:
                 </x-slot>
@@ -52,6 +64,20 @@
                         <x-table.td>{{ $note->note }}</x-table.td>
                         <x-table.td>{{ $note->date }}</x-table.td>
                         <x-table.td>{{ $note->user->name }}</x-table.td>
+                        <td>
+                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteForm{{ $note->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="confirmDelete('{{ $note->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                            </form>
+                            <script>
+                                function confirmDelete(noteId) {
+                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                        document.getElementById('deleteForm' + noteId).submit();
+                                    }
+                                }
+                            </script>
+                        </td>
                     </tr>
                 @endforeach
             </x-table>
@@ -109,4 +135,3 @@
         </div>
     </div>
 </x-app-layout>
-

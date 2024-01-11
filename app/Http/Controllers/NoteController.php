@@ -26,6 +26,20 @@ class NoteController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $users = User::paginate(10);
+        $search = $request->search;
+        $notes = Note::where(function ($query) use ($search) {
+            $query->orWhere('note', 'like', "%$search%");
+        })
+        ->orWhereHas('company', function ($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(10);
+
+        return view('sales.index', ['notes' => $notes, 'users' => $users,  'search' => $search]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -55,8 +69,8 @@ class NoteController extends Controller
             'company_id' => $request->company_id,
             'user_id' => Auth::id()
         ]);
-
-        return redirect()->route('notes.index')->with('message', 'Notitie is succesvol toegevoegd.');
+      
+        return redirect()->route('sales.index')->with('message', 'Notitie is succesvol toegevoegd.');
     }
 
     /**
@@ -72,7 +86,6 @@ class NoteController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -88,6 +101,9 @@ class NoteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $note = Note::findOrFail($id);
+    
+        $note->delete();
+        return redirect()->route('sales.index')->with('message', 'Notitie succesvol verwijderd.');
     }
-}
+}    

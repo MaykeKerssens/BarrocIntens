@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Contract;
 use App\Models\Invoice;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
@@ -15,7 +16,7 @@ class InvoicesController extends Controller
     public function index()
     {
         $contracts = Contract::paginate(10);
-        $invoices = Invoice::paginate(10);
+        $invoices = Invoice::with('products')->paginate(10);
         return view('finance.index',[
             'invoices' => $invoices,
             'contracts' => $contracts
@@ -28,7 +29,8 @@ class InvoicesController extends Controller
     public function create()
     {
         $contracts = Contract::all();
-        return view('invoices.create', ['contracts' => $contracts]);
+        $products = Product::all(); // Haal alle beschikbare producten op
+        return view('invoices.create', ['contracts' => $contracts, 'products' => $products]);
     }
 
     /**
@@ -42,12 +44,15 @@ class InvoicesController extends Controller
             'contract_id' => 'required|exists:contracts,id',
         ]);
 
-        Invoice::create([
+        $invoice = Invoice::create([
             'date' => $request->date,
-            'paid' => $request->has('paid') ? $request->paid : 0,
+            'is_paid' => $request->has('is_paid') ? $request->is_paid : 0,
             'costs' => $request->costs,
             'contract_id' => $request->contract_id,
         ]);
+
+       // Voeg producten toe aan de factuur
+       $invoice->products()->attach($request->input('product_ids', []));
 
         return redirect()->route('finance.index')->with('message', 'Factuur is succesvol aangemaakt.');
     }
@@ -77,7 +82,7 @@ class InvoicesController extends Controller
 
         $invoice = Invoice::findOrFail($id);
         $invoice->update([
-            'paid' => $request->boolean('paid'),
+            'is_paid' => $request->boolean('is_paid'),
         ]);
 
         return redirect()->route('finance.index')->with('message', 'Factuur is succesvol bijgewerkt.');

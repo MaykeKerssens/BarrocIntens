@@ -37,7 +37,7 @@
                             @endphp
 
                             @foreach ($appointmentRequests as $appointmentRequest)
-                                <p>{{ $appointmentRequest->maintenanceAppointment->user->name ? $appointmentRequest->maintenanceAppointment->user->name : '-' }}
+                                <p>{{ $appointmentRequest->appointment->user->name ? $appointmentRequest->appointment->user->name : '-' }}
                                 </p>
                             @endforeach
                         </x-table.td>

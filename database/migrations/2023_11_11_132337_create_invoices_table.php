@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
-            $table->boolean('paid');
+            $table->boolean('is_paid');
             $table->decimal('costs');
             $table->foreignId('contract_id')->references('id')->on('contracts');
             $table->timestamps();
