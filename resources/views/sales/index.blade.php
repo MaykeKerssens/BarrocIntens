@@ -65,20 +65,71 @@
                         <x-table.td>{{ $note->date }}</x-table.td>
                         <x-table.td>{{ $note->user->name }}</x-table.td>
                         <td>
-                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteForm{{ $note->id }}">
+                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteFormnote{{ $note->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" onclick="confirmDelete('{{ $note->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                                <button type="button" onclick="confirmDeleteNote('{{ $note->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
                             </form>
                             <script>
-                                function confirmDelete(noteId) {
-                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
-                                        document.getElementById('deleteForm' + noteId).submit();
+                                function confirmDeleteNote(noteId) {
+                                    if (confirm('Weet je zeker dat je deze notitie wilt verwijderen?')) {
+                                        document.getElementById('deleteFormnote' + noteId).submit();
                                     }
                                 }
                             </script>
                         </td>
                     </tr>
+                @endforeach
+            </x-table>
+
+            <x-table :columns="['Datum', 'Geaccepteerd', 'Aansluitkosten', 'Bedrijf', 'Email', 'Producten', 'Acties']">
+                <x-slot name="title">
+                    Offertes:
+                </x-slot>
+                <x-slot name="button">
+                    <a href="{{ route('offers.create') }}">Offerte Toevoegen</a>
+                </x-slot>
+                <x-slot name="paginationLinks">
+                    <!-- Display pagination links -->
+                    {{ $offers->links() }}
+                </x-slot>
+                @foreach ($offers as $offer)
+                <tr class="hover:bg-gray-200">
+                    <x-table.td>{{ $offer->date }}</x-table.td>
+                    <x-table.td>
+                        @if ($offer->accept !== null)
+                        @if ($offer->accept)
+                            <span class="text-green-500">Ja</span>
+                        @else
+                            <span class="text-red-500">Nee</span>
+                        @endif
+                    @else
+                        Afwachting
+                    @endif
+                    </x-table.td>
+                    <x-table.td>{{ $offer->costs }}</x-table.td>
+                    <x-table.td>{{ $offer->company->name }}</x-table.td>
+                    <x-table.td>{{ $offer->company->user->email }}</x-table.td>
+                    <x-table.td>
+                        {{ implode(', ', $offer->products->pluck('name')->toArray()) }}
+                    </x-table.td>
+                    <x-table.td>
+                        <a href="{{ route('offers.edit', $offer->id) }}"
+                            class="text-blue-500 hover:underline">Bewerken</a>
+                            <form action="{{ route('offers.destroy', $offer->id) }}" method="POST" id="deleteFormoffer{{ $offer->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="confirmDeleteOffer('{{ $offer->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
+                            </form>
+                            <script>
+                                function confirmDeleteOffer(offerId) {
+                                    if (confirm('Weet je zeker dat je deze offerte wilt verwijderen?')) {
+                                        document.getElementById('deleteFormoffer' + offerId).submit();
+                                    }
+                                }
+                            </script>
+                    </x-table.td>
+                </tr>
                 @endforeach
             </x-table>
         </div>

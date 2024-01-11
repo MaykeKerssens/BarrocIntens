@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Note;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,13 @@ class NoteController extends Controller
      */
     public function index()
     {
+        $offers = Offer::with('products')->paginate(10);
         $users = User::paginate(10);
         $notes = Note::paginate(10);
         return view('sales.index',[
             'users' => $users,
             'notes' => $notes,
+            'offers' => $offers,
         ]);
     }
 
