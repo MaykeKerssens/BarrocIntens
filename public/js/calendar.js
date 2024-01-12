@@ -1,5 +1,5 @@
-const userId = 3;
-// console.log(userId);
+const userId = document.getElementById('user-data').getAttribute('data-user-id');
+console.log(userId);
 const maintenanceAppointmentsUrl = `http://barrocintens.test/api/maintenance-appointments/${userId}`;
 
 console.log(maintenanceAppointmentsUrl);

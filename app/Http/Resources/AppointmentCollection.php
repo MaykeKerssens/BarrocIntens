@@ -22,9 +22,6 @@ class AppointmentCollection extends ResourceCollection
                 'description' => $appointment->note,
                 'start' => $appointment->start,
                 'end' => $appointment->end,
-                'company' => $appointment->user->company->name,
-                'city' => $appointment->user->company->city,
-                'street' => $appointment->user->company->street,
             ];
         })->toArray();
     }
