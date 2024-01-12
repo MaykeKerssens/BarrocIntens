@@ -40,11 +40,11 @@ fetch(maintenanceAppointmentsUrl)
         description: description,
         start: formattedStartDate,
         end: formattedEndDate,
-        // extendedProps: {
-        //     company: company,
-        //     city: city,
-        //     street: street
-        // },
+        extendedProps: {
+            company: company,
+            city: city,
+            street: street
+        },
         color: '#ffd700',
         };
     });

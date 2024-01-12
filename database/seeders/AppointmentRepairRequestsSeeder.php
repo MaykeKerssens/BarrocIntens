@@ -11,7 +11,7 @@ class AppointmentRepairRequestsSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             // Get random appointment and repair request
             $appointment = \App\Models\Appointment::inRandomOrder()->first();
             $repairRequest = \App\Models\RepairRequest::inRandomOrder()->first();

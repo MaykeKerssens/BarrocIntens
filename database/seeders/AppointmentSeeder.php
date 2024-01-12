@@ -16,10 +16,11 @@ class AppointmentSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             $appointment = new \App\Models\Appointment();
             $appointment->user_id = $faker->numberBetween(3,4);
+            $appointment->company_id = $faker->numberBetween(1, 3);
             $appointment->title = $faker->word;
             $appointment->note = $faker->sentence;
-            $appointment->start = $faker->dateTimeThisMonth;
-            $appointment->end = $faker->dateTimeBetween($appointment->start, $appointment->start->modify('+10 hours'));
+            $appointment->start = $faker->dateTimeBetween('-1 week', '+5 weeks');
+            $appointment->end = $faker->dateTimeBetween($appointment->start, $appointment->start->modify('+4 hours'));
             $appointment->save();
         }
     }
