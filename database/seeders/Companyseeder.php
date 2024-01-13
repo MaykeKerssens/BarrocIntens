@@ -30,11 +30,11 @@ class Companyseeder extends Seeder
             Company::create([
                 'name' => $faker->company,
                 'phone' => $faker->phoneNumber,
-                'street' => $faker->streetName,
+                'street' => $faker->streetName . ' ' . $faker->buildingNumber ,
                 'city' => $faker->city,
                 'zip' => $faker->postcode,
                 'bkr_checked_at' => now(),
-                'user_id' => $i + 1,
+                'user_id' => $faker->numberBetween(17, 26),
             ]);
         }
     }
