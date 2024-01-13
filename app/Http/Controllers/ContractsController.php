@@ -66,7 +66,6 @@ class ContractsController extends Controller
         $contract = Contract::findOrFail($id);
         $companies = Company::all();
         return view('contracts.edit')->with(['contract' => $contract, 'companies' => $companies]);
-
     }
 
     /**
@@ -97,9 +96,8 @@ class ContractsController extends Controller
                 'bkr_checked_at' => $request->input('bkr_checked_at'),
             ]);
         }
-
+      
         return redirect()->route('finance.index')->with('message', 'Contract is succesvol bijgewerkt.');
-
     }
 
     /**
@@ -107,7 +105,11 @@ class ContractsController extends Controller
      */
     public function destroy(Contract $contract)
     {
-        $contract->invoices()->delete();
+        $contract->invoices->each(function ($invoice) {
+            $invoice->products()->detach();
+            $invoice->delete();
+        });
+      
         $contract->delete();
         return redirect()->route('finance.index')->with('message', 'Contract is verwijderd');
     }

@@ -41,7 +41,7 @@
                         {{ __('Inkoop Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 6)
-                    <x-nav-link :href="route('headOfMaintenance.index')" :active="request()->routeIs('headOfMaintenance.index')">
+                    <x-nav-link :href="route('headOfMaintenance.request')" :active="request()->routeIs('headOfMaintenance.request')">
                         {{ __('Overziende Onderhoud Dashboard') }}
                     </x-nav-link>
                 @endif
