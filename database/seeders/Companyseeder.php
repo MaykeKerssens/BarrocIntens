@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class Companyseeder extends Seeder
 {
@@ -13,30 +14,28 @@ class Companyseeder extends Seeder
      */
     public function run(): void
     {
+
+        $faker = Faker::create();
         Company::create([
-            'name' => 'De Bijenkorf',
-            'phone' => '0761234567',
-            'street' => 'Coolsingel 105, 3012 AG',
-            'city' => 'Rotterdam',
+            'name' => 'Barroc Intens',
+            'phone' => '+31(0)76-5733444',
+            'street' => 'Terheijdenseweg 350',
+            'city' => 'Breda',
+            'zip' => '4826 AA',
             'bkr_checked_at' => now(),
             'user_id' => 1,
         ]);
 
-        Company::create([
-            'name' => 'Albert Heijn',
-            'phone' => '0769876543',
-            'street' => 'Moerwijk 2, 4826 HN',
-            'city' => 'Breda',
-            'bkr_checked_at' => now(),
-            'user_id' => 2,
-        ]);
-
-        Company::create([
-            'name' => 'IKEA',
-            'phone' => '0765556666',
-            'street' => 'Kruisweide 1, 4814 RW',
-            'city' => 'Breda',
-            'user_id' => 3,
-        ]);
+        for ($i = 0; $i < 10; $i++) {
+            Company::create([
+                'name' => $faker->company,
+                'phone' => $faker->phoneNumber,
+                'street' => $faker->streetName,
+                'city' => $faker->city,
+                'zip' => $faker->postcode,
+                'bkr_checked_at' => now(),
+                'user_id' => $i + 1,
+            ]);
+        }
     }
 }
