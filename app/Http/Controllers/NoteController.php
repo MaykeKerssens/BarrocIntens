@@ -28,6 +28,7 @@ class NoteController extends Controller
 
     public function search(Request $request)
     {
+        $offers = Offer::paginate(10);
         $users = User::paginate(10);
         $search = $request->search;
         $notes = Note::where(function ($query) use ($search) {
@@ -38,7 +39,7 @@ class NoteController extends Controller
         })
         ->paginate(10);
 
-        return view('sales.index', ['notes' => $notes, 'users' => $users,  'search' => $search]);
+        return view('sales.index', ['notes' => $notes, 'users' => $users, 'offers' => $offers,  'search' => $search]);
     }
     /**
      * Show the form for creating a new resource.

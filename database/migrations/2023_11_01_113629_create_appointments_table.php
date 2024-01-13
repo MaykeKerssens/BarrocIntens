@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->references('id')
                 ->on('users');
+            $table->foreignId('company_id')
+                ->references('id')
+                ->on('companies');
             $table->string('title');
             $table->text('note')->nullable();
             $table->dateTime('start');

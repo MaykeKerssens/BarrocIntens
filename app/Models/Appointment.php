@@ -14,6 +14,10 @@ class Appointment extends Model
         'end' => 'datetime:d-m-Y',
     ];
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
     public function repairRequests()
     {
         return $this->belongsToMany(RepairRequest::class, 'appointment_repair_requests', 'appointment_id', 'repair_request_id')
