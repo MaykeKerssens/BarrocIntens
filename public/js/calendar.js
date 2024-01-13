@@ -1,8 +1,5 @@
 const userId = document.getElementById('user-data').getAttribute('data-user-id');
-console.log(userId);
 const maintenanceAppointmentsUrl = `http://barrocintens.test/api/maintenance-appointments/${userId}`;
-
-console.log(maintenanceAppointmentsUrl);
 
 var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
