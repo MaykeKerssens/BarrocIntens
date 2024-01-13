@@ -18,9 +18,11 @@
             </x-primary-button>
 
             <!-- Button 3: Werkbonnen -->
-            <a href="{{ route('workOrder.create') }}" class="text-white bg-indigo-500 py-2 px-4 rounded-md hover:bg-indigo-600">
-                Werkbonnen
-            </a>
+            <x-primary-button>
+                <a href="{{ route('workOrder.create') }}">
+                    Werkbonnen
+                </a>
+            </x-primary-button>
 
         </div>
     </div>

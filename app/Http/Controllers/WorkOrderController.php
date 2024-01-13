@@ -23,19 +23,23 @@ class WorkOrderController extends Controller
         $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
-            'maintenance_appointment_id' => 'required|exists:maintenanceAppointments,id',
+            'maintenance_appointment_id' => 'required|exists:maintenance_appointments,id',
             'timeSpent' => 'required|numeric',
-            'products' => 'array', // Assuming you are submitting an array of product IDs
+            'products' => 'required|array',
+            'products.*' => 'exists:products,id',
         ]);
 
-        $workOrder = WorkOrder::create($request->only('name', 'description', 'maintenanceApointment_id', 'timeSpent'));
+        // Create a new work order
+        $workOrder = WorkOrder::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'maintenance_appointment_id' => $request->input('maintenance_appointment_id'),
+            'timeSpent' => $request->input('timeSpent'),
+        ]);
 
-        if ($request->has('products')) {
-            $workOrder->products()->attach($request->input('products'));
-        }
+        // Attach products to the work order
+        $workOrder->products()->attach($request->input('products'));
 
-        // Additional logic as needed
-
-        return redirect()->route('workOrders.index')->with('success', 'WorkOrder created successfully!');
+        return redirect()->route('workOrder.create')->with('success', 'Work Order created successfully.');
     }
 }
