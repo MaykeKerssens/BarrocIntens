@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RepairRequest extends Model
 {
     use HasFactory;
 
-    public function appointmentRequests(): HasMany
+    public function appointments()
     {
-        return $this->hasMany(AppointmentRequest::class, 'request_id');
+        return $this->belongsToMany(Appointment::class, 'appointment_repair_requests', 'repair_request_id', 'appointment_id')
+            ->withTimestamps();
     }
     public function company()
     {

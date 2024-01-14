@@ -3,15 +3,26 @@
 namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\RepairRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
     public function index()
     {
-        return view('maintenance.index'); // Update the view path as needed
+        $today = Carbon::now()->toDateString();
+        $appointmentsToday = Appointment::has('repairRequests')
+            ->with('repairRequests')
+            ->where('user_id', auth()->user()->id)
+            ->whereDate('start', $today)->get()
+            ->sortBy('start');
+        return view('maintenance.index', [
+            'appointmentsToday' => $appointmentsToday,
+        ]);
     }
+
     /**
      * Display a listing of the resource.
      */

@@ -37,13 +37,13 @@ class ContractsController extends Controller
             'billing_type' => 'required|in:maandelijks,periodiek',
         ]);
 
-        $isSigned = $request->has('is_sign') ? 1 : 0;
+        $isSigned = $request->has('is_signed') ? 1 : 0;
 
         Contract::create([
             'company_id' => $request->company_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'is_sign' => $isSigned,
+            'is_signed' => $isSigned,
             'billing_type' => $request->billing_type,
         ]);
 
@@ -66,7 +66,6 @@ class ContractsController extends Controller
         $contract = Contract::findOrFail($id);
         $companies = Company::all();
         return view('contracts.edit')->with(['contract' => $contract, 'companies' => $companies]);
-
     }
 
     /**
@@ -86,7 +85,7 @@ class ContractsController extends Controller
         $contract->update([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'is_sign' => $request->boolean('is_sign'),
+            'is_signed' => $request->boolean('is_signed'),
             'billing_type' => $request->billing_type,
         ]);
 
@@ -97,7 +96,7 @@ class ContractsController extends Controller
                 'bkr_checked_at' => $request->input('bkr_checked_at'),
             ]);
         }
-
+      
         return redirect()->route('finance.index')->with('message', 'Contract is succesvol bijgewerkt.');
     }
 
@@ -106,7 +105,11 @@ class ContractsController extends Controller
      */
     public function destroy(Contract $contract)
     {
-        $contract->invoices()->delete();
+        $contract->invoices->each(function ($invoice) {
+            $invoice->products()->detach();
+            $invoice->delete();
+        });
+      
         $contract->delete();
         return redirect()->route('finance.index')->with('message', 'Contract is verwijderd');
     }

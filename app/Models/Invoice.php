@@ -21,9 +21,9 @@ class Invoice extends Model
         return $this->belongsTo(Contract::class);
     }
 
-    public function InvoiceProducts()
+    public function products()
     {
-        return $this->hasMany(InvoiceProduct::class);
+        return $this->belongsToMany(Product::class, 'invoice_products', 'invoice_id', 'product_id')
+            ->withTimestamps();
     }
-
 }
