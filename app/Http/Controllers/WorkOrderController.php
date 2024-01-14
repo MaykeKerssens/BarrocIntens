@@ -1,6 +1,5 @@
 <?php
 
-// WorkOrderController.php
 namespace App\Http\Controllers;
 
 use App\Models\WorkOrder;
@@ -12,7 +11,7 @@ class WorkOrderController extends Controller
 {
     public function create()
     {
-        $products = Product::all(); // Assuming you have a Product model
+        $products = Product::all();
         $maintenanceAppointments = MaintenanceAppointment::all();
 
         return view('maintenance.workOrder.create', compact('products', 'maintenanceAppointments'));
@@ -21,15 +20,14 @@ class WorkOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
             'maintenance_appointment_id' => 'required|exists:maintenance_appointments,id',
             'timeSpent' => 'required|numeric',
             'products' => 'required|array',
             'products.*' => 'exists:products,id',
         ]);
 
-        // Create a new work order
         $workOrder = WorkOrder::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -37,9 +35,8 @@ class WorkOrderController extends Controller
             'timeSpent' => $request->input('timeSpent'),
         ]);
 
-        // Attach products to the work order
         $workOrder->products()->attach($request->input('products'));
 
-        return redirect()->route('workOrder.create')->with('success', 'Work Order created successfully.');
+        return redirect(url('/maintenance'))->with('success', 'Work Order created successfully.');
     }
 }

@@ -3,6 +3,12 @@
         {{ __('Onderhoud overzicht') }}
     </x-slot>
 
+    @if(session('success'))
+        <div class="max-w-7xl mx-auto my-8 bg-white shadow overflow-hidden">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- Overview for all normal maintenance employees -->
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">

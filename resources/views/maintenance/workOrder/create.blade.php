@@ -5,6 +5,15 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+            @if ($errors->any())
+                <div class="bg-red-500 text-white font-bold p-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('workOrders.store') }}" method="POST" class="mt-6">
                 @csrf
                 <div class="shadow overflow-hidden bg-white p-4">
@@ -52,7 +61,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    <x-primary-button>
+                    <x-primary-button style="width: 140px">
                         Creëer werkbon
                     </x-primary-button>
                 </div>
