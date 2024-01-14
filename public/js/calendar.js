@@ -1,5 +1,12 @@
-const userId = document.getElementById('user-data').getAttribute('data-user-id');
-const maintenanceAppointmentsUrl = `http://barrocintens.test/api/maintenance-appointments/${userId}`;
+var maintenanceAppointmentsUrl = ``;
+if(document.getElementById('user-data')){
+    const userId = document.getElementById('user-data').getAttribute('data-user-id');
+    maintenanceAppointmentsUrl = `http://barrocintens.test/api/maintenance-appointments/${userId}`;
+} else {
+    maintenanceAppointmentsUrl = `http://barrocintens.test/api/all-maintenance-appointments`;
+}
+
+
 
 var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -43,6 +50,7 @@ fetch(maintenanceAppointmentsUrl)
             street: street
         },
         color: '#ffd700',
+        display: 'list-item',
         };
     });
 

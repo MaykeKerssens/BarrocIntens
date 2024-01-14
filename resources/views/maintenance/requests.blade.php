@@ -4,6 +4,17 @@
     </x-slot>
 
     <!--Overview only for Head of maintenance employee -->
+
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden flex gap-2">
+            <div id='calendar' class="w-3/4"></div>
+            <div class="bg-gray-100 p-2 w-1/4">
+                <h4 class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">Reperaties vandaag:</h4>
+
+            </div>
+        </div>
+    </div>
+
     <div class="py-8">
         <div class="max-w-7xl mx-auto">
             <!-- Table with all repair requests -->
