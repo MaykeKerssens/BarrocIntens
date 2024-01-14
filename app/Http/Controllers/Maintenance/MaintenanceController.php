@@ -30,7 +30,7 @@ class MaintenanceController extends Controller
     {
         $repairRequests = RepairRequest::paginate(10);
         return view('maintenance.requests', [
-            'requests' => $repairRequests,
+            'repairRequests' => $repairRequests,
         ]);
     }
 
