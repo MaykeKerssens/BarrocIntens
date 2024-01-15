@@ -36,15 +36,14 @@
                     {{-- ... --}}
                 @endif
             @endif
-            
+
             <!-- Always show logout link -->
-            <form method="POST" action="{{ route('logout') }}">
+            <x-nav-link :href="route('logout')" class="cursor-pointer"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </x-nav-link>
+            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                 @csrf
-                <x-nav-link :href="route('logout')"
-                    onclick="event.preventDefault();
-                    this.closest('form').submit();">
-                    {{ __('Logout') }}
-                </x-nav-link>
             </form>
         @endguest
 

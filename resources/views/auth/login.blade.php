@@ -40,7 +40,7 @@
 
         <!-- Log In Button -->
         <div>
-            <x-primary-button class="w-full bg-indigo-600 hover:bg-indigo-700">
+            <x-primary-button>
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
