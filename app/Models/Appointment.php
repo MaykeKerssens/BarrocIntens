@@ -14,6 +14,15 @@ class Appointment extends Model
         'end' => 'datetime:d-m-Y',
     ];
 
+    protected $fillable = [
+        'title',
+        'note',
+        'start',
+        'end',
+        'user_id',
+        'company_id'
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);

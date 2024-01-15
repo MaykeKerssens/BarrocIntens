@@ -14,7 +14,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="" method="POST">
+            <form action="{{ route('appointment.store') }}" method="POST">
                 @csrf
 
                 <div class="shadow overflow-hidden">
@@ -24,7 +24,9 @@
                         <!-- Appointment title-->
                         <div>
                             <label for="title" class="block font-medium text-gray-700">Afspraak titel:</label>
-                            <input type="text" name="title" id="title"class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
+                            <input type="text" name="title"
+                                id="title"class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
+                                required>
                         </div>
 
                         <!-- Description -->
@@ -34,81 +36,49 @@
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md resize-none"></textarea>
                         </div>
 
-                        <!-- Date -->
+                        <!-- Dates -->
                         <div>
-                            <label for="date" class="block text-sm font-medium text-gray-700">Datum</label>
-                            <input type="datetime-local" name="date" id="date"
+                            <label for="start" class="block text-sm font-medium text-gray-700">Start:</label>
+                            <input type="datetime-local" name="start" id="start"
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
+                                required>
+                        </div>
+
+                        <div>
+                            <label for="end" class="block text-sm font-medium text-gray-700">Eind:</label>
+                            <input type="datetime-local" name="end" id="end"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
                         </div>
 
                         <!-- Repair Requests -->
                         <div>
-                            <label for="repairRequests" class="block font-medium text-gray-700">Bijbehorende reparatie aanvragen selecteren:</label>
+                            <label for="repairRequests" class="block font-medium text-gray-700">Bijbehorende reparatie
+                                aanvragen selecteren:</label>
                             <select name="repairRequests[]" multiple
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
+                                <option value="0">Geen bijbehorende storingsaanvraag</option>
                                 @foreach ($newRepairRequests as $repairRequest)
-                                    <option value="{{ $repairRequest->id }}">[{{ $repairRequest->id }} - {{ $repairRequest->company->name }}] {{ $repairRequest->description }}</option>
+                                    <option value="{{ $repairRequest->id }}">
+                                        [{{ $repairRequest->id . ' - ' . $repairRequest->company->name . ' - ' . $repairRequest->created_at->format('d/m/Y') }}]
+                                        {{ $repairRequest->description }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <!-- Assign maintenance worker -->
                         <div>
-                            <label for="maintenanceWorkers" class="block font-medium text-gray-700">Medewerker(s) selecteren:</label>
-                            <select name="maintenanceWorkers[]" multiple
+                            <label for="maintenanceWorkers" class="block font-medium text-gray-700">Medewerker
+                                selecteren:</label>
+                            <select name="maintenanceWorker"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
-
                                 @foreach ($maintenanceWorkers as $maintenanceWorker)
                                     <option value="{{ $maintenanceWorker->id }}">{{ $maintenanceWorker->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-
-
-
-
-
-                        <!-- IsPaid -->
-                        {{-- <div>
-                            <label for="is_paid" class="block text-sm font-medium text-gray-700">Betaald</label>
-                            <input type="checkbox" name="is_paid" id="is_paid" value="1"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md">
-                        </div>
-
-                        <!-- Sign-up costs -->
-                        <div>
-                            <label for="costs" class="block text-sm font-medium text-gray-700">Aansluitkosten</label>
-                            <input type="number"name="costs" id="costs"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
-                                required>
-                        </div>
-
-                        <!-- Contract -->
-                        <div>
-                            <label for="contract_id" class="block text-sm font-medium text-gray-700">Contract</label>
-                            <select name="contract_id" id="contract_id"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
-                                required>
-                                <option value="">Selecteer een contract</option>
-                                @foreach ($contracts as $contract)
-                                <option value="{{ $contract->id }}">{{ $contract->id . ' - ' . $contract->company->name . ' - ' . $contract->created_at->format('d/m/Y H:i') }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="product_ids" class="block text-sm font-medium text-gray-700">Selecteer Producten</label>
-                            <select name="product_ids[]" id="product_ids"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
-                                required multiple>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
 
                         <div>
                             <x-primary-button>
