@@ -1,37 +1,42 @@
-<!-- resources/views/maintenance/workOrder/index.blade.php -->
-
 <x-app-layout>
     <x-slot name="pageHeaderText">
         {{ __('All Work Orders') }}
     </x-slot>
-
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
-            <h2 class="text-2xl font-semibold mb-4">All Work Orders</h2>
-
-            {{-- Display Work Orders --}}
-            <ul>
+ 
+    <div class="max-w-7xl mx-auto my-8 bg-white shadow overflow-hidden">
+        @if (session('message'))
+            <div class="bg-yellow text-gray-800 font-bold p-4">
+                <p>{{ session('message') }}</p>
+            </div>
+        @endif
+ 
+        <div class="px-4 py-5">
+            <!-- Table for Work Orders -->
+            <x-table :columns="['Naam', 'Beschrijving', 'Duur (minuten)', 'Producten']">
+                <x-slot name="title">
+                    Work Orders:
+                </x-slot>
+ 
+                <x-slot name="paginationLinks">
+                    <!-- Display pagination links -->
+                    {{ $workOrders->links() }}
+                </x-slot>
+ 
                 @foreach ($workOrders as $workOrder)
-                    <li>
-                        <strong>Name:</strong> {{ $workOrder->name }}<br>
-                        <strong>Description:</strong> {{ $workOrder->description }}<br>
-                        <strong>Time Spent (minutes):</strong> {{ $workOrder->timeSpent }}<br>
-
-                        @if ($workOrder->products->count() > 0)
-                            <strong>Products:</strong>
-                            <ul>
-                                @foreach ($workOrder->products as $product)
-                                    <li>{{ $product->name }}</li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <em>No products selected for this work order</em>
-                        @endif
-
-                        <hr>
-                    </li>
+                    <tr class="hover:bg-gray-200">
+                        <x-table.td>{{ $workOrder->name }}</x-table.td>
+                        <x-table.td>{{ $workOrder->description }}</x-table.td>
+                        <x-table.td>{{ $workOrder->timeSpent }}</x-table.td>
+                        <x-table.td>
+                            @if ($workOrder->products->count() > 0)
+                                {{ implode(', ', $workOrder->products->pluck('name')->toArray()) }}
+                            @else
+                                <em>No products selected</em>
+                            @endif
+                        </x-table.td>
+                    </tr>
                 @endforeach
-            </ul>
+            </x-table>
         </div>
     </div>
 </x-app-layout>
