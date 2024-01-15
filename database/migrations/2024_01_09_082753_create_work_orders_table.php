@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->foreignId('maintenance_appointment_id')
+            $table->foreignId('appointment_id')
                 ->references('id')
-                ->on('maintenance_appointments');
+                ->on('appointments');
             $table->decimal('timeSpent', 8, 2);
             $table->timestamps();
         });

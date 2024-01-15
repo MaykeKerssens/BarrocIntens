@@ -34,8 +34,8 @@
                         </div>
                         {{-- Maintenance Appointment --}}
                         <div>
-                            <label for="maintenance_appointment_id" class="block font-medium text-gray-700">Onderhouds Afspraak:</label>
-                            <select name="maintenance_appointment_id"
+                            <label for="appointment_id" class="block font-medium text-gray-700">Onderhouds Afspraak:</label>
+                            <select name="appointment_id"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
                                 @foreach ($maintenanceAppointments as $maintenanceAppointment)

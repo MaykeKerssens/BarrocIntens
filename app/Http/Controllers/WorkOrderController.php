@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WorkOrder;
 use App\Models\Product;
-use App\Models\MaintenanceAppointment;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class WorkOrderController extends Controller
@@ -12,7 +12,7 @@ class WorkOrderController extends Controller
     public function create()
     {
         $products = Product::all();
-        $maintenanceAppointments = MaintenanceAppointment::all();
+        $maintenanceAppointments = Appointment::all();
 
         return view('maintenance.workOrder.create', compact('products', 'maintenanceAppointments'));
     }
@@ -22,7 +22,7 @@ class WorkOrderController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:500',
-            'maintenance_appointment_id' => 'required|exists:maintenance_appointments,id',
+            'appointment_id' => 'required|exists:appointments,id',
             'timeSpent' => 'required|numeric',
             'products' => 'required|array',
             'products.*' => 'exists:products,id',
@@ -31,7 +31,7 @@ class WorkOrderController extends Controller
         $workOrder = WorkOrder::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'maintenance_appointment_id' => $request->input('maintenance_appointment_id'),
+            'appointment_id' => $request->input('appointment_id'),
             'timeSpent' => $request->input('timeSpent'),
         ]);
 
