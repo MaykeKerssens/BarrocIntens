@@ -3,8 +3,14 @@
         {{ __('Onderhoud overzicht') }}
     </x-slot>
 
+    @if(session('success'))
+        <div class="max-w-7xl mx-auto my-8 bg-white shadow overflow-hidden">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Overview for all normal maintenance employees -->
     <div id="user-data" data-user-id="{{ auth()->user()->id }}"></div>
-    <!--Overview for all normal maintenance employees -->
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden flex gap-2">
 
@@ -57,10 +63,24 @@
                         <p id="appointment-date-times" class="text-gray-500 text-sm">-</p>
                         <p id="appointment-description" class="text-sm pt-2"></p>
                     </div>
-
-
                 </div>
             </div>
+            <!-- Button 1: Storingsaanvraag -->
+            <x-primary-button>
+                Storingsaanvraag
+            </x-primary-button>
+
+            <!-- Button 2: Werkbezoek plannen -->
+            <x-primary-button>
+                Werkbezoek plannen
+            </x-primary-button>
+
+            <!-- Button 3: Werkbonnen -->
+            <x-primary-button>
+                <a href="{{ route('workOrder.create') }}">
+                    Werkbonnen
+                </a>
+            </x-primary-button>
         </div>
     </div>
 

@@ -12,9 +12,18 @@
 
     <!-- Navigation Links -->
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-
-        {{-- Check if the user is authenticated --}}
-        @auth
+        <!-- Check authentication to show login/register/logout links -->
+        @guest
+            {{-- Display login link if user is not authenticated --}}
+            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                {{ __('Login') }}
+            </x-nav-link>
+            
+            {{-- Display register link if user is not authenticated --}}
+            <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                {{ __('Register') }}
+            </x-nav-link>
+        @else
             {{-- Check if the user has a role --}}
             @if (auth()->user()->role_id)
                 {{-- Display role-specific links --}}
@@ -41,24 +50,28 @@
                         {{ __('Inkoop Dashboard') }}
                     </x-nav-link>
                 @elseif (auth()->user()->role_id == 6)
-                    <x-nav-link :href="route('headOfMaintenance.index')" :active="request()->routeIs('headOfMaintenance.index')">
+                    <x-nav-link :href="route('headOfMaintenance.request')" :active="request()->routeIs('headOfMaintenance.request')">
                         {{ __('Overziende Onderhoud Dashboard') }}
                     </x-nav-link>
                 @endif
             @endif
-        @endauth
 
+            <!-- Always show logout link -->
+            <x-nav-link :href="route('logout')" class="cursor-pointer"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </x-nav-link>
+            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                @csrf
+            </form>
+        @endguest
 
+        <!-- Other navigation links -->
         <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
             {{ __('Producten') }}
         </x-nav-link>
         <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
             {{ __('Contact') }}
-        </x-nav-link>
-
-        {{-- Display login link --}}
-        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-            {{ __('Login') }}
         </x-nav-link>
     </div>
 </nav>

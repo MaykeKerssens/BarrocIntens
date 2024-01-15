@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoice_products', function (Blueprint $table) {
+        Schema::create('product_work_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id')
-            ->references('id')
-            ->on('invoices');
             $table->foreignId('product_id')
                 ->references('id')
                 ->on('products');
+            $table->foreignId('work_order_id')
+                ->references('id')
+                ->on('work_orders');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoice_products');
+        Schema::dropIfExists('product_work_orders');
     }
 };

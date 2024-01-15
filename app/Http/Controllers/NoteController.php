@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Note;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,14 +16,31 @@ class NoteController extends Controller
      */
     public function index()
     {
+        $offers = Offer::with('products')->paginate(10);
         $users = User::paginate(10);
         $notes = Note::paginate(10);
         return view('sales.index',[
             'users' => $users,
             'notes' => $notes,
+            'offers' => $offers,
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $offers = Offer::paginate(10);
+        $users = User::paginate(10);
+        $search = $request->search;
+        $notes = Note::where(function ($query) use ($search) {
+            $query->orWhere('note', 'like', "%$search%");
+        })
+        ->orWhereHas('company', function ($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(10);
+
+        return view('sales.index', ['notes' => $notes, 'users' => $users, 'offers' => $offers,  'search' => $search]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -52,8 +70,8 @@ class NoteController extends Controller
             'company_id' => $request->company_id,
             'user_id' => Auth::id()
         ]);
-
-        return redirect()->route('notes.index')->with('message', 'Notitie is succesvol toegevoegd.');
+      
+        return redirect()->route('sales.index')->with('message', 'Notitie is succesvol toegevoegd.');
     }
 
     /**
@@ -69,7 +87,6 @@ class NoteController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -85,6 +102,9 @@ class NoteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $note = Note::findOrFail($id);
+    
+        $note->delete();
+        return redirect()->route('sales.index')->with('message', 'Notitie succesvol verwijderd.');
     }
-}
+}    
