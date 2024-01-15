@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('street');
+            $table->string('zip');
             $table->string('city');
             $table->dateTime('bkr_checked_at')->nullable();
             $table->foreignId('user_id')
