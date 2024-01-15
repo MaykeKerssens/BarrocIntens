@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoicesController;
@@ -77,5 +78,6 @@ Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
     Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
     // Add other routes for HeadOfMaintenance
 });
+Route::post('/contact-send', [ContactController::class, 'send'])->name('contact-send');
 
 require __DIR__.'/auth.php';
