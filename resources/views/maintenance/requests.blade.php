@@ -6,32 +6,39 @@
     <!--Overview only for Head of maintenance employee -->
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden flex gap-2">
-            <div id='calendar' class="w-3/4"></div>
-            <div class="bg-gray-100 p-2 w-1/4">
-                <h4 class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">Noodgevallen:</h4>
-                @php
-                    $emergencyRepairRequests = $repairRequests->where('status.name', 'Noodgeval');
-                @endphp
-                @if ($emergencyRepairRequests)
-                    <ul class="list-disc pl-4">
-                        @foreach ($emergencyRepairRequests as $repairRequest)
-                        <li class="mt-4">
-                            <p><b>{{ $repairRequest->company->name }}</b></p>
-                            {{-- <x-table.td>{{ $repairRequest->product->name }}</x-table.td> --}}
-                            <p class="text-gray-500 text-sm">{{ $repairRequest->description }}</p>
-                            <x-secondary-button class="mt-2">
-                                <a href="{{ route('appointment.create') }}">Inplannen</a>
-                            </x-secondary-button>
+        <div class="max-w-7xl mx-auto">
+            @if (session('message'))
+                <div class="bg-yellow text-gray-800 font-bold p-4">
+                    {{ session('message') }}
+                </div>
+            @endif
+            <div class="px-4 py-5 bg-white shadow overflow-hidden flex gap-2">
+                <div id='calendar' class="w-3/4"></div>
+                <div class="bg-gray-100 p-2 w-1/4">
+                    <h4 class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">Noodgevallen:</h4>
+                    @php
+                        $emergencyRepairRequests = $repairRequests->where('status.name', 'Noodgeval');
+                    @endphp
+                    @if ($emergencyRepairRequests)
+                        <ul class="list-disc pl-4">
+                            @foreach ($emergencyRepairRequests as $repairRequest)
+                            <li class="mt-4">
+                                <p><b>{{ $repairRequest->company->name }}</b></p>
+                                {{-- <x-table.td>{{ $repairRequest->product->name }}</x-table.td> --}}
+                                <p class="text-gray-500 text-sm">{{ $repairRequest->description }}</p>
+                                <x-secondary-button class="mt-2">
+                                    <a href="{{ route('appointment.create') }}">Inplannen</a>
+                                </x-secondary-button>
 
-                        </li>
-                    @endforeach
-                    </ul>
+                            </li>
+                        @endforeach
+                        </ul>
 
-                @else
-                    <p>Momenteel geen noodgevallen</p>
-                @endif
+                    @else
+                        <p>Momenteel geen noodgevallen</p>
+                    @endif
 
+                </div>
             </div>
         </div>
     </div>

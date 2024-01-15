@@ -77,7 +77,7 @@ class AppointmentController extends Controller
         // Add related repair requests to the appointment
         $appointment->repairRequests()->attach($request->input('repairRequests', []));
 
-        return redirect()->route('headOfMaintenance.request')->with('message', 'Afspraak' . $appointment->title . ' is succesvol aangemaakt.' );
+        return redirect()->route('headOfMaintenance.request')->with('message', "Afspraak  '" . $appointment->title . "' is succesvol aangemaakt." );
     }
 
 
