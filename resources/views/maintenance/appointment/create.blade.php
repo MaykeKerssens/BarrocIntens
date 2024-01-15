@@ -71,7 +71,7 @@
                             <select name="repairRequests[]" multiple
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
-                                <option value="0">Geen bijbehorende storingsaanvraag</option>
+                                <option value="0">Geen bijbehorende storingsaanvraag (routine afspraak)</option>
                                 @foreach ($newRepairRequests as $repairRequest)
                                     <option value="{{ $repairRequest->id }}">
                                         [{{ $repairRequest->id . ' - ' . $repairRequest->company->name . ' - ' . $repairRequest->created_at->format('d/m/Y') }}]
