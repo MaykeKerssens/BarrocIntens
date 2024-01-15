@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class MaintenanceController extends Controller
 {
     public function index()
-    {;
+    {
         $today = Carbon::now()->toDateString();
         $appointmentsToday = Appointment::has('repairRequests')
             ->with('repairRequests')
