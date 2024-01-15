@@ -30,7 +30,7 @@
                         <h4 id="appointment-header"
                             class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">
                             Reperaties vandaag:</h4>
-                        <div id="appointments-today">
+                        <div id="info-box">
                             <ul class="list-disc pl-4">
                                 @if ($appointmentsToday != null)
                                     @foreach ($appointmentsToday as $appointment)
