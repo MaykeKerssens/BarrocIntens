@@ -18,14 +18,15 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             Companyseeder::class,
             ContractSeeder::class,
-            InvoiceSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
             statusSeeder::class,
             RepairRequestSeeder::class,
-            MaintenanceAppointmentSeeder::class,
-            AppointmentRequestSeeder::class,
+            AppointmentSeeder::class,
+            AppointmentRepairRequestsSeeder::class,
             NoteSeeder::class,
+            OfferSeeder::class,
+            InvoiceSeeder::class,
         ]);
     }
 }

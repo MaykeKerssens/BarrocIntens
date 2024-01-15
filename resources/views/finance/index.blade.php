@@ -2,12 +2,17 @@
     <x-slot name="pageHeaderText">
         {{ __('Finance') }}
     </x-slot>
+    
 
-
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+    <div class="max-w-7xl mx-auto my-8 bg-white shadow overflow-hidden">
+        @if (session('message'))
+            <div class="bg-yellow text-gray-800 font-bold p-4">
+                <p>{{ session('message') }}</p>
+            </div>
+        @endif
+        <div class="px-4 py-5">
             <!-- Tabel for Invoices -->
-            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Acties']">
+            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten', 'Contract', 'Producten', 'Acties']">
                 <x-slot name="title">
                     Facturen:
                 </x-slot>
@@ -22,7 +27,7 @@
                     <tr class="hover:bg-gray-200">
                         <x-table.td>{{ $invoice->date }}</x-table.td>
                         <x-table.td>
-                            @if ($invoice->paid)
+                            @if ($invoice->is_paid)
                                 <span class="text-green-500">Betaald</span>
                             @else
                                 <span class="text-red-500">Niet betaald</span>
@@ -31,15 +36,15 @@
                         <x-table.td>{{ $invoice->costs }}</x-table.td>
                         <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
                         <x-table.td>
+                            {{ implode(', ', $invoice->products->pluck('name')->toArray()) }}
+                        </x-table.td>
+                        <x-table.td>
                             <a href="{{ route('invoices.edit', $invoice->id) }}"
                                 class="text-blue-500 hover:underline">Bewerken</a>
                         </x-table.td>
                     </tr>
                 @endforeach
             </x-table>
-
-
-
 
             <!-- Table for Contracts -->
             <x-table :columns="['Bedrijf', 'Startdatum', 'Einddatum', 'Ondertekend', 'Factureringstype', 'BKR check', 'Acties']">
@@ -60,7 +65,7 @@
                         <x-table.td>{{ $contract->start_date }}</x-table.td>
                         <x-table.td>{{ $contract->end_date }}</x-table.td>
                         <x-table.td>
-                            @if ($contract->is_sign)
+                            @if ($contract->is_signed)
                                 Ja
                             @else
                                 Nee
@@ -75,17 +80,25 @@
                             @endif
                         </x-table.td>
                         <x-table.td>
-                            <a href="{{ route('contracts.edit', $contract->id) }}"
-                                class="text-blue-500 hover:underline">Bewerken</a>
-                            <form action="{{ route('contracts.destroy', $contract->id) }}" method="POST">
+                            <a href="{{ route('contracts.edit', $contract->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
+                            <form action="{{ route('contracts.destroy', $contract->id) }}" method="POST" id="deleteForm{{ $contract->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
+                                <button type="button" onclick="confirmDelete('{{ $contract->id }}')" class="text-red-500 hover:underline">Verwijderen</button>
                             </form>
+                            <script>
+                                function confirmDelete(contractId) {
+                                    if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
+                                        document.getElementById('deleteForm' + contractId).submit(); 
+                                    }
+                                }
+                            </script>
                         </x-table.td>
+
                     </tr>
                 @endforeach
             </x-table>
+        </div>
         </div>
     </div>
 </x-app-layout>

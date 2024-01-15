@@ -32,8 +32,27 @@
                     <x-nav-link :href="route('customer.index')" :active="request()->routeIs('customer.index')">
                         {{ __('Customer Dashboard') }}
                     </x-nav-link>
-                    <!-- Add other role-specific links similarly -->
-                    {{-- ... --}}
+                @elseif(auth()->user()->role_id == 2)
+                    {{-- Finance --}}
+                    <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
+                        {{ __('Financiën Dashboard') }}
+                    </x-nav-link>
+                @elseif (auth()->user()->role_id == 3)
+                    <x-nav-link :href="route('maintenance.index')" :active="request()->routeIs('maintenance.index')">
+                        {{ __('Onderhoud Dashboard') }}
+                    </x-nav-link>
+                @elseif (auth()->user()->role_id == 4)
+                    <x-nav-link :href="route('sales.index')" :active="request()->is('sales.index')">
+                        {{ __('Verkoop Dashboard') }}
+                    </x-nav-link>
+                @elseif (auth()->user()->role_id == 5)
+                    <x-nav-link :href="route('sourcing.index')" :active="request()->is('sourcing.index')">
+                        {{ __('Inkoop Dashboard') }}
+                    </x-nav-link>
+                @elseif (auth()->user()->role_id == 6)
+                    <x-nav-link :href="route('headOfMaintenance.request')" :active="request()->routeIs('headOfMaintenance.request')">
+                        {{ __('Overziende Onderhoud Dashboard') }}
+                    </x-nav-link>
                 @endif
             @endif
 

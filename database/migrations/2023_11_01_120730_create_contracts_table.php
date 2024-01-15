@@ -18,7 +18,7 @@ return new class extends Migration
             ->on('companies');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('is_sign');
+            $table->boolean('is_signed');
             $table->enum('billing_type', ['maandelijks', 'periodiek']);
             $table->timestamps();
         });
