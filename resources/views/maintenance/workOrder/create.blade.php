@@ -14,6 +14,12 @@
                     </ul>
                 </div>
             @endif
+
+            {{-- Button to go to the page displaying all work orders --}}
+            <x-primary-button style="width: 140px">
+                <a href="{{ route('workOrders.index') }}">View All Work Orders</a>
+            </x-primary-button>
+
             <form action="{{ route('workOrders.store') }}" method="POST" class="mt-6">
                 @csrf
                 <div class="shadow overflow-hidden bg-white p-4">

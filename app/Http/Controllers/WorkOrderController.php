@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class WorkOrderController extends Controller
 {
+    public function index()
+    {
+        $workOrders = WorkOrder::all(); // You may adjust this query based on your needs
+        return view('maintenance.workOrder.index', compact('workOrders'));
+    }
     public function create()
     {
         $products = Product::all();
