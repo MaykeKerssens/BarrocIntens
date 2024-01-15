@@ -50,9 +50,9 @@
                 <x-slot name="title">
                     Onderhoud verzoeken:
                 </x-slot>
-                {{-- <x-slot name="button">
-                    <a href="">-</a>
-                </x-slot> --}}
+                <x-slot name="button">
+                    <a href="{{ route('appointment.create') }}">Afspraak aanmaken</a>
+                </x-slot>
                 <x-slot name="paginationLinks">
                     <!-- Display pagination links -->
                     {{ $repairRequests->links() }}

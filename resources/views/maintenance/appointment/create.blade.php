@@ -51,6 +51,19 @@
                                 required>
                         </div>
 
+                        <!-- Choose company -->
+                        <div>
+                            <label for="company" class="block font-medium text-gray-700">Bedrijf
+                                selecteren:</label>
+                            <select name="company"
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
+                                required>
+                                @foreach ($companies as $company)
+                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <!-- Repair Requests -->
                         <div>
                             <label for="repairRequests" class="block font-medium text-gray-700">Bijbehorende reparatie
@@ -69,7 +82,7 @@
 
                         <!-- Assign maintenance worker -->
                         <div>
-                            <label for="maintenanceWorkers" class="block font-medium text-gray-700">Medewerker
+                            <label for="maintenanceWorker" class="block font-medium text-gray-700">Medewerker
                                 selecteren:</label>
                             <select name="maintenanceWorker"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
@@ -79,6 +92,8 @@
                                 @endforeach
                             </select>
                         </div>
+
+
 
                         <div>
                             <x-primary-button>
