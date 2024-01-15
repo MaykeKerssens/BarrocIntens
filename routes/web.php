@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoicesController;
@@ -75,6 +76,7 @@ Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
     Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
+    Route::resource('appointment', AppointmentController::class);
     // Add other routes for HeadOfMaintenance
 });
 

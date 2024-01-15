@@ -21,7 +21,7 @@
                             {{-- <x-table.td>{{ $repairRequest->product->name }}</x-table.td> --}}
                             <p class="text-gray-500 text-sm">{{ $repairRequest->description }}</p>
                             <x-secondary-button class="mt-2">
-                                <a href="">Inplannen</a>
+                                <a href="{{ route('appointment.create') }}">Inplannen</a>
                             </x-secondary-button>
 
                         </li>

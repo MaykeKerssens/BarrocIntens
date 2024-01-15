@@ -18,7 +18,7 @@ class RepairRequestSeeder extends Seeder
             $repairRequest = new \App\Models\RepairRequest();
             $repairRequest->product_id = $faker->numberBetween(1, 2);
             $repairRequest->company_id = $faker->numberBetween(1, 2);
-            $repairRequest->status_id = $faker->numberBetween(1, 14);
+            $repairRequest->status_id = $faker->numberBetween(1, 10);
             $repairRequest->description = $faker->sentence;
             $repairRequest->save();
         }

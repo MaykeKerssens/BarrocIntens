@@ -14,15 +14,9 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         Status::create([
-            'name' => 'In afwachting van goedkeuring',
-            'description' => 'Het reparatueverzoek is ingediend en wacht op goedkeuring van de bevoegde autoriteit.',
+            'name' => 'Nieuw',
+            'description' => 'Het reparatueverzoek is ingediend en wacht op inplanning van de bevoegde autoriteit.',
             'color'=> 'blue',
-        ]);
-
-        Status::create([
-            'name' => 'Goedgekeurd',
-            'description' => 'Het reparatieverzoek is beoordeeld en geautoriseerd voor verdere afhandeling.',
-            'color'=> 'green',
         ]);
 
         Status::create([
@@ -68,28 +62,11 @@ class StatusSeeder extends Seeder
         ]);
 
         Status::create([
-            'name' => 'Geëscaleerd',
-            'description' => 'Het reparatieverzoek is doorgestuurd naar een hoger niveau van management of expertise voor afhandeling.',
-            'color'=> 'red',
-        ]);
-
-        Status::create([
             'name' => 'Heropend',
             'description' => 'Als een probleem weer opduikt nadat het als afgesloten is gemarkeerd, kan het reparatieverzoek worden heropend voor verdere aandacht.',
             'color'=> 'yellow',
         ]);
 
-        Status::create([
-            'name' => 'Wachten op Bevestiging van de Klant',
-            'description' => 'De reparatie is voltooid, maar het onderhoudsbedrijf wacht op bevestiging van de klant dat het probleem naar tevredenheid is opgelost.',
-            'color'=> 'yellow',
-        ]);
-
-        Status::create([
-            'name' => 'Vertraagd',
-            'description' => 'De reparatie duurt langer dan verwacht, en er is vertraging in het oplossingsproces.',
-            'color'=> 'yellow',
-        ]);
 
         Status::create([
             'name' => 'Noodgeval',
@@ -98,6 +75,19 @@ class StatusSeeder extends Seeder
         ]);
 
         // Possible feauture to add in the future
+
+
+        // Status::create([
+        //     'name' => 'Wachten op Bevestiging van de Klant',
+        //     'description' => 'De reparatie is voltooid, maar het onderhoudsbedrijf wacht op bevestiging van de klant dat het probleem naar tevredenheid is opgelost.',
+        //     'color'=> 'yellow',
+        // ]);
+
+        // Status::create([
+        //     'name' => 'Vertraagd',
+        //     'description' => 'De reparatie duurt langer dan verwacht, en er is vertraging in het oplossingsproces.',
+        //     'color'=> 'yellow',
+        // ]);
         // Status::create([
         //     'name' => 'Feedback Gevraagd',
         //     'description' => 'De reparatie is voltooid, en het onderhoudsbedrijf vraagt om feedback van de klant over de verleende service.',

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             ContractSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
-            statusSeeder::class,
+            StatusSeeder::class,
             RepairRequestSeeder::class,
             AppointmentSeeder::class,
             AppointmentRepairRequestsSeeder::class,
