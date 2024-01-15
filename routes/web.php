@@ -11,6 +11,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RepairRequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,10 +42,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified', 'role:1'])->group(function () {
-    Route::prefix('customer')->group(function () {
-        Route::get('/dashboard', [CustomerController::class, 'index'])->name('customer.index');
+        Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
+        Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
         // Add other customer routes as needed
-    });
 });
 
 Route::middleware(['auth', 'verified', 'role:2'])->group(function () {
