@@ -118,16 +118,58 @@ class AppointmentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Get all needed data
+        $maintenanceWorkers = User::where('role_id', 3)->get();
+        $companies = Company::all();
+        $repairRequests = RepairRequest::all();
+
+        $appointment = Appointment::find($id);
+        return view('maintenance.appointment.edit', [
+            'appointment' => $appointment,
+            'repairRequests' => $repairRequests,
+            'maintenanceWorkers' => $maintenanceWorkers,
+            'companies' => $companies,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Appointment $appointment)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'note' => 'nullable|string',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'maintenanceWorker' => 'required|exists:users,id',
+            'repairRequests' => 'required|array',
+            'company' => 'required|exists:companies,id'
+        ]);
+
+        // Additional validation logic for repairRequests can be added if needed
+
+        $appointment->update([
+            'title' => $request->title,
+            'note' => $request->note,
+            'start' => $request->start,
+            'end' => $request->end,
+            'user_id' => $request->maintenanceWorker,
+            'company_id' => $request->company,
+        ]);
+
+        // Update status to 'Ingepland' for all selected repairRequests
+        $appointment->repairRequests()->detach(); // Clear existing relationships
+        if (!in_array(0, $request->input('repairRequests', []))) {
+            RepairRequest::whereIn('id', $request->input('repairRequests'))->update(['status_id' => 2]);
+
+            // Add related repair requests to the appointment
+            $appointment->repairRequests()->attach($request->input('repairRequests', []));
+        }
+
+        return redirect()->route('headOfMaintenance.request')->with('message', "Afspraak '" . $appointment->title . "' is succesvol bijgewerkt.");
     }
+
 
     /**
      * Remove the specified resource from storage.

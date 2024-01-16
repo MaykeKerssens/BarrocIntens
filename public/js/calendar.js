@@ -63,6 +63,14 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
         dateTimesEl.innerText = dateStart + ' | ' + timeStart + '-' + timeEnd;
         descriptionEl.innerText = info.event.extendedProps.description;
 
+        // Add edit button if it exists
+        if (document.getElementById('edit-button')) {
+            var id = info.event.id;
+            var editButton = document.getElementById('edit-button');
+
+            // Update the href attribute
+            editButton.href = "http://barrocintens.test/appointment/:id/edit" .replace(':id', id);
+        }
 
     }
 });

@@ -58,6 +58,9 @@
                             <p id="appointment-date-times" class="text-gray-500 text-sm">-</p>
                             <p id="appointment-description" class="text-sm pt-2"></p>
                         </div>
+                        <x-secondary-button class="mt-2">
+                            <a id="edit-button" href="">Afspraak aanpassen</a>
+                        </x-secondary-button>
                     </div>
                 </div>
             </div>
