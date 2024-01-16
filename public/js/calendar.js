@@ -71,7 +71,6 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             // Update the href attribute
             editButton.href = "http://barrocintens.test/appointment/:id/edit" .replace(':id', id);
         }
-
     }
 });
 
@@ -116,3 +115,4 @@ function fetchEvents(info, successCallback, failureCallback) {
         failureCallback(appointment);
         });
     }
+

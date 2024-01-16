@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoicesController;
@@ -12,8 +13,10 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RepairRequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,10 +45,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified', 'role:1'])->group(function () {
-    Route::prefix('customer')->group(function () {
-        Route::get('/dashboard', [CustomerController::class, 'index'])->name('customer.index');
+        Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
+        Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
         // Add other customer routes as needed
-    });
 });
 
 Route::middleware(['auth', 'verified', 'role:2'])->group(function () {
@@ -68,6 +70,8 @@ Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/search', [NoteController::class, 'search'])->name('search');
 });
 
+    Route::get('/workorder/create', [WorkOrderController::class, 'create'])->name('workOrder.create');
+    Route::post('/workOrders', [WorkOrderController::class, 'store'])->name('workOrders.store');
 Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
     Route::get('/sourcing', [SourcingController::class, 'index'])->name('sourcing.index');
     Route::resource('sourcing', ProductController::class);
@@ -79,5 +83,6 @@ Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
     Route::resource('appointment', AppointmentController::class);
     // Add other routes for HeadOfMaintenance
 });
+Route::post('/contact-send', [ContactController::class, 'send'])->name('contact-send');
 
 require __DIR__.'/auth.php';

@@ -16,8 +16,8 @@ class AppointmentSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             $appointment = new \App\Models\Appointment();
             $appointment->user_id = $faker->numberBetween(3,4);
-            $appointment->company_id = $faker->numberBetween(1, 3);
-            $appointment->title = $faker->word;
+            $appointment->company_id = $faker->numberBetween(2, 11);
+            $appointment->title = $faker->sentence;
             $appointment->note = $faker->sentence;
             $appointment->start = $faker->dateTimeBetween('-1 week', '+5 weeks');
             $appointment->end = $faker->dateTimeBetween($appointment->start, $appointment->start->modify('+4 hours'));
