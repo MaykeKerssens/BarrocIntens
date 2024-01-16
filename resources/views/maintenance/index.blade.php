@@ -15,19 +15,19 @@
         <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
 
             <!-- All buttons here -->
-            <div class="pb-2">
+            <div class="pb-2 flex justify-end">
                 <!-- Create workOrder -->
                 <x-primary-button>
                     <a href="{{ route('workOrder.create') }}">Werkbonnen</a>
                 </x-primary-button>
             </div>
 
-            <div class="flex gap-2">
+            <div class="flex flex-col sm:flex-row gap-2">
                 <!-- Calander with all maintenance appointments -->
-                <div id='calendar' class="w-3/4"></div>
+                <div id='calendar' class="w-full sm:w-3/4 mb-4 sm:mb-0"></div>
 
                 <!-- List of all appointments and repairment requests for today -->
-                <div class="bg-gray-100 p-2 w-1/4">
+                <div class="bg-gray-100 p-2 w-full sm:w-1/2 md:w-1/4">
                     <h4 id="appointment-header"
                         class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">
                         Reperaties vandaag:</h4>
@@ -51,7 +51,7 @@
                             @endif
                         </ul>
                     </div>
-                    <div id="appointment-details" style="display: none;">
+                    <div id="appointment-details" class="hidden sm:block" style="display: none;">
                         <!-- Show company data -->
                         <div class="pt-1 text-sm text-gray-500">
                             <div class="flex">
