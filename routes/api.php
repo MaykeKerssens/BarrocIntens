@@ -27,6 +27,6 @@ Route::get('maintenance-appointments/{user_id}', function($user_id) {
 });
 
 Route::get('all-maintenance-appointments', function() {
-    $appointments = Appointment::all();
-    return $appointments;
+    $allAppointments = Appointment::all();
+    return new AppointmentCollection($allAppointments);
 });

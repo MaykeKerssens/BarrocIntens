@@ -28,9 +28,11 @@ class MaintenanceController extends Controller
      */
     public function request()
     {
+        $emergencyRepairRequests = RepairRequest::all()->where('status.name', 'Noodgeval');
         $repairRequests = RepairRequest::paginate(10);
         return view('maintenance.requests', [
-            'requests' => $repairRequests,
+            'emergencyRepairRequests' => $emergencyRepairRequests,
+            'repairRequests' => $repairRequests,
         ]);
     }
 

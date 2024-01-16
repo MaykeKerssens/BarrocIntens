@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\CustomerController;
@@ -79,6 +80,7 @@ Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
     Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
+    Route::resource('appointment', AppointmentController::class);
     // Add other routes for HeadOfMaintenance
 });
 Route::post('/contact-send', [ContactController::class, 'send'])->name('contact-send');
