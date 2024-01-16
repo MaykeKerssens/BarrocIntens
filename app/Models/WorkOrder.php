@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use App\Models\Product;
-use App\Models\MaintenanceAppointment;
+use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkOrder extends Model
 {
-    protected $fillable = ['name', 'description', 'maintenance_appointment_id', 'timeSpent'];
+    protected $fillable = ['name', 'description', 'appointment_id', 'timeSpent'];   
 
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_work_orders');
     }
 
-    public function maintenanceAppointment()
+    public function appointment()
     {
-        return $this->belongsTo(MaintenanceAppointment::class);
+        return $this->belongsTo(Appointment::class, 'appointment_id');
     }
 }
