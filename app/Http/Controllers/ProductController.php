@@ -14,11 +14,22 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        $query = Product::query();
+    
+        if ($request->filled('stockFilter')) {
+            if ($request->stockFilter == 'in_stock') {
+                $query->where('units_in_stock', '>', 0);
+            } elseif ($request->stockFilter == 'out_of_stock') {
+                $query->where('units_in_stock', '=', 0);
+            }
+        }
+    
+        $products = $query->paginate(10);
+    
         return view('sourcing.index', [
-            'products' => $products
+            'products' => $products,
         ]);
     }
 

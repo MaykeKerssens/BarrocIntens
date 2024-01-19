@@ -10,7 +10,18 @@
             </div>
         @endif
         <div class="px-4 py-5">
-
+            <form method="GET" action="{{ route('sourcing.index') }}" class="mb-4">
+                <label for="stockFilter" class="block text-sm font-medium text-gray-700">Filter op voorraad:</label>
+                <select name="stockFilter" id="stockFilter"
+                        class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <option value="all" {{ request('stockFilter') == 'all' ? 'selected' : '' }}>Alle producten</option>
+                    <option value="in_stock" {{ request('stockFilter') == 'in_stock' ? 'selected' : '' }}>Op voorraad</option>
+                    <option value="out_of_stock" {{ request('stockFilter') == 'out_of_stock' ? 'selected' : '' }}>Uit voorraad</option>
+                </select>
+            <x-primary-button>
+                    Filteren
+                </x-primary-button>
+            </form>
             <!-- Table with all products -->
             <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
                 <x-slot name="title">
