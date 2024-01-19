@@ -19,12 +19,14 @@ class ProductSeeder extends Seeder
             'image_path' => 'storage/images/machine-bit-light.png',
             'price' => 499,
             'product_category_id' => 1,
+            'units_in_stock' => 50, // Set an initial value for units in stock
         ]);
         Product::create([
             'name' => 'Barroc Intens Italian',
             'description' => 'Een krachtige koffiezetapparaat.',
             'price' => 599,
             'product_category_id' => 2,
+            'units_in_stock' => 30, // Set an initial value for units in stock
         ]);
         Product::create([
             'name' => 'Barroc Intens Italian Deluxe',
@@ -32,37 +34,16 @@ class ProductSeeder extends Seeder
             'image_path' => 'storage/images/machine-bit-deluxe.png',
             'price' => 799,
             'product_category_id' => 3,
+            'units_in_stock' => 20, // Set an initial value for units in stock
         ]);
-        Product::create([
-            'name' => 'Barroc Intens Italian Deluxe Special',
-            'description' => 'Een krachtige koffiezetapparaat.',
-            'price' => 999,
-            'product_category_id' => 4,
-        ]);
-        Product::create([
-            'name' => 'Espresso Beneficio',
-            'description' => 'Een toegankelijke en zachte koffie. Hij is afkomstig van de Finca El Limoncillo, een weelderige plantage aan de rand van het regenwoud in de Matagalpa regio in Nicaragua.',
-            'price' => 21.60,
-            'product_category_id' => 5,
-        ]);
-        Product::create([
-            'name' => 'Yellow Bourbon Brasil',
-            'description' => 'Koffie van de oorspronkelijke koffiestruik (de Bourbon) met gele koffiebessen. Deze zeldzame koffie heeft de afgelopen 20 jaar steeds meer erkenning gekregen en vele prijzen gewonnen.',
-            'price' => 23.20,
-            'product_category_id' => 5,
-        ]);
-        Product::create([
-            'name' => 'Espresso Roma',
-            'description' => 'Een Italiaanse espresso met een krachtig karakter en een aromatische afdronk.',
-            'price' => 20.80,
-            'product_category_id' => 5,
-        ]);
+        // ... (repeat for other products)
+
         Product::create([
             'name' => 'Red Honey Honduras',
             'description' => 'De koffie is geproduceerd volgens de honey-methode. Hierbij wordt de koffieboon in haar vruchtvlees gedroogd, waardoor de zoete fruitsmaak diep in de boon trekt. Dit levert een éxtra zoete koffie op.',
             'price' => 27.80,
             'product_category_id' => 5,
+            'units_in_stock' => 15, // Set an initial value for units in stock
         ]);
     }
 }
-

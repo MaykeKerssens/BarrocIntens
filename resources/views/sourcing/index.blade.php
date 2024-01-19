@@ -12,7 +12,7 @@
         <div class="px-4 py-5">
 
             <!-- Table with all products -->
-            <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
+            <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Producten voorraad', 'Acties']">
                 <x-slot name="title">
                     Producten overzicht:
                 </x-slot>
@@ -38,6 +38,7 @@
                         </x-table.td>
                         <x-table.td>{{ $product->price }}</x-table.td>
                         <x-table.td>{{ $product->ProductCategory->name }}</x-table.td>
+                        <x-table.td>{{ $product->units_in_stock }}</x-table.td> <!-- Add this line for Units in Stock -->
                         <x-table.td>
                             <!-- Add buttons for edit and delete actions -->
                             <a href="{{ route('sourcing.edit', $product->id) }}"
