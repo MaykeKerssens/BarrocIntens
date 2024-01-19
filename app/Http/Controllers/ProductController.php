@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\InvoiceProduct;
 use App\Models\RepairRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -45,6 +45,12 @@ class ProductController extends Controller
             'product' => $product,
             'productCategories' => $productCategories,
         ]);
+    }
+
+
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -90,7 +96,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
-            'product_category_id' => 'required|exists:product_categories,id',
+            'product_category_id' => 'exists:product_categories,id',
             'units_in_stock' => 'required|integer',
         ]);
 
@@ -129,7 +135,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         // Check if there are associated invoice products
-        $associatedInvoices = InvoiceProduct::where('product_id', $product->id)->exists();
+        $associatedInvoices = Invoice::whereHas('products', function ($query) use ($product) {
+            $query->where('product_id', $product->id);
+        })->get();
+
 
         if ($associatedInvoices) {
             return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
