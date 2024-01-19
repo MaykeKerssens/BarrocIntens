@@ -134,13 +134,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        // Check if there are associated invoice products
-        $associatedInvoices = Invoice::whereHas('products', function ($query) use ($product) {
-            $query->where('product_id', $product->id);
-        })->get();
-
-
-        if ($associatedInvoices) {
+        if ($product->invoices->count() > 0 ) {
             return redirect()->route('sourcing.index')->with('message', 'Dit product kan niet verwijderd worden omdat het gekoppeld is aan een factuur.');
         }
 
