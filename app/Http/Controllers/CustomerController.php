@@ -9,9 +9,9 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $requests = RepairRequest::paginate(10);
+        $repairRequests = RepairRequest::where('company_id', auth()->user()->company->id )->paginate(10);
         return view('customer.index', [
-            'requests' => $requests,
+            'repairRequests' => $repairRequests,
         ]);
     }
 

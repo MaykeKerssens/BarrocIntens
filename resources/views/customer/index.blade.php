@@ -16,21 +16,19 @@
                 </x-slot>
                 <x-slot name="paginationLinks">
                     <!-- Display pagination links -->
-                    {{ $requests->links() }}
+                    {{ $repairRequests->links() }}
                 </x-slot>
                 <x-slot name="button">
                     <a href="{{ route('repairRequests.create') }}">Storing toevoegen</a>
                 </x-slot>
-                @foreach ($requests as $request)
-                    @if (auth()->user()->company && auth()->user()->company->id === $request->company->id)
-                        <tr>
-                            <x-table.td>{{ $request->company->name }}</x-table.td>
-                            <x-table.td>{{ $request->product->name }}</x-table.td>
-                            <x-table.td>{{ $request->description }}</x-table.td>
-                            <x-table.td>{{ $request->status->name }}</x-table.td>
-                            <x-table.td>{{ $request->company->user->name }}</x-table.td>
-                        </tr>
-                    @endif
+                @foreach ($repairRequests as $repairRequest)
+                    <tr>
+                        <x-table.td>{{ $repairRequest->company->name }}</x-table.td>
+                        <x-table.td>{{ $repairRequest->product->name }}</x-table.td>
+                        <x-table.td>{{ $repairRequest->description }}</x-table.td>
+                        <x-table.td>{{ $repairRequest->status->name }}</x-table.td>
+                        <x-table.td>{{ $repairRequest->company->user->name }}</x-table.td>
+                    </tr>
                 @endforeach
             </x-table>
         </div>
