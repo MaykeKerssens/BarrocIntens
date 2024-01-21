@@ -31,6 +31,39 @@
                     </tr>
                 @endforeach
             </x-table>
+
+            <x-table :columns="['Bedrijf', 'Startdatum', 'Einddatum', 'Ondertekend', 'Factureringstype', 'BKR check']">
+                <x-slot name="title">
+                    Contracten:
+                </x-slot>
+                <x-slot name="paginationLinks">
+                    <!-- Display pagination links -->
+                    {{ $contracts->links() }}
+                </x-slot>
+
+                @foreach ($contracts as $contract)
+                    <tr class="hover:bg-gray-200">
+                        <x-table.td>{{ $contract->company->name }}</x-table.td>
+                        <x-table.td>{{ $contract->start_date }}</x-table.td>
+                        <x-table.td>{{ $contract->end_date }}</x-table.td>
+                        <x-table.td>
+                            @if ($contract->is_signed)
+                                Ja
+                            @else
+                                Nee
+                            @endif
+                        </x-table.td>
+                        <x-table.td>{{ $contract->billing_type }}</x-table.td>
+                        <x-table.td>
+                            @if ($contract->company->bkr_checked_at)
+                                {{ $contract->company->bkr_checked_at }}
+                            @else
+                                Geen BKR-check
+                            @endif
+                        </x-table.td>
+                    </tr>
+                @endforeach
+            </x-table>
         </div>
         </div>
     </div>
