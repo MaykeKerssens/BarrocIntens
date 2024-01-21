@@ -12,7 +12,7 @@
         <div class="px-4 py-5">
 
             <!-- Table with all products -->
-            <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Acties']">
+            <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Producten voorraad', 'Acties']">
                 <x-slot name="title">
                     Producten overzicht:
                 </x-slot>
@@ -38,12 +38,11 @@
                         </x-table.td>
                         <x-table.td>{{ $product->price }}</x-table.td>
                         <x-table.td>{{ $product->ProductCategory->name }}</x-table.td>
+                        <x-table.td>{{ $product->units_in_stock }}</x-table.td>
                         <x-table.td>
-                            <!-- Add buttons for edit and delete actions -->
                             <a href="{{ route('sourcing.edit', $product->id) }}"
                                 class="text-blue-500 hover:underline">Bewerken</a>
 
-                            <!-- Verwijder knop (gebruik een formulier om de DELETE-methode te ondersteunen) -->
                             <form action="{{ route('sourcing.destroy', $product->id) }}" method="POST"
                                 class="inline" id="deleteForm{{ $product->id }}">
                                 @csrf
@@ -57,7 +56,7 @@
                                     event.preventDefault(); // Prevents the form from submitting immediately
 
                                     if (confirm('Weet je zeker dat je dit item wilt verwijderen?')) {
-                                        document.getElementById('deleteForm{{ $product->id }}').submit(); // Submits the form if confirmed
+                                        document.getElementById('deleteForm{{ $product->id }}').submit();
                                     }
                                 }
                             </script>
