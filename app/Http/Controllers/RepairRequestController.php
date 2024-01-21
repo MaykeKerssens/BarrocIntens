@@ -17,7 +17,7 @@ class RepairRequestController extends Controller
     public function index()
     {
        //
-    }    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,19 +40,19 @@ class RepairRequestController extends Controller
             'description' => 'required|string',
         ]);
 
-        $statusId = Status::where('name', 'In afwachting van goedkeuring')->value('id');
+        $statusId = Status::where('name', 'Nieuw')->value('id');
 
         if ($request->has('emergency') && $request->input('emergency')) {
             $statusId = Status::where('name', 'Noodgeval')->value('id');
         }
-    
+
         RepairRequest::create([
             'company_id' => $request->company_id,
             'product_id' => $request->product_id,
             'description' => $request->description,
             'status_id' => $statusId,
         ]);
-    
+
         return redirect()->route('customer.index')->with('message', 'Storing succesvol toegevoegd.');
     }
 
