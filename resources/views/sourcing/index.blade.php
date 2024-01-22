@@ -9,6 +9,22 @@
                 <p>{{ session('message') }}</p>
             </div>
         @endif
+    
+        <div class="px-4 py-5">
+            <form method="GET" action="{{ route('sourcing.index') }}" class="mb-4 flex items-center">
+                <input class="border border-gray-300 rounded-md p-2 mr-2" name="search" placeholder="Zoeken op naam, beschrijving of merk..."
+                       value="{{ isset($search) ? $search : '' }}">
+                    <x-primary-button>
+                    Zoeken
+                </x-primary-button>
+            </form>
+
+    <div class="max-w-7xl mx-auto my-8 bg-white shadow overflow-hidden">
+        @if (session('message'))
+            <div class="bg-yellow text-gray-800 font-bold p-4">
+                <p>{{ session('message') }}</p>
+            </div>
+        @endif
         <div class="px-4 py-5">
 
             <!-- Table with all products -->
