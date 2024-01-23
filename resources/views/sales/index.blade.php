@@ -27,8 +27,8 @@
                         <x-table.td>{{ $user->company ? $user->company->name : '-' }}</x-table.td>
                         <x-table.td>{{ $user->name }}</x-table.td>
                         <x-table.td>{{ $user->email }}</x-table.td>
-                        <x-table.td>-</x-table.td>
-                        <x-table.td>-</x-table.td>
+                        <x-table.td>{{ $user->company ? $user->company->phone : '-'}}</x-table.td>
+                        <x-table.td>{{ $user->created_at->format('d/m/Y') }}</x-table.td>
                     </tr>
                 @endforeach
             </x-table>
@@ -45,7 +45,7 @@
                         </div>
                     </form>
                 </div>
-            </div>            
+            </div>
 
             <x-table :columns="['Bedrijf', 'Beschrijving', 'Datum', 'BIT Medewerker', 'Acties']">
                 <x-slot name="title">
