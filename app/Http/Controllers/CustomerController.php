@@ -14,6 +14,4 @@ class CustomerController extends Controller
             'repairRequests' => $repairRequests,
         ]);
     }
-
-    // Add other methods as needed
 }

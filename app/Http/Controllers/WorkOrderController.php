@@ -11,7 +11,17 @@ class WorkOrderController extends Controller
 {
     public function index()
     {
-        $workOrders = WorkOrder::paginate(10); // You may adjust this query based on your needs
+        if(auth()->user()->role->name == "HeadOfMaintenance")
+        {
+            // Get all workOrders
+            $workOrders = WorkOrder::paginate(10);
+        } else {
+            // Get all the workOrders belonging to the current user
+            $workOrders = WorkOrder::whereHas('appointment', function ($query) {
+                $query->where('user_id', auth()->user()->id);
+            })->paginate(10);
+        }
+
         return view('maintenance.workOrder.index', compact('workOrders'));
     }
     public function create()
@@ -42,6 +52,6 @@ class WorkOrderController extends Controller
 
         $workOrder->products()->attach($request->input('products'));
 
-        return redirect(url('/maintenance'))->with('success', 'Work Order created successfully.');
+        return redirect(url('/maintenance'))->with('message', 'Werkbon successvol toegevoegd.');
     }
 }
