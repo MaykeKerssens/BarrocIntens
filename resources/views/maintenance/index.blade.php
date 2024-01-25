@@ -14,7 +14,13 @@
             @endif
             <div class="px-4 py-5 bg-white shadow overflow-hidden">
                 <!-- All buttons here -->
-                <div class="pb-2">
+                <div class="pb-2 space-x-2">
+
+                    <!-- Show all workOrders -->
+                    <x-primary-button>
+                        <a href="{{ route('workOrders.index') }}">Alle werkbonnen</a>
+                    </x-primary-button>
+
                     <!-- Create workOrder -->
                     <x-primary-button>
                         <a href="{{ route('workOrder.create') }}">Werkbonnen</a>
