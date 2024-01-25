@@ -34,6 +34,16 @@ class WorkOrderController extends Controller
         return view('maintenance.workOrder.create', compact('products', 'appointments'));
     }
 
+    public function createWithId(string $id)
+    {
+        $selectedAppointmentId = $id;
+        $products = Product::all();
+        $appointments = Appointment::all()->sortBy(function ($appointment) {
+            return [$appointment->start, $appointment->company->name];
+        });
+        return view('maintenance.workOrder.create', compact('products', 'appointments', 'selectedAppointmentId'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([

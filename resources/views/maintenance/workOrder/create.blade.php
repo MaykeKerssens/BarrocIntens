@@ -40,7 +40,10 @@
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
                                 @foreach ($appointments as $appointment)
-                                    <option value="{{ $appointment->id }}">[{{ $appointment->start->format('d/m/Y H:i') . ' - ' . $appointment->company->name }}] {{ $appointment->note }}</option>
+                                    <option value="{{ $appointment->id }}" {{ $selectedAppointmentId == $appointment->id ? 'selected' : '' }}>
+
+                                        [{{ $appointment->start->format('d/m/Y H:i') . ' - ' . $appointment->company->name }}] {{ $appointment->note }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

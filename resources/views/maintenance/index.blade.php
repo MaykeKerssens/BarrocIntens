@@ -78,6 +78,10 @@
                                 <p id="appointment-date-times" class="text-gray-500 text-sm">-</p>
                                 <p id="appointment-description" class="text-sm pt-2"></p>
                             </div>
+
+                            <x-primary-button class="mt-2">
+                                <a id="workorder-button" href="">Werkbon maken</a>
+                            </x-primary-button>
                         </div>
                     </div>
                 </div>
