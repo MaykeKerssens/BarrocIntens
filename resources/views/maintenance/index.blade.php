@@ -41,8 +41,9 @@
                                 @if ($appointmentsToday != null)
                                     @foreach ($appointmentsToday as $appointment)
                                         <li class="pt-4">
-                                            <p><b>{{ $appointment->title }} [{{ $appointment->start->format('H:i') }} -
+                                            <p><b>{{ $appointment->company->name }} [{{ $appointment->start->format('H:i') }} -
                                                     {{ $appointment->end->format('H:i') }}]</b></p>
+                                                    <p><b><i>{{ $appointment->title }}</i></b></p>
                                             @foreach ($appointment->repairRequests as $repairRequest)
                                                 <div class="flex">
                                                     <p class="pr-1">-</p>
