@@ -9,6 +9,13 @@
                 <p>{{ session('message') }}</p>
             </div>
         @endif
+
+        <div class="px-4 py-5">
+            <x-primary-button>
+                <a href="{{ route('privacyData.index') }}">Persoonlijke gegevens</a>
+            </x-primary-button>
+        </div>
+
         <div class="px-4 py-5">
             <x-table :columns="['Bedrijf', 'Product', 'Beschrijving', 'Status', 'Klant']">
                 <x-slot name="title">
