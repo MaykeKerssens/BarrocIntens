@@ -23,7 +23,7 @@
 
                     <!-- Create workOrder -->
                     <x-primary-button>
-                        <a href="{{ route('workOrder.create') }}">Werkbonnen</a>
+                        <a href="{{ route('workOrder.create') }}">Werkbon aanmaken</a>
                     </x-primary-button>
                 </div>
 

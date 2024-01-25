@@ -27,9 +27,11 @@ class WorkOrderController extends Controller
     public function create()
     {
         $products = Product::all();
-        $maintenanceAppointments = Appointment::all();
+        $appointments = Appointment::all()->sortBy(function ($appointment) {
+            return [$appointment->start, $appointment->company->name];
+        });
 
-        return view('maintenance.workOrder.create', compact('products', 'maintenanceAppointments'));
+        return view('maintenance.workOrder.create', compact('products', 'appointments'));
     }
 
     public function store(Request $request)

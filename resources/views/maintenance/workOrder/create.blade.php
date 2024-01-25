@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+        <div class="max-w-7xl mx-auto">
             @if ($errors->any())
                 <div class="bg-red-500 text-white font-bold p-4">
                     <ul>
@@ -15,7 +15,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('workOrders.store') }}" method="POST" class="mt-6">
+            <form action="{{ route('workOrders.store') }}" method="POST">
                 @csrf
                 <div class="shadow overflow-hidden bg-white p-4">
                     <div class="flex flex-col gap-6">
@@ -39,8 +39,8 @@
                             <select name="appointment_id"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
-                                @foreach ($maintenanceAppointments as $maintenanceAppointment)
-                                    <option value="{{ $maintenanceAppointment->id }}">{{ $maintenanceAppointment->note }}</option>
+                                @foreach ($appointments as $appointment)
+                                    <option value="{{ $appointment->id }}">[{{ $appointment->start->format('d/m/Y H:i') . ' - ' . $appointment->company->name }}] {{ $appointment->note }}</option>
                                 @endforeach
                             </select>
                         </div>
