@@ -12,7 +12,7 @@
 
         <div class="px-4 py-5">
             <!-- Table for Work Orders -->
-            <x-table :columns="['Naam', 'Beschrijving', 'Duur (minuten)', 'Producten']">
+            <x-table :columns="['Naam', 'Beschrijving', 'Tijdsduur (minuten)', 'Producten']">
                 <x-slot name="title">
                     @if (auth()->user()->role->name == "HeadOfMaintenance")
                         Alle werkbonnen:

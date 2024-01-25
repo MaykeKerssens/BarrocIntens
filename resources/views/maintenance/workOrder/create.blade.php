@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        {{ __('Create Work Order') }}
+        {{ __('Werkbon aanmaken') }}
     </x-slot>
 
     <div class="py-8">
@@ -17,7 +17,7 @@
 
             {{-- Button to go to the page displaying all work orders --}}
             <x-primary-button style="width: 140px">
-                <a href="{{ route('workOrders.index') }}">View All Work Orders</a>
+                <a href="{{ route('workOrders.index') }}">Alle werkbonnen</a>
             </x-primary-button>
 
             <form action="{{ route('workOrders.store') }}" method="POST" class="mt-6">
@@ -51,7 +51,7 @@
                         </div>
                         {{-- Time Spent --}}
                         <div>
-                            <label for="timeSpent" class="block font-medium text-gray-700">Geduurde tijd (minuten):</label>
+                            <label for="timeSpent" class="block font-medium text-gray-700">Tijdsduur (minuten):</label>
                             <input type="number" name="timeSpent"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
@@ -71,7 +71,7 @@
                         Creëer werkbon
                     </x-primary-button>
                 </div>
-            </form>            
+            </form>
         </div>
     </div>
 </x-app-layout>
