@@ -33,6 +33,9 @@
                             @endif
                         </x-table.td>
                         <x-table.td>{{ $user->created_at->format('d/m/Y') }}</x-table.td>
+                        <x-slot name="button">
+                            <a href="{{ route('privacyData.edit', $user->id) }}">Gegevens aanpassen</a>
+                        </x-slot>
                     </tr>
                 @endforeach
             </x-table>

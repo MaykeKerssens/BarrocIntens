@@ -48,7 +48,8 @@ class PrivacyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('customer.privacyData.edit')->with('user', $user);
     }
 
     /**
@@ -56,7 +57,23 @@ class PrivacyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'phone' => 'required|string',
+            'street' => 'required|string',
+            'zip' => 'required|string',
+            'city' => 'required|string',
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+        $user->company->update([
+            'phone' => $request->phone,
+            'street' => $request->street,
+            'zip' => $request->zip,
+            'city' => $request->city,
+        ]);
+
+        return redirect()->route('privacyData.index')->with('message', 'Gegevens zijn succesvol bijgewerkt');
     }
 
     /**
