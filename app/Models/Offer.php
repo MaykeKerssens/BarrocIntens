@@ -12,6 +12,10 @@ class Offer extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'date' => 'datetime: d/m/Y H:i',
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);
