@@ -51,6 +51,10 @@
                     </div>
                 </div>
             </form>
+            <form method="POST" action="{{ route('privacyData.requestDeletionByEmail') }}">
+                @csrf
+                <button type="submit" class="text-red-500 font-semibold p-4">Verwijderverzoek sturen</button>
+            </form>
         </div>
     </div>
 </x-app-layout>

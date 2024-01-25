@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PrivacyController extends Controller
 {
@@ -74,6 +75,18 @@ class PrivacyController extends Controller
         ]);
 
         return redirect()->route('privacyData.index')->with('message', 'Gegevens zijn succesvol bijgewerkt');
+    }
+
+    public function requestDeletionByEmail()
+    {
+        $user = auth()->user();
+
+        Mail::to('privacy@barroc.it')
+        ->send(new \App\Mail\DeletionRequest(
+            $user
+        ));
+
+        return redirect()->route('privacyData.index')->with('message', 'Uw verwijderingsverzoek is ontvangen. Neem contact op met privacy@barroc.it voor verdere afhandeling.');
     }
 
     /**

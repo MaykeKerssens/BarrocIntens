@@ -49,6 +49,7 @@ Route::middleware(['auth', 'verified', 'role:1'])->group(function () {
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
         Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
         Route::resource('privacyData', PrivacyController::class);
+        Route::post('privacyData/requestDeletionByEmail', [PrivacyController::class, 'requestDeletionByEmail'])->name('privacyData.requestDeletionByEmail');
         // Add other customer routes as needed
 });
 
