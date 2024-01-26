@@ -23,6 +23,14 @@
                     Filteren
                 </x-primary-button>
             </form>
+
+            <form method="GET" action="/search" class="mt-6 mb-4 flex items-center">
+                <input class="border border-gray-300 rounded-md p-2 mr-2" name="search" placeholder="Zoek..."
+                       value="{{ isset($search) ? $search : '' }}">
+                    <x-primary-button>
+                    Zoeken
+                </x-primary-button>
+            </form>
             
             <!-- Table with all products -->
             <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Producten voorraad', 'Acties']">

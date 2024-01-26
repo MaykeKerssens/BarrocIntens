@@ -27,12 +27,33 @@ class ProductController extends Controller
         }
     
         $products = $query->paginate(10);
-    
         return view('sourcing.index', [
             'products' => $products,
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $query = Product::query();
+    
+        if ($request->filled('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', "%$searchTerm%")
+                  ->orWhere('description', 'like', "%$searchTerm%")
+                  ->orWhere('image_path', 'like', "%$searchTerm%")
+                  ->orWhere('price', 'like', "%$searchTerm%")
+                  ->orWhere('product_category_id', 'like', "%$searchTerm%");
+            });
+        }
+    
+        $products = $query->paginate(10);
+        return view('sourcing.index', [
+            'products' => $products,
+            'search' => $searchTerm ?? '',
+        ]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      */
