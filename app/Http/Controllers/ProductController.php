@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InvoiceProduct;
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\RepairRequest;
@@ -18,6 +18,24 @@ class ProductController extends Controller
     {
         $query = Product::query();
     
+        if ($request->filled('stockFilter')) {
+            if ($request->stockFilter == 'in_stock') {
+                $query->where('units_in_stock', '>', 0);
+            } elseif ($request->stockFilter == 'out_of_stock') {
+                $query->where('units_in_stock', '=', 0);
+            }
+        }
+    
+        $products = $query->paginate(10);
+        return view('sourcing.index', [
+            'products' => $products,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = Product::query();
+    
         if ($request->filled('search')) {
             $searchTerm = $request->input('search');
             $query->where(function ($q) use ($searchTerm) {
@@ -26,22 +44,16 @@ class ProductController extends Controller
                   ->orWhere('image_path', 'like', "%$searchTerm%")
                   ->orWhere('price', 'like', "%$searchTerm%")
                   ->orWhere('product_category_id', 'like', "%$searchTerm%");
-                // Voeg extra kolommen toe als dat nodig is, zorg ervoor dat ze aanwezig zijn in je 'products'-tabel.
             });
         }
     
         $products = $query->paginate(10);
-    
         return view('sourcing.index', [
             'products' => $products,
             'search' => $searchTerm ?? '',
         ]);
     }
     
-    
-
-
-
     /**
      * Show the form for creating a new resource.
      */

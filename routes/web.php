@@ -73,9 +73,11 @@ Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/workorder/create', [WorkOrderController::class, 'create'])->name('workOrder.create');
     Route::post('/workOrders', [WorkOrderController::class, 'store'])->name('workOrders.store');
     Route::get('/workOrders', [WorkOrderController::class, 'index'])->name('workOrders.index');
+
 Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
     Route::get('/sourcing', [SourcingController::class, 'index'])->name('sourcing.index');
     Route::resource('sourcing', ProductController::class);
+    Route::get('/search', [ProductController::class, 'search'])->name('search');
     // Add other sourcing routes as needed
 });
 
