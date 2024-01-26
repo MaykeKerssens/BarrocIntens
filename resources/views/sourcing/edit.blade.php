@@ -39,14 +39,12 @@
                             <label for="image" class="block text-sm font-medium text-gray-700">Afbeelding:</label>
                             <input type="file" name="image" id="imageInput" onchange="previewImage(event)" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 border rounded-md">
                             @if ($product->image_path)
-                                <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }}"
-                                    style="max-width: 200px; margin-top: 5px;">
+                                <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }}" style="max-width: 200px; margin-top: 5px;">
                             @endif
                         </div>
 
                         {{-- Price input --}}
                         <div>
-                            {{-- Change in future, when pricing is done differently --}}
                             <label for="price" class="block text-sm font-medium text-gray-700">Prijs (€):</label>
                             <input type="number" name="price" value="{{ $product->price }}" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
                         </div>
@@ -55,14 +53,18 @@
                         <div>
                             <label for="product_category_id" class="block text-sm font-medium text-gray-700">Product Categorie:</label>
                             <select name="product_category_id" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md">
-                                {{-- Dynamically populate options based on your categories --}}
                                 @foreach ($productCategories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ $product->product_category_id == $category->id ? 'selected' : '' }}>
+                                    <option value="{{ $category->id }}" {{ $product->product_category_id == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        {{-- Units in Stock input --}}
+                        <div>
+                            <label for="units_in_stock" class="block text-sm font-medium text-gray-700">Units in Stock:</label>
+                            <input type="number" name="units_in_stock" value="{{ $product->units_in_stock }}" class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md" required>
                         </div>
 
                         <div>
