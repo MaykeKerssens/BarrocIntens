@@ -9,6 +9,7 @@
                 <p>{{ session('message') }}</p>
             </div>
         @endif
+
         <div class="px-4 py-5">
             <form method="GET" action="{{ route('sourcing.index') }}" class="mb-4">
                 <label for="stockFilter" class="block text-sm font-medium text-gray-700">Filter op voorraad:</label>
@@ -18,10 +19,11 @@
                     <option value="in_stock" {{ request('stockFilter') == 'in_stock' ? 'selected' : '' }}>Op voorraad</option>
                     <option value="out_of_stock" {{ request('stockFilter') == 'out_of_stock' ? 'selected' : '' }}>Uit voorraad</option>
                 </select>
-            <x-primary-button>
+            <x-primary-button class="mt-2">
                     Filteren
                 </x-primary-button>
             </form>
+            
             <!-- Table with all products -->
             <x-table :columns="['Product', 'Beschrijving', 'Afbeelding', 'Prijs', 'Categorie', 'Producten voorraad', 'Acties']">
                 <x-slot name="title">
