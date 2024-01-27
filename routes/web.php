@@ -78,6 +78,7 @@ Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
     Route::get('/sourcing', [SourcingController::class, 'index'])->name('sourcing.index');
     Route::resource('sourcing', ProductController::class);
+    Route::get('/search', [ProductController::class, 'search'])->name('search');
     // Add other sourcing routes as needed
 });
 
