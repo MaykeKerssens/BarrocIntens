@@ -12,7 +12,7 @@
                 <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }}" class="w-full h-auto">
                 <p class="text-lg mt-4">{{ $product->description }}</p>
                 <p class="text-lg font-bold mt-2">Price: ${{ $product->price }}</p>
-                
+
                 <!-- Offerte Button -->
                 <x-primary-button>
                     <a href="{{ route('contact-quotation', $product->id) }}">Offerte aanvragen</a>

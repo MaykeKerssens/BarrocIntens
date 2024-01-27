@@ -64,7 +64,7 @@
                         <x-table.td>{{ $note->note }}</x-table.td>
                         <x-table.td>{{ $note->date }}</x-table.td>
                         <x-table.td>{{ $note->user->name }}</x-table.td>
-                        <td>
+                        <x-table.td>
                             <form action="{{ route('notes.destroy', $note->id) }}" method="POST" id="deleteFormnote{{ $note->id }}">
                                 @csrf
                                 @method('DELETE')
@@ -77,7 +77,7 @@
                                     }
                                 }
                             </script>
-                        </td>
+                        </x-table.td>
                     </tr>
                 @endforeach
             </x-table>

@@ -14,10 +14,16 @@
             @endif
             <div class="px-4 py-5 bg-white shadow overflow-hidden">
                 <!-- All buttons here -->
-                <div class="pb-2">
+                <div class="pb-2 space-x-2">
+
+                    <!-- Show all workOrders -->
+                    <x-primary-button>
+                        <a href="{{ route('workOrders.index') }}">Alle werkbonnen</a>
+                    </x-primary-button>
+
                     <!-- Create workOrder -->
                     <x-primary-button>
-                        <a href="{{ route('workOrder.create') }}">Werkbonnen</a>
+                        <a href="{{ route('workOrder.create') }}">Werkbon aanmaken</a>
                     </x-primary-button>
                 </div>
 
@@ -35,8 +41,9 @@
                                 @if ($appointmentsToday != null)
                                     @foreach ($appointmentsToday as $appointment)
                                         <li class="pt-4">
-                                            <p><b>{{ $appointment->title }} [{{ $appointment->start->format('H:i') }} -
+                                            <p><b>{{ $appointment->company->name }} [{{ $appointment->start->format('H:i') }} -
                                                     {{ $appointment->end->format('H:i') }}]</b></p>
+                                                    <p><b><i>{{ $appointment->title }}</i></b></p>
                                             @foreach ($appointment->repairRequests as $repairRequest)
                                                 <div class="flex">
                                                     <p class="pr-1">-</p>
@@ -71,6 +78,10 @@
                                 <p id="appointment-date-times" class="text-gray-500 text-sm">-</p>
                                 <p id="appointment-description" class="text-sm pt-2"></p>
                             </div>
+
+                            <x-primary-button class="mt-2">
+                                <a id="workorder-button" href="">Werkbon maken</a>
+                            </x-primary-button>
                         </div>
                     </div>
                 </div>

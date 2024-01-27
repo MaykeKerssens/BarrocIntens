@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        {{ __('Create Work Order') }}
+        {{ __('Werkbon aanmaken') }}
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto px-4 py-5 bg-white shadow overflow-hidden">
+        <div class="max-w-7xl mx-auto">
             @if ($errors->any())
                 <div class="bg-red-500 text-white font-bold p-4">
                     <ul>
@@ -15,12 +15,7 @@
                 </div>
             @endif
 
-            {{-- Button to go to the page displaying all work orders --}}
-            <x-primary-button style="width: 140px">
-                <a href="{{ route('workOrders.index') }}">View All Work Orders</a>
-            </x-primary-button>
-
-            <form action="{{ route('workOrders.store') }}" method="POST" class="mt-6">
+            <form action="{{ route('workOrders.store') }}" method="POST">
                 @csrf
                 <div class="shadow overflow-hidden bg-white p-4">
                     <div class="flex flex-col gap-6">
@@ -42,16 +37,18 @@
                         <div>
                             <label for="appointment_id" class="block font-medium text-gray-700">Onderhouds Afspraak:</label>
                             <select name="appointment_id"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
-                                required>
-                                @foreach ($maintenanceAppointments as $maintenanceAppointment)
-                                    <option value="{{ $maintenanceAppointment->id }}">{{ $maintenanceAppointment->note }}</option>
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md">
+                                <option value="" {{ !isset($selectedAppointmentId) ? 'selected' : '' }}>Selecteer een afspraak</option>
+                                @foreach ($appointments as $appointment)
+                                    <option value="{{ $appointment->id }}" {{ isset($selectedAppointmentId) && $selectedAppointmentId == $appointment->id ? 'selected' : '' }}>
+                                        [{{ $appointment->start->format('d/m/Y H:i') . ' - ' . $appointment->company->name }}] {{ $appointment->note }}
+                                    </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div>                        
                         {{-- Time Spent --}}
                         <div>
-                            <label for="timeSpent" class="block font-medium text-gray-700">Geduurde tijd (minuten):</label>
+                            <label for="timeSpent" class="block font-medium text-gray-700">Tijdsduur (minuten):</label>
                             <input type="number" name="timeSpent"
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
@@ -71,7 +68,7 @@
                         Creëer werkbon
                     </x-primary-button>
                 </div>
-            </form>            
+            </form>
         </div>
     </div>
 </x-app-layout>

@@ -71,6 +71,15 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             // Update the href attribute
             editButton.href = "http://barrocintens.test/appointment/:id/edit" .replace(':id', id);
         }
+
+        // Add edit button if it exists
+        if (document.getElementById('workorder-button')) {
+            var id = info.event.id;
+            var workOrderButton = document.getElementById('workorder-button');
+
+            // Update the href attribute
+            workOrderButton.href = "http://barrocintens.test/workorder/:id/create" .replace(':id', id);
+        }
     }
 });
 
