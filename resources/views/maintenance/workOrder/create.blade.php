@@ -37,16 +37,15 @@
                         <div>
                             <label for="appointment_id" class="block font-medium text-gray-700">Onderhouds Afspraak:</label>
                             <select name="appointment_id"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
-                                required>
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md">
+                                <option value="" {{ !isset($selectedAppointmentId) ? 'selected' : '' }}>Selecteer een afspraak</option>
                                 @foreach ($appointments as $appointment)
-                                    <option value="{{ $appointment->id }}" {{ $selectedAppointmentId == $appointment->id ? 'selected' : '' }}>
-
+                                    <option value="{{ $appointment->id }}" {{ isset($selectedAppointmentId) && $selectedAppointmentId == $appointment->id ? 'selected' : '' }}>
                                         [{{ $appointment->start->format('d/m/Y H:i') . ' - ' . $appointment->company->name }}] {{ $appointment->note }}
                                     </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div>                        
                         {{-- Time Spent --}}
                         <div>
                             <label for="timeSpent" class="block font-medium text-gray-700">Tijdsduur (minuten):</label>
