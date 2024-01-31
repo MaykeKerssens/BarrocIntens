@@ -26,20 +26,20 @@ class NoteController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function searchnote(Request $request)
     {
         $offers = Offer::paginate(10);
         $users = User::paginate(10);
-        $search = $request->search;
-        $notes = Note::where(function ($query) use ($search) {
-            $query->orWhere('note', 'like', "%$search%");
+        $searchnote = $request->searchnote;
+        $notes = Note::where(function ($query) use ($searchnote) {
+            $query->orWhere('note', 'like', "%$searchnote%");
         })
-        ->orWhereHas('company', function ($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
+        ->orWhereHas('company', function ($query) use ($searchnote) {
+            $query->where('name', 'like', "%$searchnote%");
         })
         ->paginate(10);
 
-        return view('sales.index', ['notes' => $notes, 'users' => $users, 'offers' => $offers,  'search' => $search]);
+        return view('sales.index', ['notes' => $notes, 'users' => $users, 'offers' => $offers,  'searchnote' => $searchnote]);
     }
     /**
      * Show the form for creating a new resource.

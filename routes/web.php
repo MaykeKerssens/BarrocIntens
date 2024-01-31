@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::resource('notes', NoteController::class);
     Route::resource('offers', OfferController::class)->except(['index']);
     Route::resource('users', UserController::class)->except(['index']);
-    Route::get('/search', [NoteController::class, 'search'])->name('search');
+    Route::get('/searchnote', [NoteController::class, 'searchnote'])->name('searchnote');
 });
 
     Route::get('/workOrders', [WorkOrderController::class, 'index'])->name('workOrders.index');
