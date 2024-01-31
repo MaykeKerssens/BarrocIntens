@@ -54,6 +54,11 @@ class InvoicesController extends Controller
        // Voeg producten toe aan de factuur
        $invoice->products()->attach($request->input('product_ids', []));
 
+       foreach ($request->input('product_ids') as $product_id) {
+            $product = Product::find($product_id);
+            $product->update(['units_in_stock' => $product->units_in_stock - 1]);
+        }
+
         return redirect()->route('finance.index')->with('message', 'Factuur is succesvol aangemaakt.');
     }
 

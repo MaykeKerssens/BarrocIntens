@@ -64,6 +64,11 @@ class WorkOrderController extends Controller
 
         $workOrder->products()->attach($request->input('products'));
 
+        foreach ($request->input('products') as $product_id) {
+            $product = Product::find($product_id);
+            $product->update(['units_in_stock' => $product->units_in_stock - 1]);
+        }
+
         return redirect(url('/maintenance'))->with('message', 'Werkbon successvol toegevoegd.');
     }
 }
