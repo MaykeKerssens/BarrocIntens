@@ -31,34 +31,70 @@
                     </tr>
                 @endforeach
             </x-table>
+            
+            <div class="mt-10">
+                <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten','Producten', 'Bedrijf']">
+                    <x-slot name="title">
+                        Facturen:
+                    </x-slot>
+                    <x-slot name="paginationLinks">
+                        <!-- Display pagination links -->
+                        {{ $invoices->links() }}
+                    </x-slot>
+                    @foreach ($invoices as $invoice)
+                        <tr class="hover:bg-gray-200">
+                            <x-table.td>{{ $invoice->date }}</x-table.td>
+                            <x-table.td>
+                                @if ($invoice->is_paid)
+                                    <span class="text-green-500">Betaald</span>
+                                @else
+                                    <span class="text-red-500">Niet betaald</span>
+                                @endif
+                            </x-table.td>
+                            <x-table.td>{{ $invoice->costs }}</x-table.td>
+                            <x-table.td>
+                                {{ implode(', ', $invoice->products->pluck('name')->toArray()) }}
+                            </x-table.td>
+                            <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
+                        </tr>
+                    @endforeach
+                </x-table>
+            </div>
 
-            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten','Producten', 'Bedrijf']">
-                <x-slot name="title">
-                    Facturen:
-                </x-slot>
-                <x-slot name="paginationLinks">
-                    <!-- Display pagination links -->
-                    {{ $invoices->links() }}
-                </x-slot>
-                @foreach ($invoices as $invoice)
-                    <tr class="hover:bg-gray-200">
-                        <x-table.td>{{ $invoice->date }}</x-table.td>
-                        <x-table.td>
-                            @if ($invoice->is_paid)
-                                <span class="text-green-500">Betaald</span>
-                            @else
-                                <span class="text-red-500">Niet betaald</span>
-                            @endif
-                        </x-table.td>
-                        <x-table.td>{{ $invoice->costs }}</x-table.td>
-                        <x-table.td>
-                            {{ implode(', ', $invoice->products->pluck('name')->toArray()) }}
-                        </x-table.td>
-                        <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
-                    </tr>
-                @endforeach
-            </x-table>
-        </div>
+            <div class="mt-10">
+                <x-table :columns="['Bedrijf', 'Startdatum', 'Einddatum', 'Ondertekend', 'Factureringstype', 'BKR check']">
+                    <x-slot name="title">
+                        Contracten:
+                    </x-slot>
+                    <x-slot name="paginationLinks">
+                        <!-- Display pagination links -->
+                        {{ $contracts->links() }}
+                    </x-slot>
+
+                    @foreach ($contracts as $contract)
+                        <tr class="hover:bg-gray-200">
+                            <x-table.td>{{ $contract->company->name }}</x-table.td>
+                            <x-table.td>{{ $contract->start_date }}</x-table.td>
+                            <x-table.td>{{ $contract->end_date }}</x-table.td>
+                            <x-table.td>
+                                @if ($contract->is_signed)
+                                    Ja
+                                @else
+                                    Nee
+                                @endif
+                            </x-table.td>
+                            <x-table.td>{{ $contract->billing_type }}</x-table.td>
+                            <x-table.td>
+                                @if ($contract->company->bkr_checked_at)
+                                    {{ $contract->company->bkr_checked_at }}
+                                @else
+                                    Geen BKR-check
+                                @endif
+                            </x-table.td>
+                        </tr>
+                    @endforeach
+                </x-table>
+            </div>
         </div>
     </div>
 </x-app-layout>
