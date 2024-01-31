@@ -16,6 +16,11 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $repairRequests = RepairRequest::with('status')
+        ->whereHas('status', function ($query) {
+            $query->where('name', 'bezig');
+        })
+        ->paginate(10);
         $query = Product::query();
     
         if ($request->filled('stockFilter')) {
@@ -29,11 +34,17 @@ class ProductController extends Controller
         $products = $query->paginate(10);
         return view('sourcing.index', [
             'products' => $products,
+            'repairRequests' => $repairRequests,
         ]);
     }
 
     public function search(Request $request)
     {
+        $repairRequests = RepairRequest::with('status')
+        ->whereHas('status', function ($query) {
+            $query->where('name', 'bezig');
+        })
+        ->paginate(10);    
         $query = Product::query();
     
         if ($request->filled('search')) {
@@ -51,6 +62,7 @@ class ProductController extends Controller
         return view('sourcing.index', [
             'products' => $products,
             'search' => $searchTerm ?? '',
+            'repairRequests' => $repairRequests,
         ]);
     }
     
