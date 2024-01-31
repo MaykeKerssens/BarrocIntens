@@ -31,6 +31,33 @@
                     </tr>
                 @endforeach
             </x-table>
+
+            <x-table :columns="['Datum', 'Betaalstatus', 'Aansluitkosten','Producten', 'Bedrijf']">
+                <x-slot name="title">
+                    Facturen:
+                </x-slot>
+                <x-slot name="paginationLinks">
+                    <!-- Display pagination links -->
+                    {{ $invoices->links() }}
+                </x-slot>
+                @foreach ($invoices as $invoice)
+                    <tr class="hover:bg-gray-200">
+                        <x-table.td>{{ $invoice->date }}</x-table.td>
+                        <x-table.td>
+                            @if ($invoice->is_paid)
+                                <span class="text-green-500">Betaald</span>
+                            @else
+                                <span class="text-red-500">Niet betaald</span>
+                            @endif
+                        </x-table.td>
+                        <x-table.td>{{ $invoice->costs }}</x-table.td>
+                        <x-table.td>
+                            {{ implode(', ', $invoice->products->pluck('name')->toArray()) }}
+                        </x-table.td>
+                        <x-table.td>{{ $invoice->contract->company->name }}</x-table.td>
+                    </tr>
+                @endforeach
+            </x-table>
         </div>
         </div>
     </div>
