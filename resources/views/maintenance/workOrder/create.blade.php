@@ -60,7 +60,7 @@
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
                                 @foreach ($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    <option value="{{ $product->id }}" data-stock="{{ $product->units_in_stock }}">{{ $product->name }} (Voorraad: {{ $product->units_in_stock }})</option>
                                 @endforeach
                             </select>
                         </div>

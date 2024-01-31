@@ -11,6 +11,7 @@ use App\Http\Controllers\Maintenance\MaintenanceController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepairRequestController;
@@ -47,6 +48,8 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified', 'role:1'])->group(function () {
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
         Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
+        Route::resource('privacyData', PrivacyController::class);
+        Route::post('privacyData/requestDeletionByEmail', [PrivacyController::class, 'requestDeletionByEmail'])->name('privacyData.requestDeletionByEmail');
         // Add other customer routes as needed
 });
 
@@ -67,7 +70,7 @@ Route::middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::resource('notes', NoteController::class);
     Route::resource('offers', OfferController::class)->except(['index']);
     Route::resource('users', UserController::class)->except(['index']);
-    Route::get('/search', [NoteController::class, 'search'])->name('search');
+    Route::get('/searchnote', [NoteController::class, 'searchnote'])->name('searchnote');
 });
 
     Route::get('/workOrders', [WorkOrderController::class, 'index'])->name('workOrders.index');

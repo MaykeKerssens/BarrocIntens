@@ -85,6 +85,26 @@
                     </tr>
                 @endforeach
             </x-table>
+
+            <div class="mt-10">
+                <x-table :columns="['Product', 'Klant', 'Status']">
+                    <x-slot name="title">
+                        Producten waar maintenance mee bezig zijn:
+                    </x-slot>
+                    <x-slot name="paginationLinks">
+                        <!-- Display pagination links -->
+                        {{ $repairRequests->links() }}
+                    </x-slot>
+
+                    @foreach ($repairRequests as $repairRequest)
+                        <tr>
+                            <x-table.td>{{ $repairRequest->product->name }}</x-table.td>
+                            <x-table.td>{{ $repairRequest->company->name }}</x-table.td>
+                            <x-table.td>{{ $repairRequest->status->name }}</x-table.td>
+                        </tr>
+                    @endforeach
+                </x-table>
+            </div>
         </div>
     </div>
 </x-app-layout>

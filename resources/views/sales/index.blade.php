@@ -35,10 +35,10 @@
 
             <div class="col-md-6 mt-10 mb-2">
                 <div class="form-group">
-                    <form method="get" action="/search">
+                    <form method="get" action="/searchnote">
                         <div class="flex items-center">
-                            <input class="border border-gray-300 rounded-md p-2 mr-2" name="search" placeholder="Search..."
-                                value="{{ isset($search) ? $search : '' }}">
+                            <input class="border border-gray-300 rounded-md p-2 mr-2" name="searchnote" placeholder="Search..."
+                                value="{{ isset($searchnote) ? $searchnote : '' }}">
                             <x-primary-button>
                                 Zoek
                             </x-primary-button>
