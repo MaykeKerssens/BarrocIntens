@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="pageHeaderText">
-        {{ __('Storing toevoegen') }}
+        {{ __('Storingsaanvraag aanpassen') }}
     </x-slot>
 
     <div class="py-8">
@@ -14,8 +14,9 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('repairRequests.store') }}" method="POST">
+            <form action="{{ route('repairRequests.update', $repairRequest->id) }}" method="POST">
                 @csrf
+                @method('PUT')
 
                 <div class="shadow overflow-hidden">
                     <div class="px-4 py-5 bg-white flex flex-col gap-6">
@@ -28,7 +29,9 @@
                                     <option value="{{ auth()->user()->company->id }}">{{ auth()->user()->company->name }}</option>
                                 @elseif (auth()->user()->role->name == 'HeadOfMaintenance')
                                     @foreach ($companies as $company)
-                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                        <option value="{{ $company->id }}" {{ $company->id == $repairRequest->company_id ? 'selected' : '' }}>
+                                            {{ $company->name }}
+                                        </option>
                                     @endforeach
                                 @endif
 
@@ -43,7 +46,7 @@
                             class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md w-full">
                             <option value="" disabled selected>Selecteer een product</option>
                                 @foreach ($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    <option value="{{ $product->id }}" {{ $product->id == $repairRequest->product_id ? 'selected' : '' }}>{{ $product->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -52,16 +55,24 @@
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Beschrijving:</label>
                             <textarea name="description" id="description"
-                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md w-full"></textarea>
+                                class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md w-full">{{ $repairRequest->description }}</textarea>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="emergency" class="block text-gray-700 text-sm font-bold mb-2">Noodgeval:</label>
-                            <input type="checkbox" name="emergency" id="emergency" class="mr-2"> Is dit een noodgeval?
+                        <!-- Status -->
+                        <div>
+                            <label for="status_id" class="block text-sm font-medium text-gray-700">Status:</label>
+                            <select name="status_id" id="status_id"
+                            class="mt-1 p-2 focus:ring-yellow focus:border-yellow block shadow-sm border-gray-300 rounded-md w-full">
+                            <option value="" disabled selected>Selecteer een status</option>
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status->id }}" {{ $status->id == $repairRequest->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div>
                             <x-primary-button>
-                                Storing Toevoegen
+                                Storing Aanpassen
                             </x-primary-button>
                         </div>
                     </div>
