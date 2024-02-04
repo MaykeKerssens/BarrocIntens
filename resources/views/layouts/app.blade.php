@@ -12,11 +12,38 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
+    <!-- Existing Scripts (e.g., Vite, FullCalendar) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- FullCalender scripts-->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <script src="{{ asset('js/calendar.js') }}" defer></script>
+
+    <!-- Add the following lines for cookie consent directly in the head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!Cookies.get('cookieConsent')) {
+                // Create the cookie consent popup
+                const popup = document.createElement('div');
+                popup.innerHTML = `
+                    <div id="cookie-popup" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f8f8f8; padding: 15px; text-align: center; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);">
+                        <p>This website uses cookies. Do you accept?</p>
+                        <button style="margin-top: 10px; padding: 5px 10px; background-color: #3490dc; color: #fff; border: none; cursor: pointer;" onclick="acceptCookies()">Yes</button>
+                    </div>
+                `;
+
+                // Append the popup to the body
+                document.body.appendChild(popup);
+            }
+        });
+
+        function acceptCookies() {
+            // Set the 'cookieConsent' cookie
+            Cookies.set('cookieConsent', 'true', { expires: 365 });
+
+            // Hide the popup
+            document.getElementById('cookie-popup').style.display = 'none';
+        }
+    </script>
 </head>
 
 <body class="font-sans antialiased">
