@@ -34,7 +34,7 @@
                     <div class="bg-gray-100 p-2 w-1/4">
 
                         <div id="info-box">
-                            <h4 id="appointment-header" class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">Noodgevallen:</h4>
+                            <h4 id="emergency-header" class="font-semibold text-xl text-gray-800 underline decoration-yellow decoration-2 underline-offset-8 pb-2">Noodgevallen:</h4>
                             @if ($emergencyRepairRequests)
                                 <ul class="list-disc pl-4 overflow-y-auto">
                                     @foreach ($emergencyRepairRequests as $repairRequest)
