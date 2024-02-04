@@ -41,9 +41,9 @@
                                         <li class="mt-4">
                                             <p><b>{{ $repairRequest->company->name }}</b></p>
                                             <p class="text-gray-500 text-sm">{{ $repairRequest->description }}</p>
-                                            {{-- <x-secondary-button class="mt-2">
-                                                <a href="{{ route('appointment.create') }}">Inplannen</a>
-                                            </x-secondary-button> --}}
+                                            <x-secondary-button class="mt-2">
+                                                <a id="repairrequest-edit-button" href="{{ route('repairRequests.edit', $repairRequest->id) }}">Aanpassen</a>
+                                            </x-secondary-button>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -73,7 +73,7 @@
                                 <p id="appointment-description" class="text-sm pt-2"></p>
                             </div>
                             <x-secondary-button class="mt-2">
-                                <a id="edit-button" href="">Afspraak aanpassen</a>
+                                <a id="appointment-edit-button" href="">Afspraak aanpassen</a>
                             </x-secondary-button>
                         </div>
                     </div>
