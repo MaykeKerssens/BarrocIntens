@@ -27,7 +27,8 @@
                 popup.innerHTML = `
                     <div id="cookie-popup" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f8f8f8; padding: 15px; text-align: center; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);">
                         <p>This website uses cookies. Do you accept?</p>
-                        <button style="margin-top: 10px; padding: 5px 10px; background-color: #3490dc; color: #fff; border: none; cursor: pointer;" onclick="acceptCookies()">Yes</button>
+                        <button style="margin-top: 10px; padding: 5px 10px; background-color: #ffd700; color: #fff; border: none; cursor: pointer; margin-right: 10px;" onclick="acceptCookies()">Yes</button>
+                        <button style="margin-top: 10px; padding: 5px 10px; background-color: #ffd700; color: #fff; border: none; cursor: pointer;" onclick="rejectCookies()">No</button>
                     </div>
                 `;
 
@@ -41,6 +42,10 @@
             Cookies.set('cookieConsent', 'true', { expires: 365 });
 
             // Hide the popup
+            document.getElementById('cookie-popup').style.display = 'none';
+        }
+
+        function rejectCookies() {
             document.getElementById('cookie-popup').style.display = 'none';
         }
     </script>
