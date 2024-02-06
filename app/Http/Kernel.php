@@ -43,6 +43,32 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        // Admin middleware group
+        'admin' => [
+            \App\Http\Middleware\AdminMiddleware::class,
+        ],
+
+        // Role-specific middleware groups
+        'role.customer' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+        'role.finance' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+        'role.maintenance' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+        'role.sales' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+        'role.sourcing' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+        'role.headOfMaintenance' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+        // Add more role-specific middleware groups as needed
     ];
 
     /**
@@ -65,9 +91,16 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
+
+    /**
+     * The application's route middleware.
+     *
+     * These middleware may be assigned to groups or used individually.
+     *
+     * @var array<string, class-string|string>
+     */
     protected $routeMiddleware = [
-        // Other middleware entries...
-    
         'role' => \App\Http\Middleware\CheckRole::class,
+        // Add other middleware entries as needed...
     ];
 }

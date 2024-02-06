@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -21,6 +20,7 @@ class RoleSeeder extends Seeder
             ['id' => 4, 'name' => 'Sales'],
             ['id' => 5, 'name' => 'Sourcing'],
             ['id' => 6, 'name' => 'HeadOfMaintenance'],
+            ['id' => 7, 'name' => 'Admin'], // Add the 'admin' role
         ]);
     }
 }
