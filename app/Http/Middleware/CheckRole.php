@@ -15,10 +15,16 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+        // Allow access if the user has role 7
+        if ($request->user() && $request->user()->role_id == 7) {
+            return $next($request);
+        }
+
+        // Regular role-based check
         if ($request->user() && in_array($request->user()->role_id, $roles)) {
             return $next($request);
         }
-    
+
         abort(403, 'Unauthorized.');
     }
 }
