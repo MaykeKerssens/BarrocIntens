@@ -37,5 +37,15 @@ class Companyseeder extends Seeder
                 'user_id' => $faker->numberBetween(17, 26),
             ]);
         }
+
+        Company::create([
+            'name' => 'Admin Company',
+            'phone' => '+31(0)76-5733444',
+            'street' => 'Admin Street',
+            'city' => 'Admin City',
+            'zip' => '12345',
+            'bkr_checked_at' => now(),
+            'user_id' => 27, // Assuming the admin user is the 27th user created
+        ]);
     }
 }
