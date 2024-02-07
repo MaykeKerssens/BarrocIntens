@@ -73,5 +73,12 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
             ]);
         }
+
+        User::create([
+            'name' => $faker->name,
+            'email' => 'admin@barrocIntens.com',
+            'password' => Hash::make('password'),
+            'role_id' => 7,
+        ]);
     }
 }
