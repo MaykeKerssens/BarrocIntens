@@ -29,14 +29,41 @@ class AppointmentController extends Controller
 
         // Get all companies
         $companies = Company::all();
-        // Only show repairRequests that are not finished or canceled
-        $repairRequests = RepairRequest::all();
-        $newRepairRequests = $repairRequests->where('status.name', 'Nieuw');
+
+        // Only show repairRequests that are new or an emergency
+        $repairRequests = RepairRequest::whereHas('status', function ($query) {
+            $query->whereIn('name', ['Nieuw', 'Noodgeval']);
+        })->get();
 
         return view('maintenance.appointment.create', [
             'maintenanceWorkers' => $maintenanceWorkers,
             'companies' => $companies,
-            'newRepairRequests' => $newRepairRequests,
+            'repairRequests' => $repairRequests,
+        ]);
+    }
+
+        /**
+     * Show the form for creating a new resource.
+     */
+    public function createWithId(string $repairRequestId)
+    {
+        // Get selected
+        $selectedRepairRequest = RepairRequest::find($repairRequestId);
+
+        // Get all maintenance workers
+        $maintenanceWorkers = User::where('role_id', 3)->get();
+
+        // Get all companies and repairRequest
+        $companies = Company::all();
+        $repairRequests = RepairRequest::whereHas('status', function ($query) {
+            $query->whereIn('name', ['Nieuw', 'Noodgeval']);
+        })->get();
+
+        return view('maintenance.appointment.create', [
+            'maintenanceWorkers' => $maintenanceWorkers,
+            'companies' => $companies,
+            'repairRequests' => $repairRequests,
+            'selectedRepairRequest' => $selectedRepairRequest,
         ]);
     }
 

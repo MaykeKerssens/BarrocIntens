@@ -44,6 +44,9 @@
                                             <x-secondary-button class="mt-2">
                                                 <a id="repairrequest-edit-button" href="{{ route('repairRequests.edit', $repairRequest->id) }}">Aanpassen</a>
                                             </x-secondary-button>
+                                            <x-secondary-button class="mt-2">
+                                                <a id="repairrequest-edit-button" href="{{ route('appointment.createwithid', $repairRequest->id) }}">Inplannen</a>
+                                            </x-secondary-button>
                                         </li>
                                     @endforeach
                                 </ul>

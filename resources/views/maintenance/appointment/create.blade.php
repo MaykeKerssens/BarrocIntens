@@ -66,16 +66,18 @@
 
                         <!-- Repair Requests -->
                         <div>
-                            <label for="repairRequests" class="block font-medium text-gray-700">Bijbehorende reparatie
-                                aanvragen selecteren:</label>
+                            <label for="repairRequests" class="block font-medium text-gray-700">Selecteer bijbehorende
+                                reparatie aanvragen:</label>
                             <select name="repairRequests[]" multiple
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
                                 <option value="0">Geen bijbehorende storingsaanvraag (routine afspraak)</option>
-                                @foreach ($newRepairRequests as $repairRequest)
-                                    <option value="{{ $repairRequest->id }}">
-                                        [{{ $repairRequest->id . ' - ' . $repairRequest->company->name . ' - ' . $repairRequest->created_at->format('d/m/Y') }}]
-                                        {{ $repairRequest->description }}</option>
+                                @foreach ($repairRequests as $repairRequest)
+                                    <option value="{{ $repairRequest->id }}"
+                                        {{ isset($selectedRepairRequest) ? ($repairRequest->id == $selectedRepairRequest->id ? 'selected' : '') : '' }}>
+                                        [{{ $repairRequest->id . ' - ' . $repairRequest->company->name . ' - ' . $repairRequest->created_at->format('d/m/Y') }}{{ $repairRequest->status->name == 'Noodgeval' ? ' - ' . $repairRequest->status->name . '!' : '' }}]
+                                        {{ $repairRequest->description }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -88,7 +90,8 @@
                                 class="mt-1 p-2 focus:ring-yellow focus:border-yellow block w-full shadow-sm border-gray-300 rounded-md"
                                 required>
                                 @foreach ($maintenanceWorkers as $maintenanceWorker)
-                                    <option value="{{ $maintenanceWorker->id }}">{{ $maintenanceWorker->name }}</option>
+                                    <option value="{{ $maintenanceWorker->id }}">{{ $maintenanceWorker->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

@@ -95,6 +95,7 @@ Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
     Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
     Route::resource('appointment', AppointmentController::class);
+    Route::get('/appointment/{id}/create', [AppointmentController::class, 'createWithId'])->name('appointment.createwithid');;
     // Add other routes for HeadOfMaintenance
 });
 Route::post('/contact-send', [ContactController::class, 'send'])->name('contact-send');
