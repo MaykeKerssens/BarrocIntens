@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
+    <style>
+        /* CSS for positioning the image */
+        .logo {
+            position: absolute;
+            top: 0;
+            right: 0;
+            max-width: 150px; /* Adjust the max-width as needed */
+        }
+    </style>
 </head>
 <body>
+    <!-- Include the image at the top right corner -->
+    <img class="logo" src="{{ asset('images/Logo4_groot.png') }}" alt="Company Logo">
+    
+    <!-- Rest of your invoice content -->
     <h1>FACTUUR</h1>
-    <!-- Insert logo image here -->
-    <img src="{{ asset('path/to/logo.png') }}" alt="Company Logo">
     <p>Barroc Intens<br>Terhijdenseweg 350<br>4826 AA Breda</p>
     <strong>{{ $invoice->contract->company->name }}</strong><br>
     {{ $invoice->contract->company->street }}<br>
@@ -36,7 +47,7 @@
         <tbody>
             <!-- Loop through invoice products and display them -->
             @php
-                $total = 0; // Initialize total variable
+                $total = $invoice->costs; // Initialize total with the costs column value
             @endphp
             @foreach ($invoice->products as $product)
                 <tr>
