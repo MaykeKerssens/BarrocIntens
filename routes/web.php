@@ -57,6 +57,7 @@ Route::middleware(['auth', 'verified', 'role:2'])->group(function () {
     Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
     Route::resource('invoices', InvoicesController::class)->except(['index']);
     Route::resource('contracts', ContractsController::class)->except(['index']);
+    Route::get('/finance{invoice}/download-pdf', [InvoicesController::class, 'downloadPdf'])->name('invoices.download-pdf');
 });
 
 Route::middleware(['auth', 'verified', 'role:3'])->group(function () {
