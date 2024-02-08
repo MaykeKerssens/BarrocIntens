@@ -30,26 +30,30 @@
             <div class="flex flex-wrap justify-center gap-4">
                 <!-- ... existing code ... -->
 
-    @foreach($products as $product)
-    <div class="card-item md:w-1/3 sm:w-1/2">
-        <a href="{{ route('products.show', $product) }}" class="block bg-white border rounded-md overflow-hidden transition-transform duration-300 transform hover:scale-105 hover:shadow-md group">
-            <div class="machine-item__brand-image-holder">
-                <div class="machine-item__brand-image">
-                    <img src="{{ asset($product->image_path) }}" alt="Product Image" class="w-full h-auto">
+                @foreach($products as $product)
+                <div class="card-item md:w-1/3 sm:w-1/2">
+                    <a href="{{ route('products.show', $product) }}" class="block bg-white border rounded-md overflow-hidden transition-transform duration-300 transform hover:scale-105 hover:shadow-md group">
+                        <div class="machine-item__brand-image-holder">
+                            <div class="machine-item__brand-image">
+                                @if ($product->image_path)
+                                    <img src="{{ asset($product->image_path) }}" alt="Product Image" class="w-full h-auto">
+                                @else
+                                    <img src="{{ asset('storage/images/placeholder.png') }}" alt="Placeholder Image" class="w-full h-auto">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="machine-item__detail-holder p-4">
+                            <div class="machine-item__detail">
+                                <div class="machine-item__title text-xl font-bold mb-2">{{ $product->name }}</div>
+                                <div class="machine-item__description text-sm">{{ $product->description }}</div>
+                                @if ($product->category)
+                                    <div class="machine-item__category text-sm mt-2">Category: {{ $product->category->name }}</div>
+                                @endif
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="machine-item__detail-holder p-4">
-                <div class="machine-item__detail">
-                    <div class="machine-item__title text-xl font-bold mb-2">{{ $product->name }}</div>
-                    <div class="machine-item__description text-sm">{{ $product->description }}</div>
-                    @if ($product->category)
-                        <div class="machine-item__category text-sm mt-2">Category: {{ $product->category->name }}</div>
-                    @endif
-                </div>
-            </div>
-        </a>
-    </div>
-    @endforeach
+            @endforeach
 
 <!-- ... existing code ... -->
 
