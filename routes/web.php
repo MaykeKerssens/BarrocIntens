@@ -47,11 +47,18 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified', 'role:1'])->group(function () {
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
-        Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
+        // Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
         Route::resource('privacyData', PrivacyController::class);
         Route::post('privacyData/requestDeletionByEmail', [PrivacyController::class, 'requestDeletionByEmail'])->name('privacyData.requestDeletionByEmail');
         // Add other customer routes as needed
 });
+
+// Routes for customers and headOfMaintenacne
+Route::middleware(['auth', 'verified', 'role:1,6'])->group(function () {
+    Route::resource('repairRequests', RepairRequestController::class)->except(['index']);
+});
+
+
 
 Route::middleware(['auth', 'verified', 'role:2'])->group(function () {
     Route::get('/finance', [InvoicesController::class, 'index'])->name('finance.index');
@@ -89,6 +96,7 @@ Route::middleware(['auth', 'verified', 'role:5'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:6'])->group(function () {
     Route::get('/head-of-maintenance', [MaintenanceController::class, 'request'])->name('headOfMaintenance.request');
     Route::resource('appointment', AppointmentController::class);
+    Route::get('/appointment/{id}/create', [AppointmentController::class, 'createWithId'])->name('appointment.createwithid');;
     // Add other routes for HeadOfMaintenance
 });
 Route::post('/contact-send', [ContactController::class, 'send'])->name('contact-send');

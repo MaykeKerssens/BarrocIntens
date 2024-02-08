@@ -22,7 +22,7 @@ class ProductController extends Controller
         })
         ->paginate(10);
         $query = Product::query();
-    
+
         if ($request->filled('stockFilter')) {
             if ($request->stockFilter == 'in_stock') {
                 $query->where('units_in_stock', '>', 0);
@@ -30,7 +30,7 @@ class ProductController extends Controller
                 $query->where('units_in_stock', '=', 0);
             }
         }
-    
+
         $products = $query->paginate(10);
         return view('sourcing.index', [
             'products' => $products,
@@ -44,9 +44,9 @@ class ProductController extends Controller
         ->whereHas('status', function ($query) {
             $query->where('name', 'bezig');
         })
-        ->paginate(10);    
+        ->paginate(10);
         $query = Product::query();
-    
+
         if ($request->filled('search')) {
             $searchTerm = $request->input('search');
             $query->where(function ($q) use ($searchTerm) {
@@ -57,7 +57,7 @@ class ProductController extends Controller
                   ->orWhere('product_category_id', 'like', "%$searchTerm%");
             });
         }
-    
+
         $products = $query->paginate(10);
         return view('sourcing.index', [
             'products' => $products,
@@ -65,7 +65,7 @@ class ProductController extends Controller
             'repairRequests' => $repairRequests,
         ]);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */

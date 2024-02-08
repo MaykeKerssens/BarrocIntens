@@ -24,7 +24,13 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 
         var infoBoxEl = document.getElementById('info-box');
         var detailsEl = document.getElementById('appointment-details');
-        var headerEl = document.getElementById('appointment-header');
+        if (document.getElementById('appointment-header')) {
+            var headerEl = document.getElementById('appointment-header');
+        }
+        if(document.getElementById('emergency-header')) {
+            var headerEl = document.getElementById('emergency-header');
+        }
+
 
         // Company data elements
         var streetEl = document.getElementById('appointment-street');
@@ -45,7 +51,13 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
         } else {
             detailsEl.style.display = 'none';
             infoBoxEl.style.display = 'block';
-            headerEl.innerText = 'Reperaties vandaag:';
+
+            if(document.getElementById('emergency-header')) {
+                headerEl.innerText = 'Noodgevallen:';
+            } else {
+                headerEl.innerText = 'Reperaties vandaag:';
+            }
+
         }
 
         //Format date and times
@@ -63,16 +75,16 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
         dateTimesEl.innerText = dateStart + ' | ' + timeStart + '-' + timeEnd;
         descriptionEl.innerText = info.event.extendedProps.description;
 
-        // Add edit button if it exists
-        if (document.getElementById('edit-button')) {
+        // Add appointment edit button if it exists
+        if (document.getElementById('appointment-edit-button')) {
             var id = info.event.id;
-            var editButton = document.getElementById('edit-button');
+            var appointmentEditButton = document.getElementById('appointment-edit-button');
 
             // Update the href attribute
-            editButton.href = "http://barrocintens.test/appointment/:id/edit" .replace(':id', id);
+            appointmentEditButton.href = "http://barrocintens.test/appointment/:id/edit" .replace(':id', id);
         }
 
-        // Add edit button if it exists
+        // Add workorder button if it exists
         if (document.getElementById('workorder-button')) {
             var id = info.event.id;
             var workOrderButton = document.getElementById('workorder-button');
