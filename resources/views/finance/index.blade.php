@@ -41,6 +41,7 @@
                         <x-table.td>
                             <a href="{{ route('invoices.edit', $invoice->id) }}"
                                 class="text-blue-500 hover:underline">Bewerken</a>
+                            <a href="{{ route('invoices.download-pdf', $invoice->id) }}" class="text-blue-500 hover:underline">Download PDF</a>
                         </x-table.td>
                     </tr>
                 @endforeach

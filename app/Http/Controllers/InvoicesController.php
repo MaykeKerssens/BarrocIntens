@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Company;
 use App\Models\Contract;
 use App\Models\Invoice;
@@ -60,6 +62,32 @@ class InvoicesController extends Controller
         }
 
         return redirect()->route('finance.index')->with('message', 'Factuur is succesvol aangemaakt.');
+    }
+
+    public function downloadPdf(Invoice $invoice)
+    {
+        // Retrieve the data needed for the PDF
+        $data = [
+            'invoice' => $invoice,
+            // Other data you may need for the PDF
+        ];
+
+        // Instantiate dompdf with options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        // Load HTML content
+        $html = view('finance.invoice_pdf', $data)->render();
+        $dompdf->loadHtml($html);
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the generated PDF (inline or download)
+        return $dompdf->stream('invoice.pdf');
     }
 
     /**
